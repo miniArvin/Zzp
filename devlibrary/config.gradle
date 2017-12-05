@@ -1,0 +1,32 @@
+ext {
+
+    configure = [
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
+            minSdkVersion    : 15,
+            targetSdkVersion : 25,
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+    dep_version = [
+            'appcompat-v7'   : "25.1.1",
+            "recyclerview-v7": '25.1.1',
+            'design'         : "25.1.1",
+            'glide'          : "3.7.0",
+            'support-v4'     : "19.1.0",
+            'okhttp'         : "3.6.0",
+            'multidex'       : "1.0.1",
+            'gson'           : "2.7",
+    ]
+
+    dep_path = [
+            'appcompat-v7'   : "com.android.support",
+            "recyclerview-v7": 'com.android.support',
+            'design'         : "com.android.support",
+            'glide'          : "com.github.bumptech.glide",
+            'support-v4'     : "com.android.support",
+            'okhttp'         : "com.squareup.okhttp3",
+            'multidex'       : "com.android.support",
+            'gson'           : "com.google.code.gson",
+    ]
+}

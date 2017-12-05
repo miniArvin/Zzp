@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.activity.mine.release.MyReleaseActivity"
+    android:weightSum="1">
+
+    <include layout="@layout/view_head_back"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        android:layout_weight="0.18">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:src="@drawable/mine_release_article_icon"/>
+        <TextView
+            android:layout_width="108dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="30dp"
+            android:text="我要发文章"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/mine_release_bg_btn"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical"
+        android:layout_weight="0.18">
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:src="@drawable/mine_release_question_icon"/>
+        <TextView
+            android:layout_width="108dp"
+            android:layout_height="38dp"
+            android:text="我要发问答"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:background="@drawable/mine_release_bg_btn"/>
+    </LinearLayout>
+</LinearLayout>

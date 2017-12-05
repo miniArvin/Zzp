@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+apply from: 'config.gradle'
+
+def config = project.ext.configure;
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //腾讯TBS
+    compile files('libs/tbs_sdk_thirdapp_v2.5.0.1031_36880_sharewithdownload_obfs_20161107_154437.jar')
+    testCompile 'junit:junit:4.12'
+    compile dep_path['appcompat-v7'] + ':appcompat-v7:' + dep_version['appcompat-v7']
+    compile dep_path['recyclerview-v7'] + ':recyclerview-v7:' + dep_version['recyclerview-v7']
+    compile dep_path['design'] + ':design:' + dep_version['design']
+    compile dep_path['glide'] + ':glide:' + dep_version['glide']
+    compile dep_path['support-v4'] + ':support-v4:' + dep_version['support-v4']
+    compile dep_path['okhttp'] + ':okhttp:' + dep_version['okhttp']
+    compile dep_path['multidex'] + ':multidex:' + dep_version['multidex']
+    compile dep_path['gson'] + ':gson:' + dep_version['gson']
+}

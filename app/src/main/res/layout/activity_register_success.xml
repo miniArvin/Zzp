@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.activity.login.RegisterSuccessActivity">
+
+    <include layout="@layout/view_head_back"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/alp_div" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/login_success_bg"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/order_title_word"
+        android:text="恭喜您，注册成功！"
+        android:textSize="15sp"/>
+    <TextView
+        android:id="@+id/register_success_login"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="45dp"
+        android:text="立即登录"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/login_bg_btn"
+        android:textColor="@color/white"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/register_success_look"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_bg_look"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="先去逛逛"
+        android:textColor="@color/orange" />
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:useLevel="false" >
+    <padding
+        android:left="2dp"
+        android:top="1dp"
+        android:right="2dp"
+        android:bottom="1dp" />
+
+    <corners
+        android:bottomLeftRadius="24dp"
+        android:bottomRightRadius="24dp"
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" /> <!-- 设置四个角的半径 -->
+    <stroke android:color="@color/mine_wallet_item_word"
+    android:width="1dp"/>
+    <solid android:color="@color/mine_wallet_item_word"/>
+</shape>

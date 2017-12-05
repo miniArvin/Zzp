@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.tryine.zzp.ui.activity.mine.securityCenter.securityQuestions.FillOutQuestionsActivity">
+
+    <include layout="@layout/view_head_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_finish_icon" />
+
+            <View
+                android:layout_width="110dp"
+                android:layout_height="1dp"
+                android:background="@color/mine_div"/>
+
+            <ImageView
+                android:id="@+id/security_center_2_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_second_icon" />
+
+            <View
+                android:layout_width="110dp"
+                android:layout_height="1dp"
+                android:background="@color/mine_div"/>
+
+            <ImageView
+                android:id="@+id/security_center_3_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_third_icon" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:layout_weight="1"
+                android:text="填写安全问题"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:text="验证安全问题"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:text="完成安全问题"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="问题一"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/security_center_question_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:textColor="@color/equipment_content_word"
+            android:text="请选择密保问题？"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/mine_div" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="答案"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+
+        <EditText
+            android:id="@+id/security_center_answer_et1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:gravity="center_vertical"
+            android:hint="请输入答案"
+            android:textColor="@color/mine_title_word"
+            android:textColorHint="@color/equipment_content_word"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/mine_div" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="问题二"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/security_center_question_tv2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:textColor="@color/equipment_content_word"
+            android:text="请选择密保问题？"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/mine_div" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="答案"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+        <EditText
+            android:id="@+id/security_center_answer_et2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:textSize="15sp"
+            android:textColorHint="@color/equipment_content_word"
+            android:textColor="@color/mine_title_word"
+            android:hint="请输入答案"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/mine_div" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="问题三"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/security_center_question_tv3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:textColor="@color/equipment_content_word"
+            android:text="请选择密保问题？"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/mine_div" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="答案"
+            android:textSize="15sp"
+            android:textColor="@color/mine_title_word"
+            android:gravity="center|left"/>
+        <EditText
+            android:id="@+id/security_center_answer_et3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:cursorVisible="false"
+            android:background="@null"
+            android:textSize="15sp"
+            android:textColorHint="@color/equipment_content_word"
+            android:textColor="@color/mine_title_word"
+            android:hint="请输入答案"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/security_center_fill_next"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/login_bg_btn"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="下一步"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center" />
+</LinearLayout>

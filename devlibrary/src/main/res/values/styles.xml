@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.App" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light" />
+
+    <style name="AppTheme.NoTitle" parent="AppTheme.App">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.FullScreen" parent="AppTheme.App">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Welcome" parent="AppTheme.FullScreen">
+        <item name="android:windowBackground">@drawable/layers_splash</item>
+    </style>
+
+    <style name="AppTheme.LoadingDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--<item name="colorAccent">修改ProgressBar 颜色</item>-->
+    </style>
+
+    <!--设置StatusBar文本为白色-->
+    <style name="AppTheme.M.StatusBarTextLight" parent="AppTheme.App">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+    <!--设置StatusBar文本为黑色-->
+    <style name="AppTheme.M.StatusBarTextDark" parent="AppTheme.App">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+</resources>

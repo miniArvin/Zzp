@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/interesting_question_one_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/found_questions_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="问"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/interesting_question_one_title_tv"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:text="想修出大片，哪些手机APP必须有？"
+                android:textColor="@color/home_location_word"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/interesting_question_one_content_img"
+                android:layout_width="130dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/fenghuanggucheng" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/interesting_question_one_img_headimg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fenghuanggucheng"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/interesting_question_one_head_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/home_location_word"
+                android:text="肆意的紫" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:src="@drawable/found_questions_location_icon" />
+
+            <TextView
+                android:id="@+id/interesting_question_one_location_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/home_recommend_location_word"
+                android:text="长沙" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="72dp"
+                android:src="@drawable/found_question_messages_icon" />
+
+            <TextView
+                android:id="@+id/interesting_question_one_zan_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="857"
+                android:textColor="@color/home_recommend_location_word" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="22dp"
+                android:src="@drawable/found_questions_location_icon" />
+
+            <TextView
+                android:id="@+id/interesting_question_one_read_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/home_recommend_location_word"
+                android:text="8857" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/interesting_question_two_ll"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:visibility="visible">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="16dp"-->
+                    <!--android:layout_height="16dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:src="@drawable/found_questions_icon" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="问"-->
+                    <!--android:textColor="@color/white" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/interesting_question_two_title_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="长沙有哪些好玩的地方?求推荐"-->
+                <!--android:textColor="@color/home_location_word"-->
+                <!--android:textSize="18sp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/interesting_question_two_content_one_img"-->
+                <!--android:layout_width="105dp"-->
+                <!--android:layout_height="75dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:src="@drawable/fenghuanggucheng" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/interesting_question_two_content_two_img"-->
+                <!--android:layout_width="105dp"-->
+                <!--android:layout_height="75dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:src="@drawable/fenghuanggucheng" />-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/interesting_question_two_content_three_img"-->
+                <!--android:layout_width="105dp"-->
+                <!--android:layout_height="75dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:src="@drawable/fenghuanggucheng" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:id="@+id/interesting_question_two_img_headimg"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/fenghuanggucheng"-->
+                <!--app:civ_border_color="@color/white"-->
+                <!--app:civ_border_width="2dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/interesting_question_two_head_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/home_location_word"-->
+                <!--android:text="肆意的紫" />-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="10dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="32dp"-->
+                <!--android:src="@drawable/found_questions_location_icon" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/interesting_question_two_location_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/home_recommend_location_word"-->
+                <!--android:text="长沙" />-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="10dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="72dp"-->
+                <!--android:src="@drawable/found_question_messages_icon" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/interesting_question_two_zan_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/home_recommend_location_word"-->
+                <!--android:text="857" />-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="10dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="42dp"-->
+                <!--android:src="@drawable/found_questions_location_icon" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/interesting_question_two_read_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/home_recommend_location_word"-->
+                <!--android:text="8857" />-->
+        <!--</LinearLayout>-->
+
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tryine.zzp.ui.fragment.found.FoundDetailFoodFragment">
+
+    <GridView
+        android:id="@+id/found_detail_food_fl_gv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:numColumns="2"></GridView>
+
+</FrameLayout>

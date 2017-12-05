@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.fragment.mine.MyPublishQuestionsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:textColor="@color/home_location_btn"
+            android:textSize="13sp"
+            android:text="我的文章(02)"
+            android:background="@drawable/mine_publish_title_bg"/>
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/hotel_list_search_word"
+            android:textSize="13sp"
+            android:text="我的评论(02)"/>
+    </LinearLayout>
+    <GridView
+        android:id="@+id/mine_publish_comment_gv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"></GridView>
+
+</LinearLayout>

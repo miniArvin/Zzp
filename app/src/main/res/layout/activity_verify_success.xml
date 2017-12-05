@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.activity.mine.securityCenter.securityQuestions.VerifySuccessActivity">
+
+    <include layout="@layout/view_head_back"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_finish_icon" />
+
+            <View
+                android:layout_width="110dp"
+                android:layout_height="1dp"
+                android:background="@color/mine_div"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_finish_icon" />
+
+            <View
+                android:layout_width="110dp"
+                android:layout_height="1dp"
+                android:background="@color/mine_div"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/security_center_verity_questions_finish_icon" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:text="填写安全问题"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:text="验证安全问题"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/hotel_list_search_word"
+                android:text="完成安全问题"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center"
+        android:src="@drawable/security_center_verity_questions_finish_bg_icon"/>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/hotel_list_search_word"
+        android:text="恭喜你验证安全问题成功！" />
+
+    <TextView
+        android:id="@+id/security_center_setting_finish"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/login_bg_btn"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="完成"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="65dp"
+        android:gravity="center"/>
+</LinearLayout>

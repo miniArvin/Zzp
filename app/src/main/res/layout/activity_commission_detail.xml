@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.activity.mine.distribution.CommissionDetailActivity">
+
+    <include layout="@layout/view_head_back"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/commission_detail_income_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/commission_detail_income_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="收入"
+                android:textColor="@color/orange" />
+
+            <View
+                android:id="@+id/commission_detail_income_v"
+                android:layout_width="35dp"
+                android:layout_height="4dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:background="@color/orange"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/commission_detail_expend_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/commission_detail_expend_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="支出"
+                android:textColor="@color/black" />
+
+            <View
+                android:id="@+id/commission_detail_expend_v"
+                android:layout_width="35dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/commission_detail_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/it_bg"
+        android:divider="@null"
+        android:dividerHeight="15dp"></ListView>
+</LinearLayout>

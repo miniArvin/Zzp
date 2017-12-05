@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/hotel_recommend_img"
+        android:layout_width="215dp"
+        android:layout_height="145dp"
+        android:src="@drawable/gongchengwenquanlijiudian"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/found_hotel_company_icon"/>
+        <TextView
+            android:id="@+id/hotel_recommend_name"
+            android:layout_width="130dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/home_recommend_title_word"
+            android:text="东城温泉里酒店 海景海华双人间"
+            />
+        <TextView
+            android:id="@+id/hotel_recommend_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥235"
+            android:textColor="@color/home_recommend_price_word"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/hotel_recommend_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/home_recommend_location_word"
+            android:text="上海 黄浦区 外滩路"/>
+        <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
+            android:id="@+id/hotel_recommend_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="4.5"
+            android:progressTint="@color/orange"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tryine.zzp.ui.activity.mine.distribution.CommissionManageActivity">
+
+    <include layout="@layout/view_head_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/commission_manage_title_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/commission_manage_detail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="佣金明细"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="佣金总收入(元)"
+            android:textColor="#99ffffff"
+            android:textSize="13sp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="200.00"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/commission_manage_withdraw_tv"
+            android:layout_width="112dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/commission_withdraw_bg_btn"
+            android:gravity="center"
+            android:text="申请提现"
+            android:textSize="14sp"
+            android:textColor="@color/commission_withdraw_word" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="★温馨提示：佣金可提现，余额只能购物，单笔订单提现不能大于2万元每天，提现前确保个人信息是否完善，否则提现失败，谢谢合作!"
+        android:textSize="12.5sp"
+        android:textColor="@color/equipment_content_word"/>
+</LinearLayout>
