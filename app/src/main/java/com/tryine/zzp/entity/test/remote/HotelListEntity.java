@@ -8,6 +8,7 @@ import java.util.List;
 
 public class HotelListEntity extends BaseRemote {
 
+
     private List<InfoBean> info;
 
     public List<InfoBean> getInfo() {
@@ -20,18 +21,18 @@ public class HotelListEntity extends BaseRemote {
 
     public static class InfoBean {
         /**
-         * comment_count : 0
-         * area_id : 岳阳楼区
-         * hotel_id : 5
+         * comment_count : 3
+         * area_id : 岳麓区
+         * hotel_id : 1
          * fav : null
-         * tag :
-         * star : 5
-         * addr : 打扫打扫
-         * hotel_name : 岳阳酒店
-         * photo : zzp.dreamhup.com/attachs/default/2017/11/16/5a0d5c1e04d01.jpg
+         * tag : [{"tag_name":"干净卫生"},{"tag_name":"配套不错"},{"tag_name":"无线上网"}]
+         * star : 2
+         * addr : 长沙市芙蓉区
+         * hotel_name : 中国城戴斯大酒店
+         * photo : zzp.dreamhup.com/attachs/default/2017/10/27/59f2c32e6f000.jpg
          * is_auction : 1
-         * city_id : 岳阳
-         * comment_score : 5.0
+         * city_id : 长沙
+         * comment_score : 4.7
          * price : 99
          * comment_score_desc : 超棒
          */
@@ -40,16 +41,16 @@ public class HotelListEntity extends BaseRemote {
         private String area_id;
         private String hotel_id;
         private Object fav;
-        private String tag;
         private String star;
         private String addr;
         private String hotel_name;
         private String photo;
         private String is_auction;
         private String city_id;
-        private String comment_score;
+        private double comment_score;
         private String price;
         private String comment_score_desc;
+        private List<TagBean> tag;
 
         public String getComment_count() {
             return comment_count;
@@ -81,14 +82,6 @@ public class HotelListEntity extends BaseRemote {
 
         public void setFav(Object fav) {
             this.fav = fav;
-        }
-
-        public String getTag() {
-            return tag;
-        }
-
-        public void setTag(String tag) {
-            this.tag = tag;
         }
 
         public String getStar() {
@@ -139,11 +132,11 @@ public class HotelListEntity extends BaseRemote {
             this.city_id = city_id;
         }
 
-        public String getComment_score() {
+        public double getComment_score() {
             return comment_score;
         }
 
-        public void setComment_score(String comment_score) {
+        public void setComment_score(double comment_score) {
             this.comment_score = comment_score;
         }
 
@@ -161,6 +154,30 @@ public class HotelListEntity extends BaseRemote {
 
         public void setComment_score_desc(String comment_score_desc) {
             this.comment_score_desc = comment_score_desc;
+        }
+
+        public List<TagBean> getTag() {
+            return tag;
+        }
+
+        public void setTag(List<TagBean> tag) {
+            this.tag = tag;
+        }
+
+        public static class TagBean {
+            /**
+             * tag_name : 干净卫生
+             */
+
+            private String tag_name;
+
+            public String getTag_name() {
+                return tag_name;
+            }
+
+            public void setTag_name(String tag_name) {
+                this.tag_name = tag_name;
+            }
         }
     }
 }

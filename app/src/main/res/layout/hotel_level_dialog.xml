@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/hotel_level_dialog_title_tv"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center"
@@ -34,19 +35,38 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/price_range_min_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="￥0-￥1000+"
+                android:text="￥0"
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="-"
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/price_range_max_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="￥3000"
                 android:textColor="@color/orange"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <SeekBar
+            android:id="@+id/seekBar"
             android:layout_width="245dp"
             android:layout_height="36dp"
-            android:progress="100"
             android:layout_gravity="center"
+            android:progress="100"
             android:progressTint="@color/orange" />
 
         <LinearLayout
@@ -81,7 +101,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥150-￥300"
+                android:text="￥151-￥300"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
@@ -91,12 +111,12 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥300-￥450"
+                android:text="￥301-￥450"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_marginTop="16dp"
@@ -107,34 +127,67 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥450-￥600"
-                android:textColor="@color/home_location_word"
-                android:textSize="12sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="85dp"
-                android:background="@drawable/login_bg_code"
-                android:gravity="center"
-                android:text="￥600-￥1000"
+                android:text="￥451-￥600"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="170dp"
+                android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥1000以上"
+                android:text="￥601-￥1000"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
-        </RelativeLayout>
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="￥1001-￥2000"
+                android:textColor="@color/home_location_word"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="￥1001-￥2000"
+                android:textColor="@color/home_location_word"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="￥2001-￥3000"
+                android:textColor="@color/home_location_word"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="￥3000以上"
+                android:textColor="@color/home_location_word"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -150,43 +203,53 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:background="@color/orange"
                 android:gravity="center"
-                android:text="二级经济"
+                android:text="一星级"
                 android:textColor="@color/white" />
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="三星舒适"
+                android:text="二星级"
                 android:textColor="@color/home_location_word" />
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="四级高档"
+                android:text="三星级"
                 android:textColor="@color/home_location_word" />
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="五星豪华"
+                android:text="四星级"
+                android:textColor="@color/home_location_word" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="五星级"
                 android:textColor="@color/home_location_word" />
         </LinearLayout>
     </LinearLayout>
@@ -196,21 +259,23 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="140dp"
             android:layout_height="match_parent"
+            android:background="@color/order_div_bg"
+            android:gravity="center"
             android:text="清空"
             android:textColor="@color/home_location_word"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@color/order_div_bg"/>
+            android:textSize="24sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="显示结果"
-            android:textSize="24sp"
-            android:textColor="@color/white"
             android:background="@color/orange"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="显示结果"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>
