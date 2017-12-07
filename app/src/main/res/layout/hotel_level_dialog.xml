@@ -72,12 +72,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:gravity=""
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:background="@color/orange"
+                android:background="@drawable/login_bg_btn"
                 android:gravity="center"
                 android:text="不限"
                 android:textColor="@color/white"
@@ -90,7 +91,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥150以下"
+                android:text="￥100以下"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
@@ -101,7 +102,8 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥151-￥300"
+                android:text="￥101-
+                ￥200"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
@@ -111,7 +113,8 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥301-￥450"
+                android:text="￥201-
+                ￥300"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -127,7 +130,19 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
-                android:text="￥451-￥600"
+                android:text="￥301-
+                ￥450"
+                android:textColor="@color/home_location_word"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/login_bg_code"
+                android:gravity="center"
+                android:text="￥451-
+                ￥600"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
@@ -138,16 +153,6 @@
                 android:background="@drawable/login_bg_code"
                 android:gravity="center"
                 android:text="￥601-￥1000"
-                android:textColor="@color/home_location_word"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/login_bg_code"
-                android:gravity="center"
-                android:text="￥1001-￥2000"
                 android:textColor="@color/home_location_word"
                 android:textSize="12sp" />
 
@@ -207,7 +212,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:background="@color/orange"
+                android:background="@drawable/login_bg_btn"
                 android:gravity="center"
                 android:text="一星级"
                 android:textColor="@color/white" />
