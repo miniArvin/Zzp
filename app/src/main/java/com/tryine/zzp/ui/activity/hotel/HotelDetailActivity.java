@@ -10,18 +10,28 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.HotelDetailCommentAdapter;
 import com.tryine.zzp.adapter.HotelDetailRoomAdapter;
 import com.tryine.zzp.adapter.SearchKeyWordAdapter;
+import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.widget.FlowLayout.FlowLayoutManager;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
 import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class HotelDetailActivity extends BaseStatusMActivity {
     private List<String> lists;
@@ -31,6 +41,7 @@ public class HotelDetailActivity extends BaseStatusMActivity {
     private HotelDetailCommentAdapter hotelDetailCommentAdapter;
     private RecyclerView hotel_detail_comment_rv;
     private SearchKeyWordAdapter searchKeyWordAdapter;
+    private String hotel_id;
 
     @Override
     protected int getLayoutId() {
@@ -39,10 +50,12 @@ public class HotelDetailActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-
+        hotel_id=getIntent().getStringExtra("hotel_id");
+        loadMessage();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         lists=new ArrayList<>();
         lists.add("全部 88");
         lists.add("位置优越 1");
@@ -66,11 +79,45 @@ public class HotelDetailActivity extends BaseStatusMActivity {
         hotel_detail_comment_rv.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0, 0, 0));
         hotel_detail_comment_rv.setLayoutManager(flowLayoutManagerComment);
         hotel_detail_comment_rv.setNestedScrollingEnabled(false);
-        searchKeyWordAdapter=new SearchKeyWordAdapter(lists,this);
-        hotel_detail_comment_rv.setAdapter(searchKeyWordAdapter);
+//        searchKeyWordAdapter=new SearchKeyWordAdapter(lists,this);
+//        hotel_detail_comment_rv.setAdapter(searchKeyWordAdapter);
 
     }
     public int dp2px(float value) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
+     public void loadData(){
+
+     }
+
+     public void loadMessage(){
+         OkHttpUtils
+                 .post()
+                 .url(Api.HOTELDETAIL)
+                 .addParams("hotel_id",hotel_id)
+                 .build()
+                 .execute(new Callback() {
+                     @Override
+                     public Object parseNetworkResponse(Response response, int id) throws Exception {
+                         String string = response.body().string();
+                         LogUtils.e(string);
+                         return string;
+                     }
+
+                     @Override
+                     public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                     }
+
+                     @Override
+                     public void onResponse(Object response, int id) {
+                         try {
+                             JSONObject jsonObject=new JSONObject(response.toString());
+                             LogUtils.e(jsonObject);
+                         } catch (Exception e) {
+                             e.printStackTrace();
+                         }
+                     }
+                 });
+     }
 }

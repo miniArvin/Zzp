@@ -83,4 +83,16 @@ public class Api {
 
     //酒店列表
     public static final String HOTELLIST = BASE_URL +"app/hotel/lists";
+
+    //酒店详情
+    public static final String HOTELDETAIL = BASE_URL +"app/hotel/detail";
+
+    //酒店收藏
+    public static final String HOTELCOLLECT = BASE_URL +"app/hotel/collet_hotel";
+
+    //取消酒店收藏
+    public static final String HOTELCANCELCOLLECT = BASE_URL +"app/hotel/cancel_collet_hotel";
+
+    //筛选列表
+    public static final String HOTELLISTSELECT = BASE_URL +"app/hotel/screen";
 }

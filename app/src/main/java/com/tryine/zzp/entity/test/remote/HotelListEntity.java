@@ -40,7 +40,7 @@ public class HotelListEntity extends BaseRemote {
         private String comment_count;
         private String area_id;
         private String hotel_id;
-        private Object fav;
+        private int fav;
         private String star;
         private String addr;
         private String hotel_name;
@@ -76,11 +76,11 @@ public class HotelListEntity extends BaseRemote {
             this.hotel_id = hotel_id;
         }
 
-        public Object getFav() {
+        public int getFav() {
             return fav;
         }
 
-        public void setFav(Object fav) {
+        public void setFav(int fav) {
             this.fav = fav;
         }
 
