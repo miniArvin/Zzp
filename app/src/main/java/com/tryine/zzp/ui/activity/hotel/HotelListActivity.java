@@ -54,6 +54,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private HotelListSelectDialogAdapter hotelListSelectDialogAdapter;
     private List<HotelListSelectEntity.InfoBean.BrandBean> brandInfo;
     private List<HotelListSelectEntity.InfoBean.ServiceBean> serviceInfo;
+    private List<HotelListSelectEntity.InfoBean.RoomBean> roomInfo;
     private String score ;
     private Boolean isSort;
 
@@ -66,7 +67,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     @Override
     protected void afterOnCreate() {
         initView();
-        loadMessage();
+        loadMessage("","");
         hotelListSelectContent();
     }
 
@@ -75,6 +76,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         selectList = new ArrayList<>();
         brandInfo = new ArrayList<>();
         serviceInfo = new ArrayList<>();
+        roomInfo=new ArrayList<>();
         selectList.add("住宿类型");
         selectList.add("品牌");
         selectList.add("酒店设备");
@@ -101,6 +103,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         hotel_list_select_dialog = (LinearLayout) findViewById(R.id.hotel_list_select_dialog);
         hotelListSelectDialogAdapter = new HotelListSelectDialogAdapter(this, selectList);
         hotel_list_select_lv.setAdapter(hotelListSelectDialogAdapter);
+        hotelListSelectDialogAdapter.setDefSelect(0);
         bundle = new Bundle();
     }
 
@@ -127,10 +130,11 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         });
     }
 
-    public void loadMessage() {
+    public void loadMessage(String key,String value) {
         OkHttpUtils
                 .post()
                 .url(Api.HOTELLIST)
+                .addParams(key,value)
                 .build()
                 .execute(new Callback() {
                     @Override
@@ -312,6 +316,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                             if (hotelListSelectEntity.getStatus() == 330) {
                                 brandInfo = hotelListSelectEntity.getInfo().getBrand();
                                 serviceInfo = hotelListSelectEntity.getInfo().getService();
+                                roomInfo = hotelListSelectEntity.getInfo().getRoom();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

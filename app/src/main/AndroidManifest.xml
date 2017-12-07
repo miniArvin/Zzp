@@ -42,8 +42,6 @@
         <meta-data
             android:name="com.tryine.zzp.network.GlideConfiguration"
             android:value="GlideModule"/>
-
-
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="keyboardHidden|orientation"
