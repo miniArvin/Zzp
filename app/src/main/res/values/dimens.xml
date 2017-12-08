@@ -2,4 +2,5 @@
 <resources>
     <dimen name="back_radius">18dp</dimen>
     <dimen name="home_city_item_div">10dp</dimen>
+    <dimen name="hotel_list_select_div">0.5dp</dimen>
 </resources>

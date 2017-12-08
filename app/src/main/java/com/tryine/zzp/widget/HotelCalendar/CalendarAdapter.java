@@ -117,7 +117,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return 447;
     }
 
 

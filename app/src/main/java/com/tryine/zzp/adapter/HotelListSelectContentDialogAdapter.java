@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tryine.zzp.R;
@@ -16,42 +17,62 @@ import java.util.List;
  * Created by Administrator on 2017/12/7 0007.
  */
 
-public class HotelListSelectContentDialogAdapter extends RecyclerView.Adapter<HotelListSelectContentDialogAdapter.ViewHolder> {
+public class HotelListSelectContentDialogAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater inflater;
-    private List<HotelListSelectEntity.InfoBean> mData;
+    private List<HotelListSelectEntity.InfoBean.RoomBean> roomBeen;
+    private List<HotelListSelectEntity.InfoBean.ServiceBean> serviceBeen;
+    private List<HotelListSelectEntity.InfoBean.BrandBean> brandBeen;
 
-    public HotelListSelectContentDialogAdapter(Context mContext, List<HotelListSelectEntity.InfoBean> mData) {
+    public HotelListSelectContentDialogAdapter(Context mContext,
+                                               List<HotelListSelectEntity.InfoBean.RoomBean> roomBeen,
+                                               List<HotelListSelectEntity.InfoBean.ServiceBean> serviceBeen,
+                                               List<HotelListSelectEntity.InfoBean.BrandBean> brandBeen) {
         inflater = LayoutInflater.from(mContext);
         this.mContext = mContext;
-        this.mData = mData;
+        this.roomBeen = roomBeen;
+        this.serviceBeen = serviceBeen;
+        this.brandBeen = brandBeen;
+    }
+
+
+    @Override
+    public int getCount() {
+        return roomBeen==null?(brandBeen==null?(serviceBeen==null?0:serviceBeen.size()):brandBeen.size()):roomBeen.size();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.hotel_list_select_item,
-                parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.hotel_list_select_item_tv = (TextView) view.findViewById(R.id.hotel_list_select_item_tv);
-        return viewHolder;
+    public Object getItem(int position) {
+        return position;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.hotel_list_select_item_tv.setGravity(View.FOCUS_LEFT);
-        holder.hotel_list_select_item_tv.setText("");
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public int getItemCount() {
-        return mData.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public ViewHolder(View itemView) {
-            super(itemView);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = null;
+        if (viewHolder == null) {
+            viewHolder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.hotel_list_select_item, null);
+            viewHolder.hotel_list_select_item_tv = (TextView) convertView.findViewById(R.id.hotel_list_select_item_tv);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
+        if (roomBeen!=null){
+            viewHolder.hotel_list_select_item_tv.setText(roomBeen.get(position).getTitle());
+        }else if(brandBeen!=null){
+            viewHolder.hotel_list_select_item_tv.setText(brandBeen.get(position).getTitle());
+        }else if(serviceBeen!=null){
+            viewHolder.hotel_list_select_item_tv.setText(serviceBeen.get(position).getName());
+        }
+        return convertView;
+    }
+
+    public class ViewHolder {
         TextView hotel_list_select_item_tv;
     }
 }

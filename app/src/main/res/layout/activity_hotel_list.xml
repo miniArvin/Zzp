@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/view_head_back"
+            android:id="@+id/hotel_list_title_back"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:layout_centerVertical="true"
@@ -22,32 +22,41 @@
             android:padding="14dp"
             android:src="@drawable/res_back" />
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/hotel_list_date_icon" />
-
         <LinearLayout
+            android:id="@+id/hotel_list_calendar_ll"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="15dp"
                 android:layout_height="wrap_content"
-                android:text="08-31"
-                android:textColor="@color/orange"
-                android:textSize="10dp" />
+                android:layout_gravity="center"
+                android:src="@drawable/hotel_list_date_icon" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="09-01"
-                android:textColor="@color/orange"
-                android:textSize="10dp" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="6dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hotel_list_calendar_check_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="08-31"
+                    android:textColor="@color/orange"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/hotel_list_calendar_out_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09-01"
+                    android:textColor="@color/orange"
+                    android:textSize="10dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <View
@@ -57,20 +66,27 @@
             android:layout_marginLeft="10dp"
             android:background="@color/gray_font"></View>
 
-        <ImageView
-            android:layout_width="13dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:src="@drawable/hotel_list_search_icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/hotel_list_search_ll"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="关键词/地址/酒店名"
-            android:textColor="@color/hotel_list_search_word"
-            android:textSize="13sp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/hotel_list_search_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="关键词/地址/酒店名"
+                android:textColor="@color/hotel_list_search_word"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

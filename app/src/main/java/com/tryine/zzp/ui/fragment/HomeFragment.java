@@ -132,10 +132,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         home_recommend_hotel.setLayoutManager(linearLayoutManager2);
         home_recommend_hotel.setNestedScrollingEnabled(false);
         cityNameAdapter = new CityNameAdapter(mContext, waterInfo, mView);
-        home_city_name.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        home_city_name.addItemDecoration(new SpaceItemDecoration(spacingInPixels,SpaceItemDecoration.HORIZONTAL_LIST));
         home_city_name.setAdapter(cityNameAdapter);
         hotelRecommendAdapter = new HotelRecommendAdapter(mContext, hotelInfo, mView);
-        home_recommend_hotel.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        home_recommend_hotel.addItemDecoration(new SpaceItemDecoration(spacingInPixels,SpaceItemDecoration.HORIZONTAL_LIST));
         home_recommend_hotel.setAdapter(hotelRecommendAdapter);
     }
 
