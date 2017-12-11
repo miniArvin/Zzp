@@ -11,5 +11,5 @@
         android:topLeftRadius="2dp"
         android:topRightRadius="2dp" /> <!-- 设置四个角的半径 -->
     <stroke android:color="@color/gray_font"
-    android:width="1dp"/>
+    android:width="0.5dp"/>
 </shape>

@@ -36,14 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:src="@drawable/hotel_detail_share_icon"/>
         <ImageView
             android:id="@+id/view_head_collect"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="45dp"
             android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:src="@drawable/hotel_detail_collect_icon"/>
         <TextView
             android:id="@+id/view_head_cancel"
             android:layout_width="wrap_content"

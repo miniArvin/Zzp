@@ -76,7 +76,7 @@ public class HotelListAdapter extends BaseAdapter {
 
         viewHolder.hotel_list_name_tv.setText(mData.get(position).getHotel_name());
         viewHolder.hotel_list_address_tv.setText(mData.get(position).getAddr());
-        viewHolder.hotel_list_level_rb.setRating(Float.parseFloat(mData.get(position).getStar()));
+        viewHolder.hotel_list_level_rb.setRating((float) mData.get(position).getComment_score());
         Glide.with(mContext).load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().into(viewHolder.hotel_list_bg_iv);
         viewHolder.hotel_list_comment_tv.setText(mData.get(position).getComment_count() + "条评论");
         fav = mData.get(position).getFav();

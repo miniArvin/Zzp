@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/hotel_detail_head_cv"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_centerInParent="true"
@@ -21,6 +22,7 @@
             android:layout_height="35dp"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/hotel_detail_member_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="就是爱旅行"
@@ -28,29 +30,34 @@
                 android:textColor="@color/black"
                 android:gravity="center"/>
             <ImageView
+                android:id="@+id/hotel_detail_member_iv"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/mine_member_gold"
                 android:layout_gravity="center"/>
             <TextView
+                android:id="@+id/hotel_detail_member_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="铜牌会员"
                 android:textColor="@color/orange"
                 android:gravity="center"/>
             <TextView
+                android:id="@+id/hotel_detail_comment_publish_time_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="2017-08-21"
                 android:gravity="center|right"/>
         </LinearLayout>
         <RatingBar
+            android:id="@+id/hotel_detail_comment_rb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:progressTint="@color/orange"
             android:rating="5"/>
         <TextView
+            android:id="@+id/hotel_detail_comment_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="装修简介，干净，服务也很好，价位不高，很贴心的给准备了渴了，值得推荐。"
@@ -60,25 +67,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
             <ImageView
+                android:id="@+id/hotel_detail_comment1_iv"
                 android:layout_width="92dp"
                 android:layout_height="92dp"
                 android:src="@drawable/hotel_detail_comment1_icon"/>
             <ImageView
+                android:id="@+id/hotel_detail_comment2_iv"
                 android:layout_width="92dp"
                 android:layout_height="92dp"
                 android:layout_marginLeft="100dp"
                 android:src="@drawable/hotel_detail_comment2_icon"/>
             <ImageView
+                android:id="@+id/hotel_detail_comment3_iv"
                 android:layout_width="92dp"
                 android:layout_height="92dp"
                 android:layout_marginLeft="200dp"
+                android:visibility="gone"
                 android:src="@drawable/hotel_detail_comment3_icon"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:visibility="gone">
+            android:visibility="visible">
             <ImageView
                 android:layout_width="92dp"
                 android:layout_height="92dp"
@@ -92,6 +103,7 @@
                 android:layout_width="92dp"
                 android:layout_height="92dp"
                 android:layout_marginLeft="200dp"
+                android:visibility="gone"
                 android:src="@drawable/hotel_detail_comment3_icon"/>
         </RelativeLayout>
         <RelativeLayout

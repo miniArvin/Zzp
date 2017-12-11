@@ -4,13 +4,6 @@
 
     android:useLevel="false" >
     <solid android:color="@color/white" />
-    <padding
-        android:left="2dp"
-        android:top="1dp"
-        android:right="2dp"
-        android:bottom="1dp" />
-    <solid
-        android:color="@color/white" />
 
     <corners
         android:bottomLeftRadius="36dp"
