@@ -1,241 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.tryine.zzp.ui.activity.hotel.HotelEquipmentDetailActivity">
 
-    <include layout="@layout/view_head_back" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/alp_div" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="23dp"
-        android:text="设备服务"
-        android:textColor="@color/mine_title_word"
-        android:textSize="20sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="19dp"
-            android:layout_height="20dp"
-            android:src="@drawable/equipment_hotel_icon" />
+        <include layout="@layout/view_head_back" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/alp_div" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="23dp"
+            android:text="设备服务"
+            android:textColor="@color/mine_title_word"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="酒店介绍"
-                android:textColor="@color/home_location_word"
-                android:textSize="16sp" />
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:src="@drawable/equipment_hotel_icon" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="汉庭虹桥机场胡酒店位于上海南山区航信区612号，本店是全新汉庭2代产品，风格简约，提供停车场，免费接送等服务。"
-                android:textColor="@color/equipment_content_word"
-                android:textSize="14sp" />
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="酒店介绍"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/hotel_equipment_intro_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/equipment_content_word"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="19dp"
-            android:layout_height="20dp"
-            android:src="@drawable/equipment_check_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="叫醒服务"
-                android:textColor="@color/home_location_word"
-                android:textSize="16sp" />
-            <TextView
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:src="@drawable/equipment_room_icon" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="14sp"
-                android:textColor="@color/equipment_content_word"
-                android:text="1.酒店通常是14:00以后开始受理，如果提前到达需要等待。
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
 
-2.尊敬的客户本店拒绝带宠物进入，原有免费停车改成收费停车，如有不便敬请谅解，谢谢！
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="客房设施"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="16sp" />
 
-3.尊敬的会员你好，凡是2017-09-31至2017-10-08入住的客户都赠送造成一份。"/>
+                <TextView
+                    android:id="@+id/hotel_equipment_room_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/equipment_content_word"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="19dp"
-            android:layout_height="20dp"
-            android:src="@drawable/equipment_room_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="客房设施"
-                android:textColor="@color/home_location_word"
-                android:textSize="16sp" />
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:src="@drawable/equipment_service_icon" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="雨伞 电视 电吹风 无限 拖鞋 热水壶 国内长途电话 24小时热水 独立卫生间 免费咖啡包 针线包 免费瓶装水 免费洗漱用品"
-                android:textColor="@color/equipment_content_word"
-                android:textSize="14sp" />
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="服务项目"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/hotel_equipment_service_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/equipment_content_word"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="19dp"
-            android:layout_height="20dp"
-            android:src="@drawable/equipment_service_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="服务项目"
-                android:textColor="@color/home_location_word"
-                android:textSize="16sp" />
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:src="@drawable/equipment_comprehensive_icon" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="机场接送 行李寄存 叫醒服务"
-                android:textColor="@color/equipment_content_word"
-                android:textSize="14sp" />
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="综合设施"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/hotel_equipment_comprehensive_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/equipment_content_word"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="19dp"
-            android:layout_height="20dp"
-            android:src="@drawable/equipment_comprehensive_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="综合设施"
-                android:textColor="@color/home_location_word"
-                android:textSize="16sp" />
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:src="@drawable/equipment_check_icon" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="商务休息区 传真打印 前台保险柜 餐厅 POS机 会议室 大厅上网"
-                android:textColor="@color/equipment_content_word"
-                android:textSize="14sp" />
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="入住提醒"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/hotel_equipment_remind_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/equipment_content_word"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="23dp"
+            android:text="交通位置"
+            android:textColor="@color/mine_title_word"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:text="长沙市芙蓉区万家丽中路99号"
+            android:textColor="@color/equipment_content_word"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:src="@drawable/equipment_map_icon" />
     </LinearLayout>
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="23dp"
-        android:text="交通位置"
-        android:textColor="@color/mine_title_word"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:text="长沙市芙蓉区万家丽中路99号"
-        android:textSize="14sp"
-        android:textColor="@color/equipment_content_word"/>
-    
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/equipment_map_icon"/>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

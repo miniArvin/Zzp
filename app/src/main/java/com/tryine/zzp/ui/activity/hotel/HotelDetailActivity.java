@@ -1,17 +1,15 @@
 package com.tryine.zzp.ui.activity.hotel;
 
 
+import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -20,13 +18,17 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.tryine.zzp.R;
-import com.tryine.zzp.adapter.HotelDetailCommentAdapter;
+import com.tryine.zzp.adapter.HotelDetailCommentImgAdapter;
+import com.tryine.zzp.adapter.HotelDetailCommentTagAdapter;
 import com.tryine.zzp.adapter.HotelDetailIntroAdapter;
+import com.tryine.zzp.adapter.HotelDetailPolicyAdapter;
+import com.tryine.zzp.adapter.HotelDetailRecommendAdapter;
 import com.tryine.zzp.adapter.HotelDetailRoomAdapter;
-import com.tryine.zzp.adapter.SearchKeyWordAdapter;
+import com.tryine.zzp.app.ActivityCollector;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.entity.test.remote.HotelDetailEntity;
+import com.tryine.zzp.ui.MainActivity;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.FlowLayout.FlowLayoutManager;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
@@ -35,7 +37,6 @@ import com.tryine.zzp.widget.NoScrollListView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -54,7 +55,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private NoScrollGirdView hotel_detail_room_gv;
     private HotelDetailRoomAdapter hotelDetailRoomAdapter;
     private RecyclerView hotel_detail_comment_rv;
-    private SearchKeyWordAdapter searchKeyWordAdapter;
+    private HotelDetailCommentTagAdapter hotelDetailCommentTagAdapter;
     private String hotel_id;
     private String hotel_name;
     private HotelDetailEntity hotelDetailEntities;
@@ -67,6 +68,9 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private List<HotelDetailEntity.InfoBean.RoomBean> roomBeen;
     private List<HotelDetailEntity.InfoBean.HotelDetailBean.TagBean> tagBeen;
     private List<HotelDetailEntity.InfoBean.HotelIntroBean> hotelIntroBeen;
+    private List<HotelDetailEntity.InfoBean.PolicyBean> policyBeen;
+    private List<HotelDetailEntity.InfoBean.TagBeanX> tagBeanXes;
+    private List<HotelDetailEntity.InfoBean.ApplyBean.PhotoBean> photoBeen;
     private HotelDetailIntroAdapter hotelDetailIntroAdapter;
     private CircleImageView hotel_detail_head_cv;
     private TextView hotel_detail_member_name_tv;
@@ -95,6 +99,9 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private TextView hotel_detail_out_day_tv;
     private TextView hotel_detail_out_week_tv;
     private NoScrollGirdView hotel_detail_hotel_intro_gv;
+    private TextView hotel_detail_comment_all_count_tv;
+    private NoScrollGirdView hotel_detail_comment_gv;
+    private HotelDetailCommentImgAdapter hotelDetailCommentImgAdapter;
     private String checkDate;
     private String outDate;
     private Date dateCheck;
@@ -103,6 +110,10 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private String checkWeek;
     private String outWeek;
     private int week;
+    private HotelDetailPolicyAdapter hotelDetailPolicyAdapter;
+    private NoScrollListView hotel_detail_policy_lv;
+    private RecyclerView hotel_detail_recommend_rv;
+    private HotelDetailRecommendAdapter hotelDetailRecommendAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -125,13 +136,11 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         hotelBeen = new ArrayList<>();
         tagBeen = new ArrayList<>();
         hotelIntroBeen = new ArrayList<>();
+        policyBeen = new ArrayList<>();
+        tagBeanXes = new ArrayList<>();
+        photoBeen = new ArrayList<>();
         hotel_detail_room_gv = (NoScrollGirdView) findViewById(R.id.hotel_detail_room_gv);
         hotel_detail_comment_rv = (RecyclerView) findViewById(R.id.hotel_detail_comment_rv);
-        FlowLayoutManager flowLayoutManagerComment = new FlowLayoutManager();
-        hotel_detail_comment_rv.addItemDecoration(new SpaceItemDecoration(dp2px(5)));
-        hotel_detail_comment_rv.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0, 0, 0));
-        hotel_detail_comment_rv.setLayoutManager(flowLayoutManagerComment);
-        hotel_detail_comment_rv.setNestedScrollingEnabled(false);
         view_head_title = (TextView) findViewById(R.id.view_head_title);
         view_head_collect = (ImageView) findViewById(R.id.view_head_collect);
         view_head_collect.setVisibility(View.VISIBLE);
@@ -140,8 +149,6 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         view_head_share.setVisibility(View.VISIBLE);
         view_head_share.setOnClickListener(this);
         view_head_title.setText(hotel_name);
-//        searchKeyWordAdapter=new SearchKeyWordAdapter(lists,this);
-//        hotel_detail_comment_rv.setAdapter(searchKeyWordAdapter);
         hotel_detail_banner = (ConvenientBanner) findViewById(R.id.hotel_detail_banner);
         hotel_detail_ad_count_tv = (TextView) findViewById(R.id.hotel_detail_ad_count_tv);
         hotel_detail_name_tv = (TextView) findViewById(R.id.hotel_detail_name_tv);
@@ -158,13 +165,23 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         hotel_detail_hotel_intro_gv = (NoScrollGirdView) findViewById(R.id.hotel_detail_hotel_intro_gv);
         hotel_detail_rb= (RatingBar) findViewById(R.id.hotel_detail_rb);
         findViewById(R.id.view_head_back).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_all_policy_iv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_all_policy_tv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_intro_more_iv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_all_comment_iv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_comment_all_tv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_comment_all_iv).setOnClickListener(this);
         hotel_detail_head_cv = (CircleImageView) findViewById(R.id.hotel_detail_head_cv);
         hotel_detail_member_name_tv = (TextView) findViewById(R.id.hotel_detail_member_name_tv);
         hotel_detail_member_tv = (TextView) findViewById(R.id.hotel_detail_member_tv);
         hotel_detail_comment_publish_time_tv = (TextView) findViewById(R.id.hotel_detail_comment_publish_time_tv);
         hotel_detail_comment_tv = (TextView) findViewById(R.id.hotel_detail_comment_tv);
+        hotel_detail_comment_gv = (NoScrollGirdView) findViewById(R.id.hotel_detail_comment_gv);
         hotel_detail_member_iv = (ImageView) findViewById(R.id.hotel_detail_member_iv);
         hotel_detail_comment_rb = (RatingBar) findViewById(R.id.hotel_detail_comment_rb);
+        hotel_detail_policy_lv = (NoScrollListView) findViewById(R.id.hotel_detail_policy_lv);
+        hotel_detail_recommend_rv = (RecyclerView) findViewById(R.id.hotel_detail_recommend_rv);
+        hotel_detail_comment_all_count_tv = (TextView) findViewById(R.id.hotel_detail_comment_all_count_tv);
         loadData();
     }
 
@@ -220,7 +237,10 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 roomBeen = hotelDetailEntities.getInfo().getRoom();
                                 tagBeen = hotelDetailEntities.getInfo().getHotel_detail().getTag();
                                 deposit = hotelDetailEntities.getInfo().getDeposit();
+                                policyBeen = hotelDetailEntities.getInfo().getPolicy();
                                 hotelIntroBeen = hotelDetailEntities.getInfo().getHotel_intro();
+                                tagBeanXes = hotelDetailEntities.getInfo().getTag();
+                                photoBeen = hotelDetailEntities.getInfo().getApply().getPhoto();
                                 hotel_detail_name_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getHotel_name());
                                 hotel_detail_ad_count_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getPhoto_total());
                                 hotel_detail_year_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getOpen_date());
@@ -239,8 +259,40 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotel_detail_hotel_intro_gv.setAdapter(hotelDetailIntroAdapter);
                                 hotelDetailRoomAdapter = new HotelDetailRoomAdapter(mContext,roomBeen);
                                 hotel_detail_room_gv.setAdapter(hotelDetailRoomAdapter);
+
+                                //comment
                                 Glide.with(mContext).load(UrlUtils.getUrl(hotelDetailEntities.getInfo().getApply().getFace())).asBitmap().into(hotel_detail_head_cv);
+                                hotel_detail_member_name_tv.setText(hotelDetailEntities.getInfo().getApply().getNickname());
+                                hotel_detail_member_tv.setText(hotelDetailEntities.getInfo().getApply().getRank_name());
+                                hotel_detail_comment_publish_time_tv.setText(hotelDetailEntities.getInfo().getApply().getCreate_time());
+                                hotel_detail_comment_tv.setText(hotelDetailEntities.getInfo().getApply().getContent());
                                 hotel_detail_comment_rb.setRating(Float.parseFloat(hotelDetailEntities.getInfo().getApply().getScore()));
+                                hotel_detail_comment_all_count_tv.setText("("+hotelDetailEntities.getInfo().getHotel_detail().getComment_count()+")");
+                                hotelDetailCommentImgAdapter =new HotelDetailCommentImgAdapter(mContext,photoBeen);
+                                hotel_detail_comment_gv.setAdapter(hotelDetailCommentImgAdapter);
+
+                                //政策
+                                hotelDetailPolicyAdapter = new HotelDetailPolicyAdapter(mContext,policyBeen);
+                                hotel_detail_policy_lv.setAdapter(hotelDetailPolicyAdapter);
+
+                                //评论流式
+                                FlowLayoutManager flowLayoutManagerComment = new FlowLayoutManager();
+                                hotel_detail_comment_rv.addItemDecoration(new SpaceItemDecoration(dp2px(5)));
+                                hotel_detail_comment_rv.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0, 0, 0));
+                                hotel_detail_comment_rv.setLayoutManager(flowLayoutManagerComment);
+                                hotel_detail_comment_rv.setNestedScrollingEnabled(false);
+                                hotelDetailCommentTagAdapter = new HotelDetailCommentTagAdapter(mContext,tagBeanXes);
+                                hotel_detail_comment_rv.setAdapter(hotelDetailCommentTagAdapter);
+
+                                //酒店推荐
+                                LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
+                                linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                hotel_detail_recommend_rv.setLayoutManager(linearLayoutManager2);
+                                hotel_detail_recommend_rv.setNestedScrollingEnabled(false);
+                                hotelDetailRecommendAdapter = new HotelDetailRecommendAdapter(mContext,hotelBeen);
+                                int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.home_city_item_div);
+                                hotel_detail_recommend_rv.addItemDecoration(new com.tryine.zzp.utils.SpaceItemDecoration(spacingInPixels, com.tryine.zzp.utils.SpaceItemDecoration.HORIZONTAL_LIST));
+                                hotel_detail_recommend_rv.setAdapter(hotelDetailRecommendAdapter);
                             } else if (hotelDetailEntities.getStatus() == 362) {
                                 ToastUtils.showShort(hotelDetailEntities.getMsg());
                                 finish();
@@ -257,6 +309,8 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
+        Bundle bundle= new Bundle();
+        bundle.putString("hotel_id",hotel_id);
         switch (v.getId()) {
             case R.id.view_head_back:
                 finish();
@@ -265,6 +319,15 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                 break;
             case R.id.view_head_collect:
                 hotelCollect();
+                break;
+            case R.id.hotel_detail_intro_more_iv:
+            case R.id.hotel_detail_all_policy_tv:
+            case R.id.hotel_detail_all_policy_iv:
+                startAct(HotelEquipmentDetailActivity.class,bundle);
+                break;
+            case R.id.hotel_detail_comment_all_iv:
+            case R.id.hotel_detail_all_comment_iv:
+                startAct(HotelDetailAllCommentActivity.class,bundle);
                 break;
         }
     }

@@ -66,47 +66,36 @@
                     android:src="@drawable/hotel_detail_all_view_icon" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/hotel_detail_name_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-                <LinearLayout
-                    android:layout_width="255dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/hotel_detail_name_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/hotel_detail_pai_tv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="50dp"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:text="拍"
+                android:textColor="@color/white" />
 
-                    <RatingBar
-                        android:id="@+id/hotel_detail_rb"
-                        style="@style/Base.Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:progressTint="@color/orange" />
-                </LinearLayout>
+            <RatingBar
+                android:id="@+id/hotel_detail_rb"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:progressTint="@color/orange" />
 
-                <TextView
-                    android:id="@+id/hotel_detail_pai_tv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="50dp"
-                    android:background="@color/orange"
-                    android:gravity="center"
-                    android:text="拍"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -411,29 +400,30 @@
                     android:src="@drawable/hotel_detail_hotel_introduce_icon" />
 
             </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hotel_detail_comment_rv"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="22dp"></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
+                android:id="@+id/hotel_detail_comment_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/hotel_detail_comment_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="22dp">
-                </android.support.v7.widget.RecyclerView>
-
-                <include layout="@layout/hotel_detail_all_comment_item" />
+                <include layout="@layout/hotel_detail_all_comment_item"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_marginTop="15dp"
-                android:background="@color/mine_div"/>
+                android:background="@color/mine_div" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -456,6 +446,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/hotel_detail_all_policy_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -465,6 +456,7 @@
                     android:textColor="@color/equipment_content_word" />
 
                 <ImageView
+                    android:id="@+id/hotel_detail_all_policy_iv"
                     android:layout_width="6dp"
                     android:layout_height="12dp"
                     android:layout_alignParentRight="true"
@@ -473,91 +465,13 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
-                android:text="入离时间："
-                android:textColor="@color/orange"
-                android:textSize="18sp" />
-
-            <LinearLayout
+            <com.tryine.zzp.widget.NoScrollListView
+                android:id="@+id/hotel_detail_policy_lv"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:divider="@null">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="入住时间："
-                    android:textColor="@color/home_recommend_location_word" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="14:00以后"
-                    android:textColor="@color/home_recommend_location_word" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="离店时间："
-                    android:textColor="@color/home_recommend_location_word" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="11:30-12:00"
-                    android:textColor="@color/home_recommend_location_word" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
-                android:text="儿童及加床："
-                android:textColor="@color/orange"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
-                android:text="不接受18岁以下客人单独入住。"
-                android:textColor="@color/home_recommend_location_word" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
-                android:text="早餐费用："
-                android:textColor="@color/orange"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
-                android:text="酒店房价包含早餐费用，双早￥48/位。"
-                android:textColor="@color/home_recommend_location_word" />
+            </com.tryine.zzp.widget.NoScrollListView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -599,11 +513,14 @@
 
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/hotel_detail_recommend_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+
 
 </LinearLayout>

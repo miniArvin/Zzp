@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tryine.zzp.R;
 import com.tryine.zzp.entity.test.remote.HomeEntity;
+import com.tryine.zzp.entity.test.remote.HotelDetailEntity;
 import com.tryine.zzp.utils.UrlUtils;
 
 import java.util.List;
@@ -21,18 +22,16 @@ import java.util.List;
  * Created by Administrator on 2017/10/20 0020.
  */
 
-public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAdapter.ViewHolder> {
-    private final View mParent;
+public class HotelDetailRecommendAdapter extends RecyclerView.Adapter<HotelDetailRecommendAdapter.ViewHolder> {
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<HomeEntity.InfoBean.HotelBean> mData;
+    private List<HotelDetailEntity.InfoBean.HotelBean> mData;
     private OnUseClickListener onUseClickListener;
 
-    public HotelRecommendAdapter(Context context, List<HomeEntity.InfoBean.HotelBean> hotelBeen, View parent) {
+    public HotelDetailRecommendAdapter(Context context, List<HotelDetailEntity.InfoBean.HotelBean> hotelBeen) {
         mLayoutInflater = LayoutInflater.from(context);
         mData=hotelBeen;
         mContext=context;
-        mParent=parent;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

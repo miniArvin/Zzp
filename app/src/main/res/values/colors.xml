@@ -80,4 +80,5 @@
     <color name="found_detail_time_word">#767676</color>
     <color name="found_detail_member_level_word">#F9C521</color>
     <color name="mine_publish_title_bg">#ffeedc</color>
+    <color name="hotel_comment_score">#37b1ff</color>
 </resources>

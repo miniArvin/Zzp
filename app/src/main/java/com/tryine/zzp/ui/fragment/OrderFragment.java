@@ -43,7 +43,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener{
     private List<String> titles;
     private List<Fragment> fragments;
     private TextView order_all_order_btn;
-    private OrderFragmentController controller;
     private LinearLayout order_hotel_ll;
     private LinearLayout order_independent_travel_ll;
     public String firstTabShow="hotel";
@@ -138,9 +137,4 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener{
         ViewPagerHelper.bind(order_indicator, order_vp);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        controller.destoryController();
-    }
 }

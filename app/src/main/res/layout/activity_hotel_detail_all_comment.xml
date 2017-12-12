@@ -15,33 +15,6 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/hotel_detail_comment_hot_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/hotel_detail_comment_hot_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="46dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="热门"
-                android:textColor="@color/orange" />
-
-            <View
-                android:id="@+id/hotel_detail_comment_hot_v"
-                android:layout_width="30dp"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:background="@color/orange"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/hotel_detail_comment_new_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,10 +29,37 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="最新"
-                android:textColor="@color/black" />
+                android:textColor="@color/orange" />
 
             <View
                 android:id="@+id/hotel_detail_comment_new_v"
+                android:layout_width="30dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:background="@color/orange"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hotel_detail_comment_hot_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hotel_detail_comment_hot_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="热门"
+                android:textColor="@color/black" />
+
+            <View
+                android:id="@+id/hotel_detail_comment_hot_v"
                 android:layout_width="30dp"
                 android:layout_height="2dp"
                 android:layout_gravity="center"
@@ -69,7 +69,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/hotel_detail_comment_has_photo_ll"
+            android:id="@+id/hotel_detail_comment_img_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -77,7 +77,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/hotel_detail_comment_has_photo_tv"
+                android:id="@+id/hotel_detail_comment_img_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
@@ -86,7 +86,7 @@
                 android:textColor="@color/black" />
 
             <View
-                android:id="@+id/hotel_detail_comment_has_photo_v"
+                android:id="@+id/hotel_detail_comment_img_v"
                 android:layout_width="30dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
@@ -97,28 +97,91 @@
         </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="4.8/5非常好"
-            android:textSize="28sp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:gravity="center"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="12247条评论"
-            android:gravity="center"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/hotel_all_comment_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/hotel_all_comment_score_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|bottom"
+                        android:text="4.8"
+                        android:textColor="@color/hotel_comment_score"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|bottom"
+                        android:text="/5"
+                        android:textColor="@color/hotel_comment_score"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_all_comment_chinese_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:gravity="center|bottom"
+                        android:text="非常好"
+                        android:textColor="@color/hotel_comment_score"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_all_comment_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12dp"
+                        android:gravity="center"
+                        android:text="12247条评论"
+                        android:textColor="@color/equipment_content_word"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/hotel_all_comment_tag_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"></android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/found_search_bg" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hotel_all_comment_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
 </LinearLayout>

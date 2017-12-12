@@ -1,130 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/hotel_detail_head_cv"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/fenghuanggucheng"
         app:civ_border_color="@color/white"
         app:civ_border_width="2dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/hotel_detail_member_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="就是爱旅行"
-                android:textSize="18sp"
+                android:gravity="center"
                 android:textColor="@color/black"
-                android:gravity="center"/>
+                android:textSize="18sp" />
+
             <ImageView
                 android:id="@+id/hotel_detail_member_iv"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/mine_member_gold"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:src="@drawable/mine_member_gold" />
+
             <TextView
                 android:id="@+id/hotel_detail_member_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="铜牌会员"
-                android:textColor="@color/orange"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="@color/orange" />
+
             <TextView
                 android:id="@+id/hotel_detail_comment_publish_time_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="2017-08-21"
-                android:gravity="center|right"/>
+                android:gravity="center|right" />
         </LinearLayout>
+
         <RatingBar
             android:id="@+id/hotel_detail_comment_rb"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Base.Widget.AppCompat.RatingBar.Small"
-            android:progressTint="@color/orange"
-            android:rating="5"/>
+            android:progressTint="@color/orange" />
+
         <TextView
             android:id="@+id/hotel_detail_comment_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="装修简介，干净，服务也很好，价位不高，很贴心的给准备了渴了，值得推荐。"
-            android:textSize="18sp"/>
-        <RelativeLayout
+            android:textSize="18sp" />
+
+        <com.tryine.zzp.widget.NoScrollGirdView
+            android:id="@+id/hotel_detail_comment_gv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <ImageView
-                android:id="@+id/hotel_detail_comment1_iv"
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:src="@drawable/hotel_detail_comment1_icon"/>
-            <ImageView
-                android:id="@+id/hotel_detail_comment2_iv"
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="100dp"
-                android:src="@drawable/hotel_detail_comment2_icon"/>
-            <ImageView
-                android:id="@+id/hotel_detail_comment3_iv"
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="200dp"
-                android:visibility="gone"
-                android:src="@drawable/hotel_detail_comment3_icon"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:visibility="visible">
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:src="@drawable/hotel_detail_comment1_icon"/>
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="100dp"
-                android:src="@drawable/hotel_detail_comment2_icon"/>
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="200dp"
-                android:visibility="gone"
-                android:src="@drawable/hotel_detail_comment3_icon"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:visibility="gone">
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:src="@drawable/hotel_detail_comment1_icon"/>
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="100dp"
-                android:src="@drawable/hotel_detail_comment2_icon"/>
-            <ImageView
-                android:layout_width="92dp"
-                android:layout_height="92dp"
-                android:layout_marginLeft="200dp"
-                android:src="@drawable/hotel_detail_comment3_icon"/>
-        </RelativeLayout>
+            android:numColumns="3"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="10dp"></com.tryine.zzp.widget.NoScrollGirdView>
     </LinearLayout>
 </LinearLayout>

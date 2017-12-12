@@ -95,4 +95,10 @@ public class Api {
 
     //筛选列表
     public static final String HOTELLISTSELECT = BASE_URL +"app/hotel/screen";
+
+    //酒店详情——详情、设备
+    public static final String HOTELDETAILEQUIPMENT = BASE_URL +"app/hotel/equipment";
+
+    //酒店详情——评论
+    public static final String HOTELDETAILCOMMENT = BASE_URL +"app/hotel/apply";
 }
