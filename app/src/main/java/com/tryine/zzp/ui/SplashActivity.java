@@ -1,13 +1,9 @@
 package com.tryine.zzp.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.os.SystemClock;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.tryine.zzp.R;
-import com.tryine.zzp.app.ActivityCollector;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
