@@ -1,8 +1,8 @@
 package com.tryine.zzp.ui.activity.mine.message;
 
 
-import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -18,8 +18,15 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 public class ContactUsActivity extends BaseStatusMActivity {
-    private TextView contact_us_tv;
     private TextView view_head_title;
+    private ImageView contact_us_title_iv;
+    private ImageView contact_us_map_tv;
+    private TextView contact_us_title_tv;
+    private TextView contact_us_title_english_tv;
+    private TextView contact_us_address_tv;
+    private TextView contact_us_phone_tv;
+    private TextView contact_us_tell_tv;
+    private TextView contact_us_mail_tv;
 
     @Override
     protected int getLayoutId() {
@@ -32,18 +39,20 @@ public class ContactUsActivity extends BaseStatusMActivity {
         loadData();
     }
 
-    public void loadData(){
-        contact_us_tv = (TextView) findViewById(R.id.contact_us_tv);
+    public void loadData() {
         view_head_title = (TextView) findViewById(R.id.view_head_title);
+        view_head_title.setText("关于我们");
         findViewById(R.id.view_head_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        contact_us_title_iv = (ImageView) findViewById(R.id.contact_us_title_iv);
+
     }
 
-    public void loadMessage(){
+    public void loadMessage() {
         OkHttpUtils
                 .post()
                 .url(Api.CONTACTUS)
@@ -64,13 +73,13 @@ public class ContactUsActivity extends BaseStatusMActivity {
                     @Override
                     public void onResponse(Object response, int id) {
                         try {
-                            JSONObject jsonObject=new JSONObject(response.toString());
+                            JSONObject jsonObject = new JSONObject(response.toString());
                             LogUtils.e(jsonObject);
-                            if (!(jsonObject.getInt("status")==203)){
-                                CharSequence charSequence= Html.fromHtml(jsonObject.getString("v"));
-                                contact_us_tv.setText(charSequence);
+                            if (!(jsonObject.getInt("status") == 203)) {
+                                JSONObject list = new JSONObject(jsonObject.getString("list"));
+
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }

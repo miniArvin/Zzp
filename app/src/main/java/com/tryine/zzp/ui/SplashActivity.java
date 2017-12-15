@@ -25,7 +25,7 @@ public class SplashActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-
+        login();
     }
 
     public void startUI() {

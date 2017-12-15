@@ -55,6 +55,7 @@ public class MineMessagesAdapter extends BaseAdapter {
             } else if (mType == 2) {
                 convertView = mLayoutInflater.inflate(R.layout.help_cneter_item, null);
                 viewHolder.help_center_item_tv= (TextView) convertView.findViewById(R.id.help_center_item_tv);
+                viewHolder.help_center_item_tv.setSingleLine();
             }
             convertView.setTag(viewHolder);
         }else {

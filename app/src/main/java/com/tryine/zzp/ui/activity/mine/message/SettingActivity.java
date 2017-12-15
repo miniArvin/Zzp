@@ -1,6 +1,7 @@
 package com.tryine.zzp.ui.activity.mine.message;
 
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
     private TextView setting_name_tv;
     private ImageView setting_level_iv;
     private TextView setting_level_tv;
+    private Bundle bundle;
 
     @Override
     protected int getLayoutId() {
@@ -38,6 +40,7 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
     }
 
     public void loadData(){
+        bundle = new Bundle();
         findViewById(R.id.view_head_back).setOnClickListener(this);
         view_head_title= (TextView) findViewById(R.id.view_head_title);
         view_head_title.setText("设置");
@@ -46,7 +49,6 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
         findViewById(R.id.contact_us_rl).setOnClickListener(this);
         findViewById(R.id.about_zzp_rl).setOnClickListener(this);
         findViewById(R.id.setting_logout_tv).setOnClickListener(this);
-
     }
 
     @Override
@@ -62,8 +64,12 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
                 startAct(HelpCenterActivity.class);
                 break;
             case R.id.setting_member_rl:
+                bundle.putString("type","2");
+                startAct(WebViewActivity.class,bundle);
                 break;
             case R.id.about_zzp_rl:
+                bundle.putString("type","1");
+                startAct(WebViewActivity.class,bundle);
                 break;
             case R.id.setting_logout_tv:
                 settingLogout();
@@ -140,7 +146,9 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
                             JSONObject jsonObject = new JSONObject(response.toString());
                             LogUtils.e(jsonObject);
                             if (jsonObject.getInt("status")==330){
-                                ToastUtils.showShort("注销成功！");
+                                ToastUtils.showShort("msg");
+                            }else {
+                                ToastUtils.showShort("msg");
                             }
                         }catch (Exception e){
 

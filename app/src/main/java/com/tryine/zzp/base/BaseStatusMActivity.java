@@ -16,10 +16,10 @@ public abstract class BaseStatusMActivity extends BaseActivity {
         super.init();
         ImmersionBar.with(this)
                 .statusBarColor(R.color.bar)
-//                .navigationBarColor(R.color.black)
+                .navigationBarColor(R.color.black)
                 .statusBarAlpha(0)
-//                .navigationBarAlpha(0)
-//                .fitsSystemWindows(true)
+                .navigationBarAlpha(0)
+                .fitsSystemWindows(true)
                 .statusBarDarkFont(true)
                 .init();
     }

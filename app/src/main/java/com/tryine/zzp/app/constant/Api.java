@@ -118,4 +118,8 @@ public class Api {
     //酒店订单提交成功页面
     public static final String HOTELSUBMITSUCCESE = BASE_URL +"app/hotel/post_succese";
 
+    //会员条款、隐私政策、关于我们、负责说明
+    public static final String MEMBERSHIPCLAUSE = BASE_URL +"app/news/membership_clause";
+
+
 }
