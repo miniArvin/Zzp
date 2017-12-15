@@ -30,7 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"></ListView>
+            android:layout_marginRight="8dp"
+            android:divider="@color/mine_div"
+            android:dividerHeight="0.1dp"></ListView>
 
     </LinearLayout>
 
