@@ -15,15 +15,6 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-import static com.tryine.zzp.app.constant.Cons.SP_USER_ACCOUNT;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_EMAIL;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_FACE;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_ID;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_NAME;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_PHONE;
-import static com.tryine.zzp.app.constant.Cons.SP_USER_TOKEN;
-import static com.tryine.zzp.utils.UIUtils.startAct;
-
 public class SplashActivity extends BaseStatusMActivity {
 
 
