@@ -102,32 +102,32 @@ public class MainActivity extends BaseBottomTabsActivity {
                 switch (position) {
                     case 0:
                         immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.white)
+                                .statusBarColor(R.color.bar)
                                 .statusBarAlpha(0)
                                 .init();
                         break;
                     case 1:
                         immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.white)
+                                .statusBarColor(R.color.bar)
                                 .statusBarAlpha(0)
                                 .init();
                         break;
                     case 2:
                         immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.white)
+                                .statusBarColor(R.color.bar)
                                 .statusBarAlpha(0)
                                 .init();
 
                         break;
                     case 3:
                         immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.white)
+                                .statusBarColor(R.color.bar)
                                 .statusBarAlpha(0)
                                 .init();
                         break;
                     case 4:
                         immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.white)
+                                .statusBarColor(R.color.bar)
                                 .statusBarAlpha(0)
                                 .init();
                         break;

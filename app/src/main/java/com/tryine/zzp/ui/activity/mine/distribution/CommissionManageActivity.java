@@ -15,9 +15,9 @@ public class CommissionManageActivity extends BaseStatusMActivity implements Vie
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
-    public void init(){
+    public void initView(){
         findViewById(R.id.commission_manage_detail_tv).setOnClickListener(this);
         findViewById(R.id.commission_manage_withdraw_tv).setOnClickListener(this);
     }

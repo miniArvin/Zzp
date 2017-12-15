@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="bar">#00FFFFFF</color>
     <color name="black">#000000</color>
     <color name="orange">#FFEE8419</color>
     <color name="green">#3BC240</color>
@@ -81,4 +82,5 @@
     <color name="found_detail_member_level_word">#F9C521</color>
     <color name="mine_publish_title_bg">#ffeedc</color>
     <color name="hotel_comment_score">#37b1ff</color>
+    <color name="hotel_order_linkman_hint_word">#d5d5d5</color>
 </resources>

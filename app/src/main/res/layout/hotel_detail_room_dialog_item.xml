@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/item_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/hotel_detail_room_dialog_cb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/fenghuanggucheng"></com.bigkoo.convenientbanner.ConvenientBanner>
+
+            <TextView
+                android:id="@+id/hotel_detail_room_dialog_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="豪华单人床"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/hotel_detail_room_close_iv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/hotel_detail_pai_close_icon" />
+
+            <LinearLayout
+                android:layout_width="33dp"
+                android:layout_height="18dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/hotel_detail_photo_bg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="/"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="8"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/hotel_detail_room_dialog_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一晚总价：￥268"
+                android:textColor="@color/home_location_btn"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/hotel_detail_room_dialog_check_tv"
+                android:layout_width="63dp"
+                android:layout_height="27dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/login_bg_look"
+                android:gravity="center"
+                android:text="预订"
+                android:textColor="@color/home_location_btn"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <com.tryine.zzp.widget.NoScrollListView
+            android:id="@+id/hotel_detail_room_dialog_policy_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="12dp"
+            android:divider="@null"></com.tryine.zzp.widget.NoScrollListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/hotel_detail_div" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="酒店政策"
+            android:textColor="@color/home_location_btn"
+            android:textSize="18sp" />
+
+        <com.tryine.zzp.widget.NoScrollListView
+            android:id="@+id/hotel_detail_room_dialog_facilities_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="7dp"
+            android:divider="@null" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/hotel_detail_div" />
+
+        <LinearLayout
+            android:id="@+id/hotel_detail_room_dialog_pai_ll"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/login_bg_btn"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hotel_detail_room_dialog_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="趣味竞拍"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

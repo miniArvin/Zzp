@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,18 +18,23 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.othershe.nicedialog.BaseNiceDialog;
+import com.othershe.nicedialog.NiceDialog;
+import com.othershe.nicedialog.ViewConvertListener;
+import com.othershe.nicedialog.ViewHolder;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.HotelDetailCommentImgAdapter;
 import com.tryine.zzp.adapter.HotelDetailCommentTagAdapter;
+import com.tryine.zzp.adapter.HotelDetailDialogRoomAdapter;
 import com.tryine.zzp.adapter.HotelDetailIntroAdapter;
 import com.tryine.zzp.adapter.HotelDetailPolicyAdapter;
 import com.tryine.zzp.adapter.HotelDetailRecommendAdapter;
 import com.tryine.zzp.adapter.HotelDetailRoomAdapter;
-import com.tryine.zzp.app.ActivityCollector;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.entity.test.remote.HotelDetailEntity;
-import com.tryine.zzp.ui.MainActivity;
+import com.tryine.zzp.entity.test.remote.HotelDetailRoomEntity;
+import com.tryine.zzp.ui.activity.mine.order.order_time.HotelOrderTimeActivity;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.FlowLayout.FlowLayoutManager;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
@@ -36,6 +42,7 @@ import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
+
 
 import org.json.JSONObject;
 
@@ -114,6 +121,15 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private NoScrollListView hotel_detail_policy_lv;
     private RecyclerView hotel_detail_recommend_rv;
     private HotelDetailRecommendAdapter hotelDetailRecommendAdapter;
+    private String room_id;
+    private List<HotelDetailRoomEntity.InfoBean.PolicyBean> roomPolicyBeen;
+    private List<HotelDetailRoomEntity.InfoBean.FacilitiesBean> roomFacilitiesBeen;
+    private ConvenientBanner hotel_detail_room_dialog_cb;
+    private NoScrollListView hotel_detail_room_dialog_policy_lv;
+    private NoScrollListView hotel_detail_room_dialog_facilities_lv;
+    private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterPolicy;
+    private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterFacilities;
+    private Bundle bundle;
 
     @Override
     protected int getLayoutId() {
@@ -139,6 +155,9 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         policyBeen = new ArrayList<>();
         tagBeanXes = new ArrayList<>();
         photoBeen = new ArrayList<>();
+        roomPolicyBeen = new ArrayList<>();
+        roomFacilitiesBeen = new ArrayList<>();
+        bundle = new Bundle();
         hotel_detail_room_gv = (NoScrollGirdView) findViewById(R.id.hotel_detail_room_gv);
         hotel_detail_comment_rv = (RecyclerView) findViewById(R.id.hotel_detail_comment_rv);
         view_head_title = (TextView) findViewById(R.id.view_head_title);
@@ -163,7 +182,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         hotel_detail_out_day_tv = (TextView) findViewById(R.id.hotel_detail_out_day_tv);
         hotel_detail_out_week_tv = (TextView) findViewById(R.id.hotel_detail_out_week_tv);
         hotel_detail_hotel_intro_gv = (NoScrollGirdView) findViewById(R.id.hotel_detail_hotel_intro_gv);
-        hotel_detail_rb= (RatingBar) findViewById(R.id.hotel_detail_rb);
+        hotel_detail_rb = (RatingBar) findViewById(R.id.hotel_detail_rb);
         findViewById(R.id.view_head_back).setOnClickListener(this);
         findViewById(R.id.hotel_detail_all_policy_iv).setOnClickListener(this);
         findViewById(R.id.hotel_detail_all_policy_tv).setOnClickListener(this);
@@ -191,16 +210,18 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
     public void loadData() {
         SimpleDateFormat formatter = new SimpleDateFormat("MM月dd日");
-        dateCheck=new Date();//取时间
-        dateOut= new Date();
+        dateCheck = new Date();//取时间
+        dateOut = new Date();
         calendar = new GregorianCalendar();
         calendar.setTime(dateCheck);
         checkDate = formatter.format(dateCheck);
-        calendar.add(calendar.DATE,1);//把日期往后增加一天.整数往后推,负数往前移动
-        dateOut=calendar.getTime(); //这个时间就是日期往后推一天的结果
-        outDate=formatter.format(dateOut);
+        calendar.add(calendar.DATE, 1);//把日期往后增加一天.整数往后推,负数往前移动
+        dateOut = calendar.getTime(); //这个时间就是日期往后推一天的结果
+        outDate = formatter.format(dateOut);
         hotel_detail_check_day_tv.setText(checkDate);
         hotel_detail_out_day_tv.setText(outDate);
+        bundle.putString("check",checkDate);
+        bundle.putString("out",outDate);
 
     }
 
@@ -255,10 +276,10 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                         hotel_detail_comment_tag2_tv.setText(tagBeen.get(1).getTag_name());
                                     hotel_detail_comment_tag2_tv.setVisibility(View.VISIBLE);
                                 }
-                                hotelDetailIntroAdapter =new HotelDetailIntroAdapter(mContext,hotelIntroBeen);
+                                hotelDetailIntroAdapter = new HotelDetailIntroAdapter(mContext, hotelIntroBeen);
                                 hotel_detail_hotel_intro_gv.setAdapter(hotelDetailIntroAdapter);
-                                hotelDetailRoomAdapter = new HotelDetailRoomAdapter(mContext,roomBeen);
-                                hotel_detail_room_gv.setAdapter(hotelDetailRoomAdapter);
+                                //room
+                                checkRoom(roomBeen);
 
                                 //comment
                                 Glide.with(mContext).load(UrlUtils.getUrl(hotelDetailEntities.getInfo().getApply().getFace())).asBitmap().into(hotel_detail_head_cv);
@@ -267,12 +288,12 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotel_detail_comment_publish_time_tv.setText(hotelDetailEntities.getInfo().getApply().getCreate_time());
                                 hotel_detail_comment_tv.setText(hotelDetailEntities.getInfo().getApply().getContent());
                                 hotel_detail_comment_rb.setRating(Float.parseFloat(hotelDetailEntities.getInfo().getApply().getScore()));
-                                hotel_detail_comment_all_count_tv.setText("("+hotelDetailEntities.getInfo().getHotel_detail().getComment_count()+")");
-                                hotelDetailCommentImgAdapter =new HotelDetailCommentImgAdapter(mContext,photoBeen);
+                                hotel_detail_comment_all_count_tv.setText("(" + hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + ")");
+                                hotelDetailCommentImgAdapter = new HotelDetailCommentImgAdapter(mContext, photoBeen);
                                 hotel_detail_comment_gv.setAdapter(hotelDetailCommentImgAdapter);
 
                                 //政策
-                                hotelDetailPolicyAdapter = new HotelDetailPolicyAdapter(mContext,policyBeen);
+                                hotelDetailPolicyAdapter = new HotelDetailPolicyAdapter(mContext, policyBeen);
                                 hotel_detail_policy_lv.setAdapter(hotelDetailPolicyAdapter);
 
                                 //评论流式
@@ -281,7 +302,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotel_detail_comment_rv.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_CANCEL, 0, 0, 0));
                                 hotel_detail_comment_rv.setLayoutManager(flowLayoutManagerComment);
                                 hotel_detail_comment_rv.setNestedScrollingEnabled(false);
-                                hotelDetailCommentTagAdapter = new HotelDetailCommentTagAdapter(mContext,tagBeanXes);
+                                hotelDetailCommentTagAdapter = new HotelDetailCommentTagAdapter(mContext, tagBeanXes);
                                 hotel_detail_comment_rv.setAdapter(hotelDetailCommentTagAdapter);
 
                                 //酒店推荐
@@ -289,7 +310,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 hotel_detail_recommend_rv.setLayoutManager(linearLayoutManager2);
                                 hotel_detail_recommend_rv.setNestedScrollingEnabled(false);
-                                hotelDetailRecommendAdapter = new HotelDetailRecommendAdapter(mContext,hotelBeen);
+                                hotelDetailRecommendAdapter = new HotelDetailRecommendAdapter(mContext, hotelBeen);
                                 int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.home_city_item_div);
                                 hotel_detail_recommend_rv.addItemDecoration(new com.tryine.zzp.utils.SpaceItemDecoration(spacingInPixels, com.tryine.zzp.utils.SpaceItemDecoration.HORIZONTAL_LIST));
                                 hotel_detail_recommend_rv.setAdapter(hotelDetailRecommendAdapter);
@@ -309,8 +330,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        Bundle bundle= new Bundle();
-        bundle.putString("hotel_id",hotel_id);
+        bundle.putString("hotel_id", hotel_id);
         switch (v.getId()) {
             case R.id.view_head_back:
                 finish();
@@ -323,11 +343,11 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
             case R.id.hotel_detail_intro_more_iv:
             case R.id.hotel_detail_all_policy_tv:
             case R.id.hotel_detail_all_policy_iv:
-                startAct(HotelEquipmentDetailActivity.class,bundle);
+                startAct(HotelEquipmentDetailActivity.class, bundle);
                 break;
             case R.id.hotel_detail_comment_all_iv:
             case R.id.hotel_detail_all_comment_iv:
-                startAct(HotelDetailAllCommentActivity.class,bundle);
+                startAct(HotelDetailAllCommentActivity.class, bundle);
                 break;
         }
     }
@@ -366,4 +386,146 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     }
                 });
     }
+
+    public void checkRoom(final List<HotelDetailEntity.InfoBean.RoomBean> roomBeen) {
+        hotelDetailRoomAdapter = new HotelDetailRoomAdapter(mContext, roomBeen);
+        hotel_detail_room_gv.setAdapter(hotelDetailRoomAdapter);
+
+        hotelDetailRoomAdapter.setOnCheckClickListener(new HotelDetailRoomAdapter.OnCheckClickListener() {
+            @Override
+            public void onCheck(View v, int position) {
+                if (roomBeen.get(position).getSku() != 0) {
+                    room_id = roomBeen.get(position).getRoom_id();
+                    bundle.putString("room_id",room_id);
+                    startAct(HotelOrderTimeActivity.class,bundle);
+                }
+            }
+
+            @Override
+            public void onPai(View v, final int position) {
+                NiceDialog.init()
+                        .setLayoutId(R.layout.hotel_interest_pai_dialog)
+                        .setConvertListener(new ViewConvertListener() {
+                            @Override
+                            protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
+                                room_id = roomBeen.get(position).getRoom_id();
+                                viewHolder.setOnClickListener(R.id.hotel_detail_pai_close_iv, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        baseNiceDialog.dismiss();
+                                    }
+                                });
+                            }
+                        })
+                        .setOutCancel(false)
+                        .setAnimStyle(R.style.EnterExitAnimation)
+                        .show(getSupportFragmentManager());
+            }
+        });
+
+        hotel_detail_room_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                room_id = roomBeen.get(position).getRoom_id();
+                loadRoomMessage(room_id, position);
+            }
+        });
+
+    }
+
+    public void loadRoomMessage(String room_id, final int position) {
+        OkHttpUtils
+                .post()
+                .url(Api.HOTELDETAILROOM)
+                .addParams("room_id", room_id)
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        String string = response.body().string();
+                        LogUtils.e(string);
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            LogUtils.e(jsonObject);
+                            if (jsonObject.getInt("status") == 330) {
+                                Gson gson = new Gson();
+                                HotelDetailRoomEntity hotelDetailRoomEntities = gson.fromJson(response.toString(), HotelDetailRoomEntity.class);
+                                roomPolicyBeen = hotelDetailRoomEntities.getInfo().getPolicy();
+                                roomFacilitiesBeen = hotelDetailRoomEntities.getInfo().getFacilities();
+                                roomCheckDialog(position, roomPolicyBeen, roomFacilitiesBeen);
+                            } else {
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    public void roomCheckDialog(final int position, final List<HotelDetailRoomEntity.InfoBean.PolicyBean> roomPolicyBeen, final List<HotelDetailRoomEntity.InfoBean.FacilitiesBean> roomFacilitiesBeen) {
+        if (hotelDetailEntities.getInfo().getRoom().get(position).getSku() != 0) {
+            NiceDialog.init()
+                    .setLayoutId(R.layout.hotel_detail_room_dialog_item)
+                    .setConvertListener(new ViewConvertListener() {
+                        @Override
+                        protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
+                            viewHolder.setOnClickListener(R.id.hotel_detail_room_close_iv, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    baseNiceDialog.dismiss();
+                                }
+                            });
+                            viewHolder.setOnClickListener(R.id.hotel_detail_room_dialog_check_tv, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    room_id=roomBeen.get(position).getRoom_id();
+                                    bundle.putString("room_id",room_id);
+                                    bundle.putString("hotel_name",hotel_name);
+                                    startAct(HotelOrderTimeActivity.class,bundle);
+                                }
+                            });
+                            viewHolder.setOnClickListener(R.id.hotel_detail_room_dialog_pai_ll, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ToastUtils.showShort("pai");
+                                }
+                            });
+                            viewHolder.setText(R.id.hotel_detail_room_dialog_type_tv, roomBeen.get(position).getTitle());
+                            viewHolder.setText(R.id.hotel_detail_room_dialog_price_tv, "一晚总价：" + roomBeen.get(position).getPrice());
+
+                            View dialogView = viewHolder.getConvertView();
+                            hotel_detail_room_dialog_cb = (ConvenientBanner) dialogView.findViewById(R.id.hotel_detail_room_dialog_cb);
+                            hotel_detail_room_dialog_cb.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ToastUtils.showShort("cb");
+                                }
+                            });
+                            hotel_detail_room_dialog_policy_lv = (NoScrollListView) dialogView.findViewById(R.id.hotel_detail_room_dialog_policy_lv);
+                            hotel_detail_room_dialog_facilities_lv = (NoScrollListView) dialogView.findViewById(R.id.hotel_detail_room_dialog_facilities_lv);
+
+                            hotelDetailDialogRoomAdapterFacilities = new HotelDetailDialogRoomAdapter(baseNiceDialog.getContext(), null, roomFacilitiesBeen);
+                            hotelDetailDialogRoomAdapterPolicy = new HotelDetailDialogRoomAdapter(baseNiceDialog.getContext(), roomPolicyBeen, null);
+                            hotel_detail_room_dialog_policy_lv.setAdapter(hotelDetailDialogRoomAdapterPolicy);
+                            hotel_detail_room_dialog_facilities_lv.setAdapter(hotelDetailDialogRoomAdapterFacilities);
+                        }
+                    })
+                    .setOutCancel(false)
+                    .setAnimStyle(R.style.EnterExitAnimation)
+                    .show(getSupportFragmentManager());
+        }
+
+    }
+
 }

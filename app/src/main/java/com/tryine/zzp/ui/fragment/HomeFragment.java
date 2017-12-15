@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +30,6 @@ import com.tryine.zzp.base.BaseFragment;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -47,7 +45,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout home_gonglue_gonglue;
     private LinearLayout home_gonglue_question;
     private RecyclerView home_city_name;
-    private HorizontalScrollView home_city_name_sh;
     private RecyclerView home_recommend_hotel;
     private ConvenientBanner home_banner;
     private CityNameAdapter cityNameAdapter;
@@ -78,13 +75,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void afterCreated(Bundle savedInstanceState) {
+        loadMessage();
         initView();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadMessage();
     }
 
     public void initView() {

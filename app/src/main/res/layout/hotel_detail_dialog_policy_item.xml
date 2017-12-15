@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+        <TextView
+            android:id="@+id/hotel_detail_dialog_policy_title_tv"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hotel_detail_room_word"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/hotel_detail_dialog_policy_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_location_word"
+            android:textSize="14sp" />
+</LinearLayout>

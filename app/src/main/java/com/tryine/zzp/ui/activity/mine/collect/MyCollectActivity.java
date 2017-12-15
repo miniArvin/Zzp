@@ -34,10 +34,10 @@ public class MyCollectActivity extends BaseStatusMActivity implements View.OnCli
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         mine_collect_lv= (ListView) findViewById(R.id.mine_collect_lv);
         mineCollectHotelAdapter=new MineCollectHotelAdapter(this);
         mineCollectArticleAdapter=new MineCollectArticleAdapter(this);

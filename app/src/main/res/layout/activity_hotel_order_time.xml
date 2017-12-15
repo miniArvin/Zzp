@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,507 +7,538 @@
     android:orientation="vertical"
     tools:context="com.tryine.zzp.ui.activity.mine.order.order_time.HotelOrderTimeActivity">
 
-    <include layout="@layout/view_head_back" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/orange"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_head_back" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/orange"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            android:gravity="center"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hotel_order_time_type_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="精选大床房"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="入住"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_order_time_check_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="8月31日"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text="离店"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_order_time_out_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="9月01日"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_order_time_night_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:text="1晚"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/hotel_order_time_price_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="￥399.00"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/order_time_breakfast_icon" />
+
+            <TextView
+                android:id="@+id/hotel_order_time_breakfast_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="精选大床房"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="24dp"
+                android:text="含双早"
+                android:textColor="@color/orange"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/hotel_order_time_breakfast_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="64dp"
+                android:text="￥48/份"
+                android:textColor="@color/orange"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="入住"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/order_time_sub_icon" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:text="8月31日"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:text="离店"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:text="9月01日"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:text="1晚"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/order_time_add_icon" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="￥399.00"
-            android:textColor="@color/white"
-            android:textSize="21sp" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/order_time_breakfast_icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:text="含双早"
-            android:textColor="@color/orange"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="64dp"
-            android:text="￥48/份"
-            android:textColor="@color/orange"
-            android:textSize="14sp" />
+            android:layout_height="10dp"
+            android:background="@color/found_search_bg"
+            android:visibility="gone" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:id="@+id/hotel_order_time_pledge_ll"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/order_time_sub_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="押金金额"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
 
             <TextView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:text="3"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:textColor="@color/home_location_word"/>
+                android:id="@+id/hotel_order_time_pledge_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="￥389"
+                android:textColor="@color/home_location_btn"
+                android:textSize="18sp" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/order_time_add_icon"/>
         </LinearLayout>
-    </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/found_search_bg"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="押金金额"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="￥389"
-            android:textColor="@color/home_location_btn"
-            android:textSize="18sp"/>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/mine_div"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="95dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/order_time_green_icon"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="14sp"
-            android:textColor="@color/home_location_word"
-            android:text="前台免交押金"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="95dp"
-        android:layout_marginBottom="18dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/order_time_green_icon"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="14sp"
-            android:textColor="@color/home_location_word"
-            android:text="急速退房"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/found_search_bg"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="房间数"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/home_location_word"
-            android:text="2间" />
-
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/more_right_icon" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="100dp"
-            android:gravity="center_vertical"
-            android:text="入住人"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp" />
-        
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center"
-            android:src="@drawable/order_time_check_in_question_icon"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:textColor="@color/home_location_word"
-                android:text="刘辰" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="入住人2姓名"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <RelativeLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/order_time_check_in_people_right_icon"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="手机号码"
-             />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="请输入联系电话"
-            android:textSize="16sp"
-            android:layout_marginLeft="80dp"
-            android:layout_alignParentTop="true" />
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/order_time_check_in_phone_right_icon"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="其他需求" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="26dp"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textColor="@color/home_location_word"
-            android:text="高层" />
-
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/more_right_icon" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/found_search_bg"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="优惠券" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="26dp"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textColor="@color/home_location_word"
-            android:text="-20元" />
-
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/more_right_icon" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/order_cash_pledge_word"
-            android:textSize="15sp"
-            android:text="发票" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="26dp"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textColor="@color/home_location_word"
-            android:text="纸质发票" />
-
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/more_right_icon" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/found_search_bg">
+            android:layout_height="0.1dp"
+            android:background="@color/mine_div" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_gravity="center"
-                android:src="@drawable/order_time_pay_icon" />
+                android:src="@drawable/order_time_green_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="总额"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="前台免交押金"
                 android:textColor="@color/home_location_word"
                 android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/order_time_green_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(含押金)￥389"
-                android:textColor="@color/orange"
-                android:textSize="18sp" />
+                android:layout_marginLeft="10dp"
+                android:text="急速退房"
+                android:textColor="@color/home_location_word"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-            <RelativeLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/found_search_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:text="房间数"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/hotel_order_room_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="80dp"
+                android:gravity="center"
+                android:text="2间"
+                android:textColor="@color/home_location_word"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/more_right_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <LinearLayout
+                android:id="@+id/hotel_order_linkman_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="入住人"
+                    android:textColor="@color/order_cash_pledge_word"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/hotel_order_linkman_question_iv"
+                    android:layout_width="30dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/order_time_check_in_question_icon" />
+            </LinearLayout>
+
+            <com.tryine.zzp.widget.NoScrollListView
+                android:id="@+id/hotel_order_linkman_lv"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/hotel_order_linkman_ll"
+                android:divider="@color/mine_div"
+                android:dividerHeight="0.1dp"/>
+
+
+            <ImageView
+                android:id="@+id/hotel_order_time_linkman_iv"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/order_time_check_in_people_right_icon" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="手机号码"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/hotel_order_time_phone_et"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="80dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入联系电话"
+                android:textColorHint="@color/hotel_order_linkman_hint_word"
+                android:textSize="16sp"
+                android:inputType="phone"/>
+
+            <ImageView
+                android:id="@+id/hotel_order_time_phone_iv"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/order_time_check_in_phone_right_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="其他需求"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/hotel_order_time_equipment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="26dp"
+                android:gravity="center"
+                android:text="高层"
+                android:layout_centerVertical="true"
+                android:textColor="@color/home_location_word"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/hotel_order_time_equipment_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/more_right_icon" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/found_search_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="优惠券"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/hotel_order_time_coupon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="26dp"
+                android:gravity="center"
+                android:text="-20元"
+                android:textColor="@color/home_location_word"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/hotel_order_time_coupon_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/more_right_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="发票"
+                android:textColor="@color/order_cash_pledge_word"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/hotel_order_invoice_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="26dp"
+                android:gravity="center"
+                android:text="纸质发票"
+                android:textColor="@color/home_location_word"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/hotel_order_invoice_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/more_right_icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/found_search_bg">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/order_time_pay_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="130dp"
-                    android:text="费用明细"
-                    android:textColor="@color/orange"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:textSize="12sp" />
+                    android:layout_marginLeft="4dp"
+                    android:text="总额"
+                    android:textColor="@color/home_location_word"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:layout_width="110dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/orange"
-                    android:gravity="center"
-                    android:text="支付"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
+                    android:id="@+id/hotel_order_time_total_prices_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(含押金)￥389"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp" />
 
-</LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/hotel_order_time_price_detail_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="115dp"
+                        android:gravity="center"
+                        android:text="费用明细"
+                        android:textColor="@color/orange"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/hotel_order_time_pay_tv"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@color/orange"
+                        android:gravity="center"
+                        android:text="支付"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

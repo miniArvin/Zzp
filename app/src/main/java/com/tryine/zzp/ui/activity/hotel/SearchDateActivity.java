@@ -42,10 +42,10 @@ public class SearchDateActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         calendarRV = (RecyclerView) findViewById(R.id.rv_calendar);
         tv_start_date= (TextView) findViewById(R.id.tv_start_date);
         tv_end_date= (TextView) findViewById(R.id.tv_end_date);

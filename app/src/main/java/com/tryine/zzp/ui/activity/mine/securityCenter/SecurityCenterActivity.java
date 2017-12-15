@@ -47,10 +47,10 @@ public class SecurityCenterActivity extends BaseStatusMActivity implements View.
     @Override
     protected void afterOnCreate() {
         loadData();
-        init();
+        initView();
     }
 
-    public void init() {
+    public void initView() {
         security_center_name_tv= (TextView) findViewById(R.id.security_center_name_tv);
         security_center_level_tv= (TextView) findViewById(R.id.security_center_level_tv);
         level_progress_pb= (ProgressBar) findViewById(R.id.level_progress_pb);

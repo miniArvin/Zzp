@@ -27,6 +27,7 @@ public class HotelDetailRoomAdapter extends BaseAdapter {
     private Context mContext;
     private List<HotelDetailEntity.InfoBean.RoomBean> roomBeen;
     private ViewHolder viewHolder;
+    private OnCheckClickListener onCheckClickListener;
 
     public HotelDetailRoomAdapter(Context context,List<HotelDetailEntity.InfoBean.RoomBean> roomBeen) {
         mLayoutInflater=LayoutInflater.from(context);
@@ -78,6 +79,10 @@ public class HotelDetailRoomAdapter extends BaseAdapter {
             viewHolder.hotel_detail_room_check_tv.setTextColor(Color.WHITE);
             viewHolder.hotel_detail_room_check_tv.setBackgroundResource(R.drawable.login_bg_btn);
         }
+        viewHolder.hotel_detail_room_pai_tv.setTag(position);
+        viewHolder.hotel_detail_room_check_tv.setTag(position);
+        viewHolder.hotel_detail_room_pai_tv.setOnClickListener(mOnClickListener);
+        viewHolder.hotel_detail_room_check_tv.setOnClickListener(mOnClickListener);
 
         viewHolder.hotel_detail_room_price_tv.setText(roomBeen.get(position).getPrice());
         Glide.with(mContext).load(UrlUtils.getUrl(roomBeen.get(position).getPhoto())).asBitmap().into(viewHolder.hotel_detail_room_img_iv);
@@ -95,4 +100,30 @@ public class HotelDetailRoomAdapter extends BaseAdapter {
         TextView hotel_detail_room_pai_tv;
         TextView hotel_detail_room_check_tv;
     }
+
+    public void setOnCheckClickListener(OnCheckClickListener listener) {
+        this.onCheckClickListener = listener;
+    }
+
+    public interface OnCheckClickListener {
+        void onCheck(View v, int position);
+        void onPai(View v,int position);
+    }
+
+    private  View.OnClickListener mOnClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (onCheckClickListener != null) {
+                int position = (Integer) v.getTag();
+                switch (v.getId()) {
+                    case R.id.hotel_detail_room_pai_tv:
+                        onCheckClickListener.onPai(v,position);
+                        break;
+                    case R.id.hotel_detail_room_check_tv:
+                        onCheckClickListener.onCheck(v,position);
+                        break;
+                }
+            }
+        }
+    };
 }

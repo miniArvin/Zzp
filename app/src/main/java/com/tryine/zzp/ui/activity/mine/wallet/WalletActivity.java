@@ -21,10 +21,10 @@ public class WalletActivity extends BaseStatusMActivity implements View.OnClickL
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         mine_wallet_lv= (NoScrollListView) findViewById(R.id.mine_wallet_lv);
         mineWalletAdapter=new MineWalletAdapter(this);
         mine_wallet_lv.setAdapter(mineWalletAdapter);

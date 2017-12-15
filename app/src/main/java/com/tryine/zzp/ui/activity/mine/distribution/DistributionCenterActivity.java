@@ -24,10 +24,10 @@ public class DistributionCenterActivity extends BaseStatusMActivity implements V
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         distribution_center_lv= (NoScrollListView) findViewById(R.id.distribution_center_lv);
         distributionCenterAdapter=new DistributionCenterAdapter(getApplicationContext());
         distribution_center_lv.setAdapter(distributionCenterAdapter);

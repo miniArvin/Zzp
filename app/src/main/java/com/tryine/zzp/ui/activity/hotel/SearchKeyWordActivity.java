@@ -26,10 +26,10 @@ public class SearchKeyWordActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         lists=new ArrayList<>();
         lists.add("长沙");
         lists.add("上海");

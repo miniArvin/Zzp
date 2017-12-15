@@ -37,6 +37,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/hotel_detail_pai_2_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="恭喜你竞拍成功！二拍价格为"
@@ -44,6 +45,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/hotel_detail_pai_2_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥188"
@@ -59,33 +61,52 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
+            <LinearLayout
+                android:id="@+id/hotel_detail_pai_selected_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:src="@drawable/hotel_detail_pai_dialog_selected_icon" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="￥168"
-                android:textColor="@color/order_title_word"
-                android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/hotel_detail_pai_selected_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:src="@drawable/hotel_detail_pai_dialog_selected_icon" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginLeft="40dp"
-                android:src="@drawable/hotel_detail_pai_dialog_unselected_icon" />
+                <TextView
+                    android:id="@+id/hotel_detail_pai_selected_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥168"
+                    android:textColor="@color/order_title_word"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/hotel_detail_pai_unselected_ll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="￥168"
-                android:textColor="@color/hotel_detail_dialog_word"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/hotel_detail_pai_unselected_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/hotel_detail_pai_dialog_unselected_icon" />
+
+                <TextView
+                    android:id="@+id/hotel_detail_pai_unselected_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥168"
+                    android:textColor="@color/hotel_detail_dialog_word"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
+            android:id="@+id/hotel_detail_pai_order_tv"
             android:layout_width="225dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
@@ -130,10 +151,11 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/hotel_detail_pai_close_iv"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="15dp"
         android:layout_gravity="center"
-        android:src="@drawable/hotel_detail_pai_close_icon"/>
+        android:layout_marginTop="15dp"
+        android:src="@drawable/hotel_detail_pai_close_icon" />
 
 </LinearLayout>

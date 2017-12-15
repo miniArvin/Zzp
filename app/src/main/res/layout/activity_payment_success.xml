@@ -16,6 +16,7 @@
         android:layout_gravity="center"
         android:src="@drawable/order_time_success_bg_icon"/>
     <TextView
+        android:id="@+id/hotel_order_submit_success_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -31,6 +32,7 @@
         android:textSize="14sp"
         android:textColor="@color/home_recommend_location_word"/>
     <TextView
+        android:id="@+id/hotel_order_submit_continue_order_tv"
         android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginTop="60dp"
@@ -41,11 +43,12 @@
         android:textSize="17sp"
         android:gravity="center"/>
     <TextView
+        android:id="@+id/hotel_order_submit_check_order_tv"
         android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:text="继续预定"
+        android:text="查看订单"
         android:background="@drawable/login_bg_look"
         android:textColor="@color/orange"
         android:textSize="17sp"

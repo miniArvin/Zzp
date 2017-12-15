@@ -19,9 +19,9 @@ public class MineMemberActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
-    public void init(){
+    public void initView(){
         distribution_member_lv= (ListView) findViewById(R.id.distribution_member_lv);
         minePublishCommentAdapter=new MinePublishCommentAdapter(null,this,type);
         distribution_member_lv.setAdapter(minePublishCommentAdapter);

@@ -101,4 +101,21 @@ public class Api {
 
     //酒店详情——评论
     public static final String HOTELDETAILCOMMENT = BASE_URL +"app/hotel/apply";
+
+    //酒店详情——房型详情
+    public static final String HOTELDETAILROOM = BASE_URL +"app/hotel/room_detail";
+
+    //下单页面
+    public static final String HOTELORDERS = BASE_URL +"app/hotel/order";
+
+    //酒店优惠券
+    public static final String HOTELCOUPON = BASE_URL +"app/hotel/coupon";
+
+
+    //酒店提交订单
+    public static final String HOTELSUBMITORDER = BASE_URL +"app/hotel/place_order";
+
+    //酒店订单提交成功页面
+    public static final String HOTELSUBMITSUCCESE = BASE_URL +"app/hotel/post_succese";
+
 }

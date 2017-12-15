@@ -22,7 +22,7 @@ public class Code {
 //    //货到付款
 //    public static final String CODE_PAY_RECEIVE = "cod";
 
-    //
+    //ForResult返回码
     public static final int REQUEST_CODE = 1003;
     public static final int RESULT_CODE = 1004;
 }

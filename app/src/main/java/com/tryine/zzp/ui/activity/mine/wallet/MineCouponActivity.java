@@ -20,10 +20,10 @@ public class MineCouponActivity extends BaseStatusMActivity implements View.OnCl
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init() {
+    public void initView() {
         mine_coupon_lv = (ListView) findViewById(R.id.mine_coupon_lv);
         minePublishCommentAdapter = new MinePublishCommentAdapter(null, this, type);
         mine_coupon_lv.setAdapter(minePublishCommentAdapter);

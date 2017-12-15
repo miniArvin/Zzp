@@ -69,7 +69,7 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(mContext).load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().into(holder.hotel_recommend_img);
+        Glide.with(mContext).load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().centerCrop().into(holder.hotel_recommend_img);
         holder.hotel_recommend_name.setText(mData.get(position).getHotel_name());
         holder.hotel_recommend_price.setText(mData.get(position).getPrice());
         holder.hotel_recommend_location.setText(mData.get(position).getAddr());

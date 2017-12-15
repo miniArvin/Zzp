@@ -475,6 +475,15 @@ public class HotelDetailEntity extends BaseRemote {
             private String price;
             private String is_auction;
             private int sku;
+            private String room_id;
+
+            public String getRoom_id() {
+                return room_id;
+            }
+
+            public void setRoom_id(String room_id) {
+                this.room_id = room_id;
+            }
 
             public String getTitle() {
                 return title;

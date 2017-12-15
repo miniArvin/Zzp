@@ -17,10 +17,10 @@ public class RegisterSuccessActivity extends BaseStatusMActivity implements View
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         register_success_login= (TextView) findViewById(R.id.register_success_login);
         register_success_login.setOnClickListener(this);
         register_success_look= (TextView) findViewById(R.id.register_success_look);

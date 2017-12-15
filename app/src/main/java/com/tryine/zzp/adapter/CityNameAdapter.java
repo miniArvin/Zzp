@@ -61,7 +61,7 @@ public class CityNameAdapter extends RecyclerView.Adapter<CityNameAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glide.with(mContext)
-                .load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().into(holder.city_name_img);
+                .load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
         holder.city_name_tv.setText(mData.get(position).getTitle());
     }
 

@@ -32,7 +32,7 @@ public class MineMessagesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return helpCenters.size();
+        return helpCenters==null?0:helpCenters.size();
     }
 
     @Override

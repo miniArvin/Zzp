@@ -39,10 +39,10 @@ public class MyPublishActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         titles = new ArrayList<>();
         titles.add("订单点评(20)");
         titles.add("文章(8)");

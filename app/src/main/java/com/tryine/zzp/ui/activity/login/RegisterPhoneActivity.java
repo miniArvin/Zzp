@@ -22,10 +22,10 @@ public class RegisterPhoneActivity extends BaseStatusMActivity implements View.O
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         register_num= (TextView) findViewById(R.id.register_num);
         register_phone= (EditText) findViewById(R.id.register_phone);
         register_input_code= (EditText) findViewById(R.id.register_input_code);

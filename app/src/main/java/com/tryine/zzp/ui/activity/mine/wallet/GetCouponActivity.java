@@ -19,10 +19,10 @@ public class GetCouponActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         get_coupon_lv= (ListView) findViewById(R.id.get_coupon_lv);
         minePublishCommentAdapter=new MinePublishCommentAdapter(null,this,type);
         get_coupon_lv.setAdapter(minePublishCommentAdapter);

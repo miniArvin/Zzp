@@ -68,4 +68,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <!--<item name="colorAccent">修改ProgressBar 颜色</item>-->
     </style>
+    <style name="EnterExitAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/exit_anim</item>
+    </style>
 </resources>

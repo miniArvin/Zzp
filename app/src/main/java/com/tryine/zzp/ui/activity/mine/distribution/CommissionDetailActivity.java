@@ -26,10 +26,10 @@ public class CommissionDetailActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         commission_detail_lv= (ListView) findViewById(R.id.commission_detail_lv);
         minePublishCommentAdapter=new MinePublishCommentAdapter(null,this,type);
         commission_detail_lv.setAdapter(minePublishCommentAdapter);

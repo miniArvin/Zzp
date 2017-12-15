@@ -19,10 +19,10 @@ public class RegisterPasswordActivity extends BaseStatusMActivity implements Vie
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         register_password= (EditText) findViewById(R.id.register_password);
         register_password_again= (EditText) findViewById(R.id.register_password_again);
         register_finish= (TextView) findViewById(R.id.register_finish);
