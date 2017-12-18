@@ -234,6 +234,7 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_toRightOf="@id/intro_tv"
+                    android:listSelector="@color/transparent"
                     android:numColumns="4"></com.tryine.zzp.widget.NoScrollGirdView>
 
                 <ImageView
@@ -350,6 +351,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:horizontalSpacing="10dp"
+                android:listSelector="@color/transparent"
                 android:numColumns="2"></com.tryine.zzp.widget.NoScrollGirdView>
 
             <RelativeLayout
@@ -469,8 +471,8 @@
                 android:id="@+id/hotel_detail_policy_lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@null">
-
+                android:divider="@null"
+                android:listSelector="@color/transparent">
             </com.tryine.zzp.widget.NoScrollListView>
 
             <RelativeLayout

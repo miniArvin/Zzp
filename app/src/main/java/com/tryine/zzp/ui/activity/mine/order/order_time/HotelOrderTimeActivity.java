@@ -187,6 +187,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 finish();
                 break;
             case R.id.hotel_order_time_linkman_iv:
+                addLinkman();
                 break;
             case R.id.hotel_order_time_phone_iv:
                 break;
@@ -261,6 +262,24 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 .setOutCancel(true)
                 .setAnimStyle(R.style.EnterExitAnimation)
                 .show(getSupportFragmentManager());
+    }
+
+    /** 添加item */
+    public void addLinkman() {
+        if (linkmanName.size()<5) {
+            hotelOrderLinkmanAdapter.addData("入住人"+linkmanName.size()+1+"名字");
+            hotelOrderLinkmanAdapter.notifyDataSetChanged();
+        }else {
+            ToastUtils.showShort("最多填写6位入住人！");
+        }
+    }
+
+    /** 移除item */
+    public void delLinkman() {
+        hotelOrderLinkmanAdapter.delData();
+        hotelOrderLinkmanAdapter.notifyDataSetChanged();
+        // 判断是否>1
+//        if (linkmanName.size() > 1);
     }
 
     public void loadCouponMessage(String price) {

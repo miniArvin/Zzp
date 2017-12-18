@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -61,13 +62,21 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <SeekBar
+        <com.jaygoo.widget.RangeSeekBar
             android:id="@+id/seekBar"
             android:layout_width="245dp"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:progress="100"
-            android:progressTint="@color/orange" />
+            android:progress="3000"
+            app:cells="1"
+            app:lineColorEdge="@color/orange"
+            app:lineColorSelected="@color/orange"
+            app:max="3000"
+            app:min="0"
+            app:progressHintMode="defaultMode"
+            app:reserve="100"
+            app:seekBarMode="range"
+            app:thumbResId="@drawable/seekbar_thumb_icon" />
 
         <com.tryine.zzp.widget.NoScrollGirdView
             android:id="@+id/hotel_list_level_price_gv"

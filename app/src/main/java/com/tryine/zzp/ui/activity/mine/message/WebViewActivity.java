@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class WebViewActivity extends BaseStatusMActivity {
     private TextView web_view_tv;
     private String type;
     private WebView web_view_wb;
+    private WebSettings webSettings;
 
     @Override
     protected int getLayoutId() {
@@ -58,6 +60,7 @@ public class WebViewActivity extends BaseStatusMActivity {
             }
         });
         web_view_wb = (WebView) findViewById(R.id.web_view_wb);
+        webSettings = web_view_wb.getSettings();
     }
 
     public void loadMessage(String url,String id){
@@ -100,6 +103,8 @@ public class WebViewActivity extends BaseStatusMActivity {
                                     sb.append(list.getString("contents"));
                                     sb.append("</body>");
                                     sb.append("</html>");
+                                    webSettings.setUseWideViewPort(true);
+                                    webSettings.setLoadWithOverviewMode(true);
                                     web_view_wb.loadDataWithBaseURL(null,sb.toString(),"text/html","utf-8",null);
                                 }
 

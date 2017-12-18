@@ -83,4 +83,5 @@
     <color name="mine_publish_title_bg">#ffeedc</color>
     <color name="hotel_comment_score">#37b1ff</color>
     <color name="hotel_order_linkman_hint_word">#d5d5d5</color>
+    <color name="transparent">#00000000</color>
 </resources>

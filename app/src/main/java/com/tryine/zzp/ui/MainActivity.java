@@ -125,12 +125,12 @@ public class MainActivity extends BaseBottomTabsActivity {
                                 .statusBarAlpha(0)
                                 .init();
                         break;
-                    case 4:
-                        immersionBar.statusBarDarkFont(true)
-                                .statusBarColor(R.color.bar)
-                                .statusBarAlpha(0)
-                                .init();
-                        break;
+//                    case 4:
+//                        immersionBar.statusBarDarkFont(true)
+//                                .statusBarColor(R.color.bar)
+//                                .statusBarAlpha(0)
+//                                .init();
+//                        break;
                 }
             }
 
@@ -159,8 +159,8 @@ public class MainActivity extends BaseBottomTabsActivity {
                 R.color.orange, R.drawable.res_home_unselect, R.drawable.res_home_selected));
         tabItemViews.add(new BottomTabView.TabItemView(this, "发现", R.color.black,
                 R.color.orange, R.drawable.res_found_unselect, R.drawable.res_found_selected));
-        tabItemViews.add(new BottomTabView.TabItemView(this, "自由行", R.color.black,
-                R.color.black, R.drawable.res_independent_travel_unselect, R.drawable.res_independent_travel_unselect));
+//        tabItemViews.add(new BottomTabView.TabItemView(this, "自由行", R.color.black,
+//                R.color.black, R.drawable.res_independent_travel_unselect, R.drawable.res_independent_travel_unselect));
         tabItemViews.add(new BottomTabView.TabItemView(this, "订单", R.color.black,
                 R.color.orange, R.drawable.res_order_unselect, R.drawable.res_order_seletced));
         tabItemViews.add(new BottomTabView.TabItemView(this, "我的", R.color.black,
@@ -173,7 +173,7 @@ public class MainActivity extends BaseBottomTabsActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new FoundFragment());
-        fragments.add(new IndependentTravelFragment());
+//        fragments.add(new IndependentTravelFragment());
         fragments.add(new OrderFragment());
         fragments.add(new MineFragment());
         return fragments;

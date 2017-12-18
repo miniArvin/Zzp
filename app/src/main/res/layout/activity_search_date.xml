@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_above="@+id/search_date_tv">
 
         <include layout="@layout/view_head_back" />
 
@@ -82,6 +83,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/search_date_tv"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"

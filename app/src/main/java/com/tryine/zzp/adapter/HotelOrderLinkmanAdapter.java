@@ -64,4 +64,17 @@ public class HotelOrderLinkmanAdapter extends BaseAdapter{
     public class ViewHolder{
         EditText hotel_order_linkman_et;
     }
+
+    /** 添加item数据 */
+    public void addData(String text) {
+        if (linkmanName != null)
+            linkmanName.add("");// 添加数据
+        viewHolder.hotel_order_linkman_et.setHint(text);
+    }
+
+    /** 移除item数据 */
+    public void delData() {
+        if (linkmanName != null && linkmanName.size() > 0)
+            linkmanName.remove(linkmanName.size() - 1);// 移除最后一条数据
+    }
 }

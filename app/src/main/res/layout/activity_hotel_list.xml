@@ -222,24 +222,28 @@
             android:id="@+id/hotel_list_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
-
-        <LinearLayout
-            android:id="@+id/hotel_list_level_dialog"
+        <FrameLayout
+            android:id="@+id/hotel_list_fl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:visibility="gone"></FrameLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/hotel_list_level_dialog"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone">-->
 
-            <include layout="@layout/hotel_level_dialog" />
-        </LinearLayout>
+            <!--<include layout="@layout/hotel_level_dialog" />-->
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/hotel_list_select_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/hotel_list_select_dialog"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone">-->
 
-            <include layout="@layout/hotel_list_select_dialog" />
-        </LinearLayout>
+            <!--<include layout="@layout/hotel_list_select_dialog" />-->
+        <!--</LinearLayout>-->
     </RelativeLayout>
 
 </LinearLayout>

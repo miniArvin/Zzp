@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.tryine.zzp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -44,5 +44,6 @@ dependencies {
     compile 'com.github.Othershe:NiceDialog:1.1.4'
     compile 'com.github.addappcn:android-pickers:1.0.1'
     compile 'com.alibaba:fastjson:1.1.56.android'
+    compile 'com.github.Jay-Goo:RangeSeekBar:v1.1.0'
     testCompile 'junit:junit:4.12'
 }
