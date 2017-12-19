@@ -1,5 +1,7 @@
 package com.tryine.zzp.entity.test.remote;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

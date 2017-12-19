@@ -1,10 +1,13 @@
 package com.tryine.zzp.ui.activity.hotel;
 
 
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -16,16 +19,15 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.HotelListAdapter;
-import com.tryine.zzp.adapter.HotelListLevelDialogAdapter;
-import com.tryine.zzp.adapter.HotelListSelectContentDialogAdapter;
-import com.tryine.zzp.adapter.HotelListSelectDialogAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.entity.test.remote.HotelListEntity;
 import com.tryine.zzp.entity.test.remote.HotelListSelectEntity;
 import com.tryine.zzp.ui.fragment.hotel.HotelListLevelFragment;
 import com.tryine.zzp.ui.fragment.hotel.HotelListSelectFragment;
-import com.tryine.zzp.widget.NoScrollGirdView;
+import com.tryine.zzp.ui.fragment.hotel.SelectBrandFragment;
+import com.tryine.zzp.ui.fragment.hotel.SelectRoomFragment;
+import com.tryine.zzp.ui.fragment.hotel.SelectServiceFragment;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -37,7 +39,12 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class HotelListActivity extends BaseStatusMActivity implements View.OnClickListener {
+public class HotelListActivity extends BaseStatusMActivity implements View.OnClickListener,
+        HotelListLevelFragment.LevelFragmentListener,
+        HotelListSelectFragment.SelectFragmentListener,
+        SelectServiceFragment.ServiceFragmentListener,
+        SelectRoomFragment.RoomFragmentListener,
+        SelectBrandFragment.BrandFragmentListener {
     private ListView hotel_list_lv;
     private HotelListAdapter hotelListAdapter;
     private HotelListEntity hotelListEntities;
@@ -45,7 +52,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private List<HotelListEntity.InfoBean> hotelListTemp;
     private Bundle bundle;
     private int fav;
-
+    private View hotel_list_fl;
     private TextView hotel_list_score_tv;
     private TextView hotel_list_level_tv;
     private TextView hotel_list_pai_tv;
@@ -55,15 +62,15 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private ImageView hotel_list_pai_iv;
     private HotelListLevelFragment hotelListLevelFragment;
     private HotelListSelectFragment hotelListSelectFragment;
-
+    private String score;
+    private Boolean isSort;
+    private Boolean isVisible = false;
     private List<HotelListSelectEntity.InfoBean.BrandBean> brandInfo;
     private List<HotelListSelectEntity.InfoBean.ServiceBean> serviceInfo;
     private List<HotelListSelectEntity.InfoBean.RoomBean> roomInfo;
-    private String score;
-    private Boolean isSort;
-
     private TextView hotel_list_calendar_check_tv;
     private TextView hotel_list_calendar_out_tv;
+    private boolean isLoad = false;
 
 
     @Override
@@ -82,10 +89,10 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     public void initView() {
         hotelListInfo = new ArrayList<>();
         hotelListTemp = new ArrayList<>();
+        isSort = true;
         brandInfo = new ArrayList<>();
         serviceInfo = new ArrayList<>();
         roomInfo = new ArrayList<>();
-        isSort = true;
         hotel_list_lv = (ListView) findViewById(R.id.hotel_list_lv);
         hotel_list_score_tv = (TextView) findViewById(R.id.hotel_list_score_tv);
         hotel_list_level_tv = (TextView) findViewById(R.id.hotel_list_level_tv);
@@ -98,11 +105,6 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         findViewById(R.id.hotel_list_score_ll).setOnClickListener(this);
         findViewById(R.id.hotel_list_level_ll).setOnClickListener(this);
         findViewById(R.id.hotel_list_pai_ll).setOnClickListener(this);
-        findViewById(R.id.hotel_list_select_result_tv).setOnClickListener(this);
-        findViewById(R.id.hotel_list_level_empty_tv).setOnClickListener(this);
-        findViewById(R.id.hotel_list_select_empty_tv).setOnClickListener(this);
-        findViewById(R.id.hotel_list_level_result_tv).setOnClickListener(this);
-        findViewById(R.id.hotel_level_dialog_title_tv).setVisibility(View.GONE);
         findViewById(R.id.hotel_list_title_back).setOnClickListener(this);
         findViewById(R.id.hotel_list_calendar_ll).setOnClickListener(this);
         findViewById(R.id.hotel_list_search_ll).setOnClickListener(this);
@@ -111,8 +113,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         hotel_list_calendar_check_tv.setOnClickListener(this);
         hotel_list_calendar_out_tv.setOnClickListener(this);
         bundle = new Bundle();
-
-        setDefaultFragment();
+        hotel_list_fl = findViewById(R.id.hotel_list_fl);
     }
 
     public void loadData() {
@@ -123,7 +124,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     bundle.putString("hotel_id", hotelListInfo.get(position).getHotel_id());
-                    bundle.putString("hotel_name",hotelListInfo.get(position).getHotel_name());
+                    bundle.putString("hotel_name", hotelListInfo.get(position).getHotel_name());
                     startAct(HotelDetailActivity.class, bundle);
 //                    isVisibility();
                 }
@@ -273,9 +274,22 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
             case R.id.hotel_list_select_result_tv:
                 break;
             case R.id.hotel_list_select_ll:
-                if (hotelListSelectFragment == null)
-                {
-                    hotelListSelectFragment = new HotelListSelectFragment();
+                if (isLoad) {
+                    setDefaultFragment();
+                    if (isVisible) {
+                        hotel_list_fl.setVisibility(View.GONE);
+                        isVisible = false;
+                        notClick(hotel_list_fl, isVisible);
+                    } else {
+                        hotel_list_fl.setVisibility(View.VISIBLE);
+                        isVisible = true;
+                        notClick(hotel_list_fl, isVisible);
+                    }
+                    if (hotelListSelectFragment == null) {
+                        hotelListSelectFragment = new HotelListSelectFragment();
+                    }
+                } else {
+                    ToastUtils.showShort("正在加载数据…");
                 }
                 // 使用当前Fragment的布局替代id_content的控件
                 transaction.replace(R.id.hotel_list_fl, hotelListSelectFragment);
@@ -292,9 +306,21 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 }
                 break;
             case R.id.hotel_list_level_ll:
-                if (hotelListLevelFragment == null)
-                {
-                    hotelListLevelFragment = new HotelListLevelFragment();
+                if (isLoad) {
+                    if (isVisible) {
+                        hotel_list_fl.setVisibility(View.GONE);
+                        isVisible = false;
+                        notClick(hotel_list_fl, isVisible);
+                    } else {
+                        hotel_list_fl.setVisibility(View.VISIBLE);
+                        isVisible = true;
+                        notClick(hotel_list_fl, isVisible);
+                    }
+                    if (hotelListLevelFragment == null) {
+                        hotelListLevelFragment = new HotelListLevelFragment();
+                    }
+                }else {
+                    ToastUtils.showShort("正在加载数据…");
                 }
                 // 使用当前Fragment的布局替代id_content的控件
                 transaction.replace(R.id.hotel_list_fl, hotelListLevelFragment);
@@ -312,10 +338,10 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
             case R.id.hotel_list_calendar_out_tv:
             case R.id.hotel_list_calendar_check_tv:
             case R.id.hotel_list_calendar_ll:
-                startActForResult(SearchDateActivity.class,101);
+                startActForResult(SearchDateActivity.class, 101);
                 break;
             case R.id.hotel_list_search_ll:
-                startActForResult(SearchKeyWordActivity.class,10);
+                startActForResult(SearchKeyWordActivity.class, 10);
                 break;
             default:
                 break;
@@ -323,43 +349,6 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         transaction.commit();
     }
 
-
-    public void hotelListSelectContent() {
-        OkHttpUtils
-                .post()
-                .url(Api.HOTELLISTSELECT)
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        LogUtils.e(string);
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        LogUtils.e(e);
-                    }
-
-                    @Override
-                    public void onResponse(Object response, int id) {
-                        try {
-
-                            LogUtils.e(new JSONObject(response.toString()));
-                            Gson gson = new Gson();
-                            HotelListSelectEntity hotelListSelectEntity = gson.fromJson(response.toString(), HotelListSelectEntity.class);
-                            if (hotelListSelectEntity.getStatus() == 330) {
-                                brandInfo = hotelListSelectEntity.getInfo().getBrand();
-                                serviceInfo = hotelListSelectEntity.getInfo().getService();
-                                roomInfo = hotelListSelectEntity.getInfo().getRoom();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-    }
 
     public void scoreSort(String score) {
         OkHttpUtils
@@ -413,7 +402,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     }
 
 
-    private void setDefaultFragment(){
+    private void setDefaultFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         hotelListSelectFragment = new HotelListSelectFragment();
@@ -421,5 +410,95 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         transaction.commit();
     }
 
+    // 实现接口，实现回调
+    @Override
+    public void level(String price, String star) {
+        if (price != null || star != null) {
+            loadMessage("price", price, "star", star);
+            hotel_list_fl.setVisibility(View.GONE);
+        }
+    }
 
+
+    @Override
+    public void select(String str) {
+        if (str != null) {
+            loadMessage("keyword", str, "", "");
+            hotel_list_fl.setVisibility(View.GONE);
+        }
+    }
+
+    public void notClick(View view, final boolean isVisible) {
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return isVisible; // 阻止事件继续传递
+            }
+        });
+    }
+
+    public void hotelListSelectContent() {
+        OkHttpUtils
+                .post()
+                .url(Api.HOTELLISTSELECT)
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        String string = response.body().string();
+                        LogUtils.e(string);
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        try {
+
+                            LogUtils.e(new JSONObject(response.toString()));
+                            Gson gson = new Gson();
+                            HotelListSelectEntity hotelListSelectEntity = gson.fromJson(response.toString(), HotelListSelectEntity.class);
+                            if (hotelListSelectEntity.getStatus() == 330) {
+                                brandInfo = hotelListSelectEntity.getInfo().getBrand();
+                                serviceInfo = hotelListSelectEntity.getInfo().getService();
+                                roomInfo = hotelListSelectEntity.getInfo().getRoom();
+                                isLoad = true;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void Room(String str) {
+
+    }
+
+    @Override
+    public void Brand(String str) {
+
+    }
+
+    @Override
+    public void Service(String str) {
+
+    }
+
+    public List<HotelListSelectEntity.InfoBean.BrandBean> getBrand() {
+        return brandInfo;
+    }
+
+    public List<HotelListSelectEntity.InfoBean.RoomBean> getRoom() {
+        return roomInfo;
+    }
+
+    public List<HotelListSelectEntity.InfoBean.ServiceBean> getService() {
+        return serviceInfo;
+    }
 }

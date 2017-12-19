@@ -1,10 +1,12 @@
 package com.tryine.zzp.ui.fragment.hotel;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.HotelListLevelDialogAdapter;
@@ -17,7 +19,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotelListLevelFragment extends BaseFragment {
+public class HotelListLevelFragment extends BaseFragment implements View.OnClickListener {
     private List<String> levelPriceList;
     private List<String> levelStarList;
     private NoScrollGirdView hotel_list_level_price_gv;
@@ -26,12 +28,29 @@ public class HotelListLevelFragment extends BaseFragment {
     private HotelListLevelDialogAdapter hotelListLevelStar;
     private String starPos;
     private String pricePos;
-    private String starKey;
-    private String priceKey;
+    private TextView hotel_level_dialog_title_tv;
     public HotelListLevelFragment() {
 
     }
 
+    // 定义用来与外部activity交互，获取到宿主activity
+    private LevelFragmentListener listterner;
+
+
+    // 定义了所有activity必须实现的接口方法
+    public interface LevelFragmentListener {
+        void level(String price,String star);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof LevelFragmentListener) {
+            listterner = (LevelFragmentListener)context; // 获取到宿主activity并赋值
+        } else{
+            throw new IllegalArgumentException("activity must implements LevelFragmentListener");
+        }
+    }
 
     @Override
     protected int getContentViewLayoutID() {
@@ -40,18 +59,22 @@ public class HotelListLevelFragment extends BaseFragment {
 
     @Override
     protected void afterCreated(Bundle savedInstanceState) {
+        locationData();
         initView();
+
     }
 
     public void initView(){
-        hotelListLevelPrice = new HotelListLevelDialogAdapter(mContext, levelPriceList, 1);
-        hotel_list_level_price_gv.setAdapter(hotelListLevelPrice);
-        hotelListLevelPrice.setDefSelect(0);
-        hotelListLevelStar = new HotelListLevelDialogAdapter(mContext, levelStarList, 2);
-        hotel_list_level_star_gv.setAdapter(hotelListLevelStar);
-        hotelListLevelStar.setDefSelect(0);
+        mView.findViewById(R.id.hotel_list_level_empty_tv).setOnClickListener(this);
+        mView.findViewById(R.id.hotel_list_level_result_tv).setOnClickListener(this);
+        hotel_level_dialog_title_tv = (TextView) mView.findViewById(R.id.hotel_level_dialog_title_tv);
+        hotel_level_dialog_title_tv.setVisibility(View.GONE);
         hotel_list_level_price_gv = (NoScrollGirdView) mView.findViewById(R.id.hotel_list_level_price_gv);
         hotel_list_level_star_gv = (NoScrollGirdView) mView.findViewById(R.id.hotel_list_level_star_gv);
+        hotelListLevelPrice = new HotelListLevelDialogAdapter(mContext, levelPriceList, 1);
+        hotel_list_level_price_gv.setAdapter(hotelListLevelPrice);
+        hotelListLevelStar = new HotelListLevelDialogAdapter(mContext, levelStarList, 2);
+        hotel_list_level_star_gv.setAdapter(hotelListLevelStar);
         hotel_list_level_star_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -68,7 +91,6 @@ public class HotelListLevelFragment extends BaseFragment {
                 }else if (position==5){
                     starPos="1";
                 }
-                starKey = "star";
                 hotelListLevelStar.setDefSelect(position);
             }
         });
@@ -76,14 +98,14 @@ public class HotelListLevelFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 hotelListLevelPrice.setDefSelect(position);
-                priceKey = "price";
                 pricePos = (position + 1) + "";
             }
         });
+        hotelListLevelStar.setDefSelect(0);
+        hotelListLevelPrice.setDefSelect(0);
     }
 
     public void locationData() {
-
         levelPriceList = new ArrayList<>();
         levelPriceList.add("不限");
         levelPriceList.add("￥100以下");
@@ -102,8 +124,28 @@ public class HotelListLevelFragment extends BaseFragment {
         levelStarList.add("三星级");
         levelStarList.add("四星级");
         levelStarList.add("五星级");
-        hotelListLevelStar.setDefSelect(0);
-        hotelListLevelPrice.setDefSelect(0);
+    }
+
+    //把传递进来的activity对象释放掉
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listterner = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.hotel_list_level_empty_tv:
+                hotelListLevelStar.setDefSelect(0);
+                hotelListLevelPrice.setDefSelect(0);
+                starPos="";
+                pricePos="";
+                break;
+            case R.id.hotel_list_level_result_tv:
+                listterner.level(pricePos,starPos);
+                break;
+        }
     }
 
 }

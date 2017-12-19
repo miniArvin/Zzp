@@ -226,24 +226,7 @@
             android:id="@+id/hotel_list_fl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"></FrameLayout>
-        <!--<LinearLayout-->
-            <!--android:id="@+id/hotel_list_level_dialog"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:visibility="gone">-->
-
-            <!--<include layout="@layout/hotel_level_dialog" />-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-            <!--android:id="@+id/hotel_list_select_dialog"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:visibility="gone">-->
-
-            <!--<include layout="@layout/hotel_list_select_dialog" />-->
-        <!--</LinearLayout>-->
+            android:visibility="visible"></FrameLayout>
     </RelativeLayout>
 
 </LinearLayout>

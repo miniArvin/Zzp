@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tryine.zzp.ui.fragment.hotel.SelectBrandFragment">
+
+    <ListView
+        android:id="@+id/select_brand_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/mine_div"
+        android:dividerHeight="0.1dp"
+        android:choiceMode="multipleChoice"></ListView>
+
+</FrameLayout>
