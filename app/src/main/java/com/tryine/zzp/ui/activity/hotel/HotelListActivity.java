@@ -273,7 +273,6 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 break;
             case R.id.hotel_list_select_ll:
                 if (isLoad) {
-                    setDefaultFragment();
                     if (isVisible) {
                         hotel_list_fl.setVisibility(View.GONE);
                         isVisible = false;
@@ -285,12 +284,13 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                     }
                     if (hotelListSelectFragment == null) {
                         hotelListSelectFragment = new HotelListSelectFragment();
+                        transaction.add(R.id.hotel_list_fl, hotelListSelectFragment);
                     }
                 } else {
                     ToastUtils.showShort("正在加载数据…");
                 }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.hotel_list_fl, hotelListSelectFragment);
+                hideFragment(transaction);
+                transaction.show(hotelListSelectFragment);
                 break;
             case R.id.hotel_list_score_ll:
                 if (isSort) {
@@ -316,12 +316,13 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                     }
                     if (hotelListLevelFragment == null) {
                         hotelListLevelFragment = new HotelListLevelFragment();
+                        transaction.add(R.id.hotel_list_fl, hotelListLevelFragment);
                     }
                 }else {
                     ToastUtils.showShort("正在加载数据…");
                 }
-                // 使用当前Fragment的布局替代id_content的控件
-                transaction.replace(R.id.hotel_list_fl, hotelListLevelFragment);
+                hideFragment(transaction);
+                transaction.show(hotelListLevelFragment);
                 break;
             case R.id.hotel_list_pai_ll:
                 break;
@@ -404,8 +405,10 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         hotelListSelectFragment = new HotelListSelectFragment();
-        transaction.replace(R.id.hotel_list_fl, hotelListSelectFragment);
+        transaction.add(R.id.hotel_list_fl, hotelListSelectFragment);
+        hideFragment(transaction);
         transaction.commit();
+
     }
 
     // 实现接口，实现回调
@@ -465,6 +468,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                                 serviceInfo = hotelListSelectEntity.getInfo().getService();
                                 roomInfo = hotelListSelectEntity.getInfo().getRoom();
                                 isLoad = true;
+                                setDefaultFragment();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -498,5 +502,15 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
 
     public List<HotelListSelectEntity.InfoBean.ServiceBean> getService() {
         return serviceInfo;
+    }
+
+    //隐藏所有的fragment
+    private void hideFragment(FragmentTransaction transaction){
+        if(hotelListLevelFragment != null){
+            transaction.hide(hotelListLevelFragment);
+        }
+        if(hotelListSelectFragment != null){
+            transaction.hide(hotelListSelectFragment);
+        }
     }
 }
