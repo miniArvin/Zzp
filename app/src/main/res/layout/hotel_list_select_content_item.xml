@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:button="@drawable/hotel_select_checked_style"
         android:focusable="false" />

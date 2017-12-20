@@ -1,8 +1,6 @@
 package com.tryine.zzp.ui.activity.hotel;
 
 
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
