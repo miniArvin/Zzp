@@ -2,12 +2,13 @@ package com.tryine.zzp.ui.activity.mine.order.order_time;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -18,13 +19,14 @@ import com.othershe.nicedialog.ViewConvertListener;
 import com.othershe.nicedialog.ViewHolder;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.HotelOrderLinkmanAdapter;
+import com.tryine.zzp.adapter.HotelOrderRoomCountAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
+import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -57,7 +59,10 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private TextView hotel_order_invoice_tv;
     private TextView hotel_order_time_total_prices_tv;
     private TextView hotel_order_time_pay_tv;
+    private ImageView hotel_order_room_count_iv;
     private HotelOrderLinkmanAdapter hotelOrderLinkmanAdapter;
+    private HotelOrderRoomCountAdapter hotelOrderRoomCountAdaptet;
+    private NoScrollGirdView hotel_order_room_count_gv;
     private List<String> linkmanName;
     private String roomPrice;
     private int totalPrice;
@@ -65,6 +70,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private String roomType;
     private String invoice_name;
     private String tax_code;
+    private int sku;
     private int invoiceType = 0;
     private String credit_code;
     private String bank;
@@ -78,6 +84,13 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private String city;
     private String county;
     private String address;
+    private String requirement;
+    private String room = "";
+    private String quiet = "";
+    private String high = "";
+    private String voice = "";
+    private boolean isNeed = true;
+    private String needStr = "";
 
     @Override
     protected int getLayoutId() {
@@ -98,7 +111,30 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         linkmanName.add("刘辰");
         hotelOrderLinkmanAdapter = new HotelOrderLinkmanAdapter(linkmanName, this);
         hotel_order_linkman_lv.setAdapter(hotelOrderLinkmanAdapter);
-
+        hotelOrderRoomCountAdaptet = new HotelOrderRoomCountAdapter(this, sku);
+        hotel_order_room_count_gv.setAdapter(hotelOrderRoomCountAdaptet);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) hotel_order_room_count_gv.getLayoutParams();
+        params.height = 60;
+        hotel_order_room_count_gv.setLayoutParams(params);
+        hotelOrderRoomCountAdaptet.setDefSelect(0);
+        hotel_order_room_count_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                hotelOrderRoomCountAdaptet.setDefSelect(position);
+                hotel_order_room_count_tv.setText(position + 1 + "间");
+                int count = Math.abs(position + 1 - linkmanName.size());
+                if (linkmanName.size() < position + 1) {
+                    for (int i = 0; i < count; i++) {
+                        addLinkman();
+                    }
+                } else if (linkmanName.size() > position + 1) {
+                    for (int i = 0; i < count; i++) {
+                        delLinkman();
+                    }
+                }
+                hotel_order_room_count_gv.setVisibility(View.GONE);
+            }
+        });
     }
 
     public void initView() {
@@ -129,7 +165,9 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         findViewById(R.id.hotel_order_time_price_detail_tv).setOnClickListener(this);
         hotel_order_time_out_tv.setText(outDay);
         hotel_order_time_check_tv.setText(checkDay);
-        loadData();
+        hotel_order_room_count_gv = (NoScrollGirdView) findViewById(R.id.hotel_order_room_count_gv);
+        findViewById(R.id.hotel_order_room_count_rl).setOnClickListener(this);
+        hotel_order_room_count_iv = (ImageView) findViewById(R.id.hotel_order_room_count_iv);
     }
 
     public void loadMessage() {
@@ -170,6 +208,8 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                                     hotel_order_time_pledge_tv.setText("￥" + info.getString("money"));
                                     hotel_order_time_total_prices_tv.setText("(含押金):￥" + totalPrice);
                                 }
+                                sku = info.getInt("sku");
+                                loadData();
                             } else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }
@@ -187,7 +227,6 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 finish();
                 break;
             case R.id.hotel_order_time_linkman_iv:
-                addLinkman();
                 break;
             case R.id.hotel_order_time_phone_iv:
                 break;
@@ -212,6 +251,15 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 }
 
                 break;
+            case R.id.hotel_order_room_count_rl:
+                if (hotel_order_room_count_gv.getVisibility() == View.GONE) {
+                    hotel_order_room_count_gv.setVisibility(View.VISIBLE);
+                    hotel_order_room_count_iv.setImageResource(R.drawable.order_time_linkman_selected_icon);
+                } else {
+                    hotel_order_room_count_gv.setVisibility(View.GONE);
+                    hotel_order_room_count_iv.setImageResource(R.drawable.more_right_icon);
+                }
+                break;
             default:
                 break;
         }
@@ -222,8 +270,148 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 .setLayoutId(R.layout.order_time_other_requirement_dialog)
                 .setConvertListener(new ViewConvertListener() {
                     @Override
-                    protected void convertView(ViewHolder viewHolder, BaseNiceDialog baseNiceDialog) {
+                    protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
                         View dialogView = viewHolder.getConvertView();
+                        final ImageView order_time_requirement_dialog_iv = (ImageView) dialogView.findViewById(R.id.order_time_requirement_dialog_iv);
+                        final ImageView order_time_unrequirement_dialog_iv = (ImageView) dialogView.findViewById(R.id.order_time_unrequirement_dialog_iv);
+                        final LinearLayout order_time_requirement_dialog_ll = (LinearLayout) dialogView.findViewById(R.id.order_time_requirement_dialog_ll);
+                        if (isNeed) {
+                            order_time_requirement_dialog_ll.setVisibility(View.VISIBLE);
+                            order_time_requirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_selected_icon);
+                            order_time_unrequirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_unselected_icon);
+                        } else {
+                            order_time_requirement_dialog_ll.setVisibility(View.GONE);
+                            order_time_unrequirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_selected_icon);
+                            order_time_requirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_unselected_icon);
+                        }
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_dialog_rl, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (order_time_requirement_dialog_ll.getVisibility() == View.GONE) {
+                                    order_time_requirement_dialog_ll.setVisibility(View.VISIBLE);
+                                    order_time_requirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_selected_icon);
+                                    order_time_unrequirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_unselected_icon);
+                                    isNeed = true;
+                                }
+                            }
+                        });
+                        viewHolder.setOnClickListener(R.id.order_time_unrequirement_dialog_rl, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (order_time_requirement_dialog_ll.getVisibility() == View.VISIBLE) {
+                                    order_time_requirement_dialog_ll.setVisibility(View.GONE);
+                                    order_time_unrequirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_selected_icon);
+                                    order_time_requirement_dialog_iv.setImageResource(R.drawable.order_time_requirement_dialog_unselected_icon);
+                                    isNeed = false;
+                                }
+                            }
+                        });
+
+                        final EditText order_time_requirement_dialog_et = (EditText) dialogView.findViewById(R.id.order_time_requirement_dialog_et);
+                        if (!needStr.isEmpty()) {
+                            order_time_requirement_dialog_et.setText(needStr);
+                        }
+
+
+                        final TextView order_time_requirement_room_tv = (TextView) dialogView.findViewById(R.id.order_time_requirement_room_tv);
+                        final TextView order_time_requirement_quiet_tv = (TextView) dialogView.findViewById(R.id.order_time_requirement_quiet_tv);
+                        final TextView order_time_requirement_high_tv = (TextView) dialogView.findViewById(R.id.order_time_requirement_high_tv);
+                        final TextView order_time_requirement_voice_tv = (TextView) dialogView.findViewById(R.id.order_time_requirement_voice_tv);
+
+                        if (room.isEmpty()) {
+                            order_time_requirement_room_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                            order_time_requirement_room_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                        } else {
+                            order_time_requirement_room_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                            order_time_requirement_room_tv.setBackgroundResource(R.drawable.login_bg_look);
+                        }
+
+                        if (quiet.isEmpty()) {
+                            order_time_requirement_quiet_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                            order_time_requirement_quiet_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                        } else {
+                            order_time_requirement_quiet_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                            order_time_requirement_quiet_tv.setBackgroundResource(R.drawable.login_bg_look);
+                        }
+                        if (high.isEmpty()) {
+                            order_time_requirement_high_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                            order_time_requirement_high_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                        } else {
+                            order_time_requirement_high_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                            order_time_requirement_high_tv.setBackgroundResource(R.drawable.login_bg_look);
+                        }
+                        if (voice.isEmpty()) {
+                            order_time_requirement_voice_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                            order_time_requirement_voice_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                        } else {
+                            order_time_requirement_voice_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                            order_time_requirement_voice_tv.setBackgroundResource(R.drawable.login_bg_look);
+                        }
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_room_tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (room.isEmpty()) {
+                                    order_time_requirement_room_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                                    order_time_requirement_room_tv.setBackgroundResource(R.drawable.login_bg_look);
+                                    room = order_time_requirement_room_tv.getText().toString();
+                                } else {
+                                    order_time_requirement_room_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                                    order_time_requirement_room_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                                    room = "";
+                                }
+                            }
+                        });
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_quiet_tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (quiet.isEmpty()) {
+                                    order_time_requirement_quiet_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                                    order_time_requirement_quiet_tv.setBackgroundResource(R.drawable.login_bg_look);
+                                    quiet = order_time_requirement_quiet_tv.getText().toString();
+                                } else {
+                                    order_time_requirement_quiet_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                                    order_time_requirement_quiet_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                                    quiet = "";
+                                }
+                            }
+                        });
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_high_tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (high.isEmpty()) {
+                                    order_time_requirement_high_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                                    order_time_requirement_high_tv.setBackgroundResource(R.drawable.login_bg_look);
+                                    high = order_time_requirement_high_tv.getText().toString();
+                                } else {
+                                    order_time_requirement_high_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                                    order_time_requirement_high_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                                    high = "";
+                                }
+                            }
+                        });
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_voice_tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (voice.isEmpty()) {
+                                    order_time_requirement_voice_tv.setTextColor(getResources().getColor(R.color.home_location_btn));
+                                    order_time_requirement_voice_tv.setBackgroundResource(R.drawable.login_bg_look);
+                                    voice = order_time_requirement_voice_tv.getText().toString();
+                                } else {
+                                    order_time_requirement_voice_tv.setTextColor(getResources().getColor(R.color.order_cash_pledge_word));
+                                    order_time_requirement_voice_tv.setBackgroundResource(R.drawable.other_requirement_dialog_border_gray);
+                                    voice = "";
+                                }
+                            }
+                        });
+                        viewHolder.setOnClickListener(R.id.order_time_requirement_result_tv, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                requirement = (!room.isEmpty() ? room : (!quiet.isEmpty() ? quiet : (!high.isEmpty() ? high : (!voice.isEmpty() ? voice : ""))));
+                                hotel_order_time_equipment_tv.setText(requirement);
+                                needStr = order_time_requirement_dialog_et.getText().toString();
+                                baseNiceDialog.dismiss();
+                            }
+                        });
                     }
                 })
                 .setOutCancel(true)
@@ -264,17 +452,17 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 .show(getSupportFragmentManager());
     }
 
-    /** 添加item */
+    /**
+     * 添加item
+     */
     public void addLinkman() {
-        if (linkmanName.size()<5) {
-            hotelOrderLinkmanAdapter.addData("入住人"+linkmanName.size()+1+"名字");
-            hotelOrderLinkmanAdapter.notifyDataSetChanged();
-        }else {
-            ToastUtils.showShort("最多填写6位入住人！");
-        }
+        hotelOrderLinkmanAdapter.addData("入住人" + linkmanName.size() + "名字");
+        hotelOrderLinkmanAdapter.notifyDataSetChanged();
     }
 
-    /** 移除item */
+    /**
+     * 移除item
+     */
     public void delLinkman() {
         hotelOrderLinkmanAdapter.delData();
         hotelOrderLinkmanAdapter.notifyDataSetChanged();
@@ -396,7 +584,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 boolean send_type = resultBundle.getBoolean("send_type");
                 if (send_type) {
                     email = resultBundle.getString("email");
-                }else {
+                } else {
                     mobile = resultBundle.getString("mobile");
                     province = resultBundle.getString("province");
                     city = resultBundle.getString("city");

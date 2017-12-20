@@ -30,7 +30,7 @@ public class HotelOrderLinkmanAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return linkmanName==null?1:(linkmanName.size()+1);
+        return linkmanName==null?1:linkmanName.size();
     }
 
     @Override

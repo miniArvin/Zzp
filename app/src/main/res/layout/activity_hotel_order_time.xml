@@ -247,6 +247,7 @@
             android:background="@color/found_search_bg" />
 
         <RelativeLayout
+            android:id="@+id/hotel_order_room_count_rl"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
@@ -269,17 +270,28 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="80dp"
                 android:gravity="center"
-                android:text="2间"
+                android:text="1间"
                 android:textColor="@color/home_location_word"
                 android:textSize="16sp" />
 
             <ImageView
+                android:id="@+id/hotel_order_room_count_iv"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/more_right_icon" />
         </RelativeLayout>
+
+        <com.tryine.zzp.widget.NoScrollGirdView
+            android:id="@+id/hotel_order_room_count_gv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="6"
+            android:visibility="gone"></com.tryine.zzp.widget.NoScrollGirdView>
 
         <RelativeLayout
             android:layout_width="match_parent"

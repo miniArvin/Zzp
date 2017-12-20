@@ -22,6 +22,7 @@
             android:textSize="21sp" />
 
         <RelativeLayout
+            android:id="@+id/order_time_requirement_dialog_rl"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="15dp">
@@ -35,6 +36,7 @@
                 android:textSize="15sp" />
 
             <ImageView
+                android:id="@+id/order_time_requirement_dialog_iv"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_alignParentRight="true"
@@ -45,9 +47,11 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/mine_div"/>
+            android:background="@color/mine_div" />
+
 
         <RelativeLayout
+            android:id="@+id/order_time_unrequirement_dialog_rl"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="15dp">
@@ -61,6 +65,7 @@
                 android:textSize="15sp" />
 
             <ImageView
+                android:id="@+id/order_time_unrequirement_dialog_iv"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_alignParentRight="true"
@@ -68,74 +73,86 @@
                 android:src="@drawable/order_time_requirement_dialog_unselected_icon" />
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginTop="18dp"
-            android:background="@color/found_search_bg"
-            android:gravity="top"
-            android:hint="其他需求（您的需求会尽量转达给酒店，但不保证一定实现）"
-            android:padding="8dp"
-            android:textColor="@color/home_check_in_word"
-            android:textSize="14sp" />
-
         <LinearLayout
+            android:id="@+id/order_time_requirement_dialog_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="57dp"
-                android:layout_height="30dp"
-                android:background="@drawable/login_bg_look"
-                android:gravity="center"
-                android:text="有窗"
-                android:textColor="@color/home_location_btn"
-                android:textSize="13sp" />
+            <EditText
+                android:id="@+id/order_time_requirement_dialog_et"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="18dp"
+                android:background="@color/found_search_bg"
+                android:gravity="top"
+                android:hint="其他需求（您的需求会尽量转达给酒店，但不保证一定实现）"
+                android:padding="8dp"
+                android:textColor="@color/home_check_in_word"
+                android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="57dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/other_requirement_dialog_border_gray"
-                android:gravity="center"
-                android:text="安静"
-                android:textColor="@color/order_cash_pledge_word"
-                android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="57dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/other_requirement_dialog_border_gray"
-                android:gravity="center"
-                android:text="高层"
-                android:textColor="@color/order_cash_pledge_word"
-                android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/order_time_requirement_room_tv"
+                    android:layout_width="57dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/other_requirement_dialog_border_gray"
+                    android:gravity="center"
+                    android:text="有窗"
+                    android:textColor="@color/order_cash_pledge_word"
+                    android:textSize="13sp" />
 
-            <TextView
-                android:layout_width="57dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/other_requirement_dialog_border_gray"
-                android:gravity="center"
-                android:text="安静"
-                android:textColor="@color/order_cash_pledge_word"
-                android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/order_time_requirement_quiet_tv"
+                    android:layout_width="57dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/other_requirement_dialog_border_gray"
+                    android:gravity="center"
+                    android:text="安静"
+                    android:textColor="@color/order_cash_pledge_word"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/order_time_requirement_high_tv"
+                    android:layout_width="57dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/other_requirement_dialog_border_gray"
+                    android:gravity="center"
+                    android:text="高层"
+                    android:textColor="@color/order_cash_pledge_word"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/order_time_requirement_voice_tv"
+                    android:layout_width="57dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/other_requirement_dialog_border_gray"
+                    android:gravity="center"
+                    android:text="无杂音"
+                    android:textColor="@color/order_cash_pledge_word"
+                    android:textSize="13sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/order_time_requirement_result_tv"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:gravity="center"
         android:layout_marginTop="27dp"
-        android:textSize="17sp"
         android:background="@color/home_location_btn"
+        android:gravity="center"
+        android:text="确定"
         android:textColor="@color/white"
-        android:text="确定"/>
+        android:textSize="17sp" />
 
 
 </LinearLayout>
