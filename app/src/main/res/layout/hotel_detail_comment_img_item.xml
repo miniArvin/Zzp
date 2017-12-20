@@ -6,5 +6,6 @@
         android:id="@+id/hotel_detail_comment1_img_iv"
         android:layout_width="92dp"
         android:layout_height="92dp"
+        android:scaleType="fitXY"
         android:src="@drawable/hotel_detail_comment1_icon"/>
 </LinearLayout>

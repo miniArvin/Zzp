@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/login_bg_code"
     android:orientation="vertical">
     <RelativeLayout
-        android:layout_width="168dp"
+        android:layout_width="match_parent"
         android:layout_height="125dp">
         <ImageView
             android:id="@+id/hotel_detail_room_img_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:src="@drawable/gongchengwenquanlijiudian"/>
         <RelativeLayout
             android:id="@+id/hotel_detail_no_room"
@@ -58,7 +59,7 @@
         android:textColor="@color/hotel_detail_room_list_word"
         android:text="大床 12-17层"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="27dp"
         android:layout_marginLeft="6dp"
@@ -80,11 +81,11 @@
             android:id="@+id/hotel_detail_room_check_tv"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="14dp"
             android:gravity="center"
+            android:layout_alignParentRight="true"
             android:text="满房"
             android:textSize="14sp"
             android:background="@drawable/hotel_detail_item_man_fang_bg_btn"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
