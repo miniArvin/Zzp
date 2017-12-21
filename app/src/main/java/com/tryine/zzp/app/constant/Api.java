@@ -121,5 +121,7 @@ public class Api {
     //会员条款、隐私政策、关于我们、负责说明
     public static final String MEMBERSHIPCLAUSE = BASE_URL +"app/news/membership_clause";
 
+    //美食美景
+    public static final String FOODANDVIEW = BASE_URL +"app/beauty/scenery";
 
 }

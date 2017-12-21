@@ -4,18 +4,25 @@ package com.tryine.zzp.ui.activity.found;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.tryine.zzp.R;
+import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.ui.fragment.found.FoundDetailFoodFragment;
 import com.tryine.zzp.ui.fragment.found.FoundDetailNewsFragment;
 import com.tryine.zzp.ui.fragment.found.FoundDetailQuestionFragment;
 import com.tryine.zzp.widget.NoScrollViewPager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 
+import net.lucode.hackware.magicindicator.FragmentContainerHelper;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -26,8 +33,13 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class FoundDetailActivity extends BaseStatusMActivity implements View.OnClickListener {
     private List<String> titles;
@@ -37,7 +49,9 @@ public class FoundDetailActivity extends BaseStatusMActivity implements View.OnC
     private ImageView found_detail_show_iv;
     private LinearLayout found_detail_article_ll;
     private LinearLayout found_detail_question_ll;
+    private FragmentContainerHelper mFragmentContainerHelper = new FragmentContainerHelper();
     private Boolean isShow=false;
+    private int mPage=0;
 
     @Override
     protected int getLayoutId() {
@@ -46,9 +60,11 @@ public class FoundDetailActivity extends BaseStatusMActivity implements View.OnC
 
     @Override
     protected void afterOnCreate() {
-
+        mPage = getIntent().getIntExtra("found",0);
+        initView();
+        loadMessage();
     }
-    public void init(){
+    public void initView(){
         titles=new ArrayList<>();
         titles.add("美食·美景");
         titles.add("趣味问答");
@@ -66,7 +82,10 @@ public class FoundDetailActivity extends BaseStatusMActivity implements View.OnC
         found_detail_article_ll.setOnClickListener(this);
         found_detail_question_ll= (LinearLayout) findViewById(R.id.found_detail_question_ll);
         found_detail_question_ll.setOnClickListener(this);
+        found_detail_vp.setCurrentItem(mPage);
+        mFragmentContainerHelper.handlePageSelected(mPage,false);
     }
+
 
     private void initMagicIndicator() {
         found_detail_vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -139,5 +158,35 @@ public class FoundDetailActivity extends BaseStatusMActivity implements View.OnC
             case R.id.found_detail_question_ll:
                 break;
         }
+    }
+
+    public void loadMessage(){
+        OkHttpUtils
+                .post()
+                .url(Api.FOODANDVIEW)
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        String string = response.body().string();
+                        LogUtils.e(string);
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            LogUtils.e(jsonObject);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

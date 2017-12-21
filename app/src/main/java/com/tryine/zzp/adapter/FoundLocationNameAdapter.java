@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tryine.zzp.R;
 import com.tryine.zzp.entity.test.TestEntity;
+import com.tryine.zzp.entity.test.remote.FoundEntity;
+import com.tryine.zzp.utils.UrlUtils;
 
 import java.util.List;
 
@@ -21,13 +24,13 @@ public class FoundLocationNameAdapter extends RecyclerView.Adapter<FoundLocation
     private final View mParent;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<TestEntity> mData;
+    private List<FoundEntity.InfoBean.CityBean> cityBeen;
 
-    public FoundLocationNameAdapter(View mParent, Context mContext, List<TestEntity> mData) {
+    public FoundLocationNameAdapter(View mParent, Context mContext, List<FoundEntity.InfoBean.CityBean> mData) {
         mLayoutInflater=LayoutInflater.from(mContext);
         this.mParent = mParent;
         this.mContext = mContext;
-        this.mData = mData;
+        this.cityBeen = mData;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,14 +60,14 @@ public class FoundLocationNameAdapter extends RecyclerView.Adapter<FoundLocation
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.location_name_img.setImageResource(mData.get(position).mImg);
-        holder.location_name_tv.setText(mData.get(position).mName);
-        holder.location_detail_tv.setText(mData.get(position).mLocation);
+        Glide.with(mContext).load(UrlUtils.getUrl(cityBeen.get(position).getPhoto())).asBitmap().into(holder.location_name_img);
+        holder.location_name_tv.setText(cityBeen.get(position).getName());
+//        holder.location_detail_tv.setText(cityBeen.get(position).getCity_id());
     }
 
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return cityBeen==null?0:cityBeen.size();
     }
 }

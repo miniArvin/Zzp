@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tryine.zzp.R;
 import com.tryine.zzp.entity.test.TestEntity;
+import com.tryine.zzp.entity.test.remote.FoundEntity;
+import com.tryine.zzp.utils.UrlUtils;
 
 import java.util.List;
 
@@ -21,11 +24,13 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
     private final View mParent;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
+    private List<FoundEntity.InfoBean.PostBean> postBeen;
 
-    public FoundFoodViewAdapter(View mParent, Context mContext) {
+    public FoundFoodViewAdapter(View mParent, Context mContext ,List<FoundEntity.InfoBean.PostBean> data) {
         mLayoutInflater=LayoutInflater.from(mContext);
         this.mParent = mParent;
         this.mContext = mContext;
+        this.postBeen = data;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,12 +69,17 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Glide.with(mContext).load(UrlUtils.getUrl(postBeen.get(position).getPic())).asBitmap().into(holder.food_view_img);
+        Glide.with(mContext).load(UrlUtils.getUrl(postBeen.get(position).getFace())).asBitmap().into(holder.found_food_view_img_headimg);
+        holder.food_view_place_tv.setText(postBeen.get(position).getCity());
+        holder.food_view_place_detail_tv.setText(postBeen.get(position).getTitle());
+        holder.food_view_zan_tv.setText(postBeen.get(position).getZan_num());
+        holder.food_view_comment_tv.setText(postBeen.get(position).getViews());
     }
 
 
     @Override
     public int getItemCount() {
-        return 4;
+        return postBeen==null?0:postBeen.size();
     }
 }

@@ -9,6 +9,7 @@
         android:id="@+id/food_view_img"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:scaleType="fitXY"
         android:src="@drawable/found_location_icon" />
 
     <LinearLayout

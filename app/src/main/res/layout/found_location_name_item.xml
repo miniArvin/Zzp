@@ -9,6 +9,7 @@
         android:id="@+id/location_name_img"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:scaleType="fitXY"
         android:src="@drawable/found_location_icon"/>
 
     <TextView
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:text="奇山、奇石、玻璃桥"
         android:textColor="@color/home_recommend_location_word"
-        android:textSize="13sp"/>
+        android:textSize="13sp"
+        android:visibility="gone"/>
 
 </LinearLayout>

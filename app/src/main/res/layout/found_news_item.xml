@@ -3,23 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/new_content_img"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/new_title_tv"
-                android:layout_width="210dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="都有哪些常用滤镜拯救了你的照片"
                 android:textColor="@color/home_location_word"
@@ -27,7 +26,7 @@
 
             <TextView
                 android:id="@+id/new_content_tv"
-                android:layout_width="210dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:text="因为我刚好遇见你，留下足迹才美丽。风吹花落累……"
@@ -39,9 +38,11 @@
             android:layout_width="140dp"
             android:layout_height="110dp"
             android:layout_marginLeft="20dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
             android:src="@drawable/fenghuanggucheng" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -51,6 +52,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/new_company_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/found_news_company_icon" />

@@ -36,8 +36,8 @@ public class FoundDetailNewsFragment extends BaseFragment {
 
     public void init() {
         found_detail_news_fl_lv = (ListView) mView.findViewById(R.id.found_detail_news_fl_lv);
-        foundNewsAdapter=new FoundNewsAdapter(mView,mContext);
-        found_detail_news_fl_lv.setAdapter(foundNewsAdapter);
+//        foundNewsAdapter=new FoundNewsAdapter(mView,mContext);
+//        found_detail_news_fl_lv.setAdapter(foundNewsAdapter);
     }
 
 }

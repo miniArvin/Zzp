@@ -17,6 +17,7 @@ import com.tryine.zzp.adapter.CityNameAdapter;
 import com.tryine.zzp.adapter.HotelRecommendAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.entity.test.remote.HomeEntity;
+import com.tryine.zzp.entity.test.remote.HotelBean;
 import com.tryine.zzp.ui.activity.hotel.HotelListActivity;
 import com.tryine.zzp.ui.activity.hotel.HotelSearchActivity;
 import com.tryine.zzp.ui.activity.hotel.SearchDateActivity;
@@ -64,6 +65,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout home_hotel_all_ll;
     private ImageView home_middle_ad_iv;
     private HomeEntity homeEntity;
+    private List<HotelBean> hotelBeanList;
 
     public HomeFragment() {
     }
@@ -92,6 +94,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         gourmetCityInfo = new ArrayList<>();
         coastalCityInfo = new ArrayList<>();
         bannerInfo = new ArrayList<>();
+        hotelBeanList = new ArrayList<>();
         home_gonglue_hotel = (LinearLayout) mView.findViewById(R.id.home_gonglue_hotel);
         home_gonglue_hotel.setOnClickListener(this);
         home_gonglue_mall = (LinearLayout) mView.findViewById(R.id.home_gonglue_mall);
@@ -192,6 +195,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_gonglue_hotel:
+                startAct(HotelListActivity.class);
                 break;
             case R.id.home_gonglue_mall:
                 break;
