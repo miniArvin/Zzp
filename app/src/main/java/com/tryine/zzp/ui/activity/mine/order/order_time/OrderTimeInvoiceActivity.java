@@ -341,21 +341,9 @@ public class OrderTimeInvoiceActivity extends BaseStatusMActivity implements Vie
                 invoice_province=province.getAreaName();
                 invoice_city=city.getAreaName();
                 invoice_county=county.getAreaName();
-//                if (county == null) {
-//                    ToastUtils.showShort(province.getAreaName() + city.getAreaName());
-//                    order_time_invoice_province_tv.setText(invoice_province);
-//                    order_time_invoice_city_tv.setText(invoice_city);
-//                    order_time_invoice_county_tv.setText("");
-//                    if (order_time_invoice_county_tv.getVisibility()==View.VISIBLE)
-//                    order_time_invoice_county_tv.setVisibility(View.GONE);
-//                } else {
-//                    ToastUtils.showShort(province.getAreaName() + city.getAreaName() + county.getAreaName());
                     order_time_invoice_province_tv.setText(invoice_province);
                     order_time_invoice_city_tv.setText(invoice_city);
                     order_time_invoice_county_tv.setText(invoice_county);
-//                    if (order_time_invoice_county_tv.getVisibility()==View.GONE)
-//                        order_time_invoice_county_tv.setVisibility(View.VISIBLE);
-//                }
             }
         });
         task.execute("湖南", "长沙", "岳麓");

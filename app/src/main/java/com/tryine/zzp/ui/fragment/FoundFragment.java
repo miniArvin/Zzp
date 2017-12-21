@@ -20,6 +20,7 @@ import com.tryine.zzp.ui.activity.hotel.HotelListActivity;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.tryine.zzp.base.BaseFragment;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
     private LinearLayout found_hotel_more_ll;
     private NoScrollListView found_question_lv;
     private FoundQuestionsAdapter foundQuestionsAdapter;
+    private Banner found_banner;
 
     public FoundFragment() {
         // Required empty public constructor
@@ -88,6 +90,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
         found_news_more_ll.setOnClickListener(this);
         found_question_more_ll.setOnClickListener(this);
         found_hotel_more_ll.setOnClickListener(this);
+        found_banner = (Banner) mView.findViewById(R.id.found_banner);
     }
 
     public void loadData(){

@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -35,11 +34,13 @@ import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.entity.test.remote.HotelDetailEntity;
 import com.tryine.zzp.entity.test.remote.HotelDetailRoomEntity;
 import com.tryine.zzp.ui.activity.mine.order.order_time.HotelOrderTimeActivity;
+import com.tryine.zzp.utils.GlideImageLoader;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.FlowLayout.FlowLayoutManager;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
 import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
+import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -91,7 +92,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private String star;
     private int fav = 0;
     private int deposit = 0;
-    private ConvenientBanner hotel_detail_banner;
+    private Banner hotel_detail_banner;
     private TextView hotel_detail_ad_count_tv;
     private TextView hotel_detail_name_tv;
     private RatingBar hotel_detail_rb;
@@ -124,7 +125,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private String room_id;
     private List<HotelDetailRoomEntity.InfoBean.PolicyBean> roomPolicyBeen;
     private List<HotelDetailRoomEntity.InfoBean.FacilitiesBean> roomFacilitiesBeen;
-    private ConvenientBanner hotel_detail_room_dialog_cb;
+    private Banner hotel_detail_room_dialog_cb;
     private NoScrollListView hotel_detail_room_dialog_policy_lv;
     private NoScrollListView hotel_detail_room_dialog_facilities_lv;
     private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterPolicy;
@@ -168,7 +169,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         view_head_share.setVisibility(View.VISIBLE);
         view_head_share.setOnClickListener(this);
         view_head_title.setText(hotel_name);
-        hotel_detail_banner = (ConvenientBanner) findViewById(R.id.hotel_detail_banner);
+        hotel_detail_banner = (Banner) findViewById(R.id.hotel_detail_banner);
         hotel_detail_ad_count_tv = (TextView) findViewById(R.id.hotel_detail_ad_count_tv);
         hotel_detail_name_tv = (TextView) findViewById(R.id.hotel_detail_name_tv);
         hotel_detail_year_tv = (TextView) findViewById(R.id.hotel_detail_year_tv);
@@ -278,6 +279,16 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 }
                                 hotelDetailIntroAdapter = new HotelDetailIntroAdapter(mContext, hotelIntroBeen);
                                 hotel_detail_hotel_intro_gv.setAdapter(hotelDetailIntroAdapter);
+                                //banner
+                                List<String> bannerUrls = new ArrayList<>();
+                                if (bannerBeen!= null) {
+                                    for (int i = 0; i < bannerBeen.size(); i++) {
+                                        bannerUrls.add(UrlUtils.getUrl(bannerBeen.get(i).getPhoto()));
+                                    }
+                                }
+                                hotel_detail_banner.setImages(bannerUrls)
+                                        .setImageLoader(new GlideImageLoader())
+                                        .start();
                                 //room
                                 checkRoom(roomBeen);
 
@@ -505,13 +516,14 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                             viewHolder.setText(R.id.hotel_detail_room_dialog_price_tv, "一晚总价：" + roomBeen.get(position).getPrice());
 
                             View dialogView = viewHolder.getConvertView();
-                            hotel_detail_room_dialog_cb = (ConvenientBanner) dialogView.findViewById(R.id.hotel_detail_room_dialog_cb);
-                            hotel_detail_room_dialog_cb.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ToastUtils.showShort("cb");
+                            List<String> bannerUrls = new ArrayList<>();
+                            if (bannerBeen!= null) {
+                                for (int i = 0; i < bannerBeen.size(); i++) {
+                                    bannerUrls.add(UrlUtils.getUrl(bannerBeen.get(i).getPhoto()));
                                 }
-                            });
+                            }
+                            hotel_detail_room_dialog_cb = (Banner) dialogView.findViewById(R.id.hotel_detail_room_dialog_cb);
+
                             hotel_detail_room_dialog_policy_lv = (NoScrollListView) dialogView.findViewById(R.id.hotel_detail_room_dialog_policy_lv);
                             hotel_detail_room_dialog_facilities_lv = (NoScrollListView) dialogView.findViewById(R.id.hotel_detail_room_dialog_facilities_lv);
 

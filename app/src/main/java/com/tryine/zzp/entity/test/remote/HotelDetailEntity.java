@@ -467,6 +467,7 @@ public class HotelDetailEntity extends BaseRemote {
              * price : 99
              * is_auction : 1
              * sku : 153
+             * room_id : 2
              */
 
             private String title;

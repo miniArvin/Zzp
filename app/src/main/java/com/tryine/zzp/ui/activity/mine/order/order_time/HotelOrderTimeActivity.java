@@ -37,6 +37,7 @@ import okhttp3.Response;
 
 import static com.tryine.zzp.app.constant.Code.REQUEST_CODE;
 import static com.tryine.zzp.app.constant.Code.RESULT_CODE;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_NAME;
 
 public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.OnClickListener {
     private String room_id;
@@ -68,29 +69,35 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private int totalPrice;
     private String phone;
     private String roomType;
-    private String invoice_name;
-    private String tax_code;
+    private int deposit = 1;
+    private String bill_name = "";
+    private String invoice_name = "";
+    private String tax_code = "";
     private int sku;
     private int invoiceType = 0;
-    private String credit_code;
-    private String bank;
-    private String company_card;
-    private String company_tell;
-    private String company_address;
-    private int sendTyp = 0;
-    private String email;
-    private String mobile;
-    private String province;
-    private String city;
-    private String county;
-    private String address;
-    private String requirement;
+    private String credit_code = "";
+    private String bank = "";
+    private String company_card = "";
+    private String company_tell = "";
+    private String company_address = "";
+    private String sendType = "";
+    private String email = "";
+    private String name = "";
+    private String mobile = "";
+    private String province = "";
+    private String city = "";
+    private String county = "";
+    private String address = "";
+    private String requirement = "";
     private String room = "";
     private String quiet = "";
     private String high = "";
     private String voice = "";
     private boolean isNeed = true;
     private String needStr = "";
+    private boolean isCoupon = false;
+    private String coupon = "";
+    private String user_pay_fee = "";
 
     @Override
     protected int getLayoutId() {
@@ -201,10 +208,13 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                                 roomType = info.getString("title");
                                 hotel_order_time_type_tv.setText(roomType);
                                 hotel_order_time_price_tv.setText("￥" + roomPrice);
-                                if (info.getInt("deposit") != 0) {
+                                deposit = info.getInt("deposit");
+                                if (deposit != 0) {
+                                    user_pay_fee ="";
                                     hotel_order_time_pledge_ll.setVisibility(View.GONE);
                                     hotel_order_time_total_prices_tv.setText("￥" + roomPrice);
                                 } else {
+                                    user_pay_fee="200";
                                     hotel_order_time_pledge_tv.setText("￥" + info.getString("money"));
                                     hotel_order_time_total_prices_tv.setText("(含押金):￥" + totalPrice);
                                 }
@@ -245,6 +255,11 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
             case R.id.hotel_order_time_pay_tv:
                 getInputMessage();
                 if (!phone.isEmpty()) {
+                    if (isCoupon) {
+
+                    } else {
+
+                    }
                     loadCommitOrderMessage();
                 } else {
                     ToastUtils.showShort("请输入手机号码！");
@@ -516,8 +531,27 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 .addParams("ltime", outDay)
                 .addParams("num", "2")
                 .addParams("realname", "[刘辰,刘辰1,li]")
-                .addParams("mobile", phone)
-                .addParams("user_pay_fee", "200")
+                .addParams("phone", phone)
+                .addParams("user_pay_fee", user_pay_fee)
+                .addParams("demand", requirement)
+                .addParams("coupon", coupon)
+                .addParams("invoice_type", invoiceType + "")
+                .addParams("bill_name", bill_name)
+                .addParams("invoice_name", invoice_name)
+                .addParams("tax_code", tax_code)
+                .addParams("credit_code", credit_code)
+                .addParams("bank", bank)
+                .addParams("company_card", company_card)
+                .addParams("company_tell", company_tell)
+                .addParams("company_address", company_address)
+                .addParams("name", name)
+                .addParams("mobile", mobile)
+                .addParams("province", province)
+                .addParams("city", city)
+                .addParams("district", county)
+                .addParams("address", address)
+                .addParams("send_type", sendType)
+                .addParams("email", email)
                 .build()
                 .execute(new Callback() {
                     @Override
@@ -569,30 +603,37 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         if (requestCode == REQUEST_CODE && resultCode == RESULT_CODE) {
             setResult(RESULT_CODE);
             Bundle resultBundle = new Bundle();
+            bill_name = "平台";
             resultBundle = data.getExtras().getBundle("invoice");
             if (resultBundle != null) {
                 invoice_name = resultBundle.getString("invoice_name");
                 tax_code = resultBundle.getString("tax_code");
                 boolean invoice_type = resultBundle.getBoolean("invoice_type");
                 if (!invoice_type) {
+                    invoiceType = 2;
                     credit_code = resultBundle.getString("credit_code");
                     bank = resultBundle.getString("bank");
                     company_card = resultBundle.getString("company_card");
                     company_tell = resultBundle.getString("company_tell");
                     company_address = resultBundle.getString("company_address");
+                } else {
+                    invoiceType = 1;
                 }
                 boolean send_type = resultBundle.getBoolean("send_type");
                 if (send_type) {
+                    sendType = "email";
                     email = resultBundle.getString("email");
                 } else {
+                    sendType = "express";
                     mobile = resultBundle.getString("mobile");
+                    name = resultBundle.getString("name");
                     province = resultBundle.getString("province");
                     city = resultBundle.getString("city");
                     county = resultBundle.getString("county");
                     address = resultBundle.getString("address");
                 }
             } else {
-
+                invoiceType = 0;
             }
         }
     }

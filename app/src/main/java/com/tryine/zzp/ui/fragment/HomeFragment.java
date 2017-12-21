@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -22,11 +21,12 @@ import com.tryine.zzp.ui.activity.hotel.HotelListActivity;
 import com.tryine.zzp.ui.activity.hotel.HotelSearchActivity;
 import com.tryine.zzp.ui.activity.hotel.SearchDateActivity;
 import com.tryine.zzp.ui.activity.hotel.SearchKeyWordActivity;
-import com.tryine.zzp.utils.BannerHelper;
+import com.tryine.zzp.utils.GlideImageLoader;
 import com.tryine.zzp.utils.SpaceItemDecoration;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.BottomDialog.BottomDialog;
 import com.tryine.zzp.base.BaseFragment;
+import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -46,7 +46,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout home_gonglue_question;
     private RecyclerView home_city_name;
     private RecyclerView home_recommend_hotel;
-    private ConvenientBanner home_banner;
+    private Banner home_banner;
     private CityNameAdapter cityNameAdapter;
     private HotelRecommendAdapter hotelRecommendAdapter;
     private List<HomeEntity.InfoBean> homeInfo;
@@ -114,7 +114,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         home_hotel_all_ll.setOnClickListener(this);
         home_city_name = (RecyclerView) mView.findViewById(R.id.home_city_name);
         home_recommend_hotel = (RecyclerView) mView.findViewById(R.id.home_recommend_hotel);
-        home_banner = (ConvenientBanner) mView.findViewById(R.id.home_banner);
+        home_banner = (Banner) mView.findViewById(R.id.home_banner);
         home_middle_ad_iv= (ImageView) mView.findViewById(R.id.home_middle_ad_iv);
     }
 
@@ -175,7 +175,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                         bannerUrls.add(UrlUtils.getUrl(bannerInfo.get(i).getPhoto()));
                                     }
                                 }
-                                BannerHelper.getInstance().config(home_banner,bannerUrls);
+                                home_banner.setImages(bannerUrls)
+                                        .setImageLoader(new GlideImageLoader())
+                                        .start();
                                 Glide.with(mContext).load(UrlUtils.getUrl(homeEntity.getInfo().getImg().getPhoto())).asBitmap().into(home_middle_ad_iv);
                                 loadData();
                             }
