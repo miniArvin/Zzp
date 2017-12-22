@@ -11,6 +11,8 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        android:numColumns="2"></GridView>
+        android:layout_marginRight="8dp"
+        android:numColumns="2"
+        android:horizontalSpacing="15dp"></GridView>
 
 </FrameLayout>

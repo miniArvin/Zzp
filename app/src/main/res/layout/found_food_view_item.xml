@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/food_view_img"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="160dp"
         android:scaleType="fitXY"
         android:src="@drawable/found_location_icon" />
@@ -42,7 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/found_food_view_img_headimg"
@@ -81,10 +82,11 @@
         <TextView
             android:id="@+id/food_view_comment_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="17dp"
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:text="5.8w"
-            android:textColor="@color/home_recommend_location_word" />
+            android:textColor="@color/home_recommend_location_word"
+            android:layout_weight="0.56" />
     </LinearLayout>
 </LinearLayout>

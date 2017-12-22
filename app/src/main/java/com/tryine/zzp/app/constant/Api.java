@@ -124,4 +124,25 @@ public class Api {
     //美食美景
     public static final String FOODANDVIEW = BASE_URL +"app/beauty/scenery";
 
+    //美食美景详情
+    public static final String FOODANDVIEWDETAIL = BASE_URL +"app/beauty/scenery_detail";
+
+    //点赞
+    public static final String FOODANDVIEWDETAILZAN = BASE_URL +"app/beauty/likes";
+
+    //取消点赞
+    public static final String FOODANDVIEWDETAILCANCELZAN = BASE_URL +"app/beauty/cancel_likes";
+
+    //趣味问答
+    public static final String ANSWER = BASE_URL +"app/beauty/interlocution";
+
+    //趣味问答详情
+    public static final String ANSWERDETAIL = BASE_URL +"app/beauty/interlocution_detail";
+
+    //新闻资讯
+    public static final String NEWS = BASE_URL +"app/beauty/news";
+
+    //新闻资讯
+    public static final String NEWSDETAIL = BASE_URL +"app/beauty/news_detail";
+
 }
