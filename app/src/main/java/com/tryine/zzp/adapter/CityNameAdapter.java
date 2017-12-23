@@ -25,15 +25,25 @@ public class CityNameAdapter extends RecyclerView.Adapter<CityNameAdapter.ViewHo
     private final View mParent;
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<HomeEntity.InfoBean.WaterBean> mData;
+    private List<HomeEntity.InfoBean.WaterBean> waterBeen;
+    private List<HomeEntity.InfoBean.CoastalCityBean> coastalCityBeen;
+    private List<HomeEntity.InfoBean.GourmetCityBean> gourmetCityBeen;
+    private List<HomeEntity.InfoBean.HistoricalCultureBean> historicalCultureBeen;
     private OnUseClickListener onUseClickListener;
 
 
-    public CityNameAdapter(Context context, List<HomeEntity.InfoBean.WaterBean> infoBeen, View parent) {
+    public CityNameAdapter(Context context, List<HomeEntity.InfoBean.WaterBean> waterBeen,
+                           List<HomeEntity.InfoBean.CoastalCityBean> coastalCityBeen,
+                           List<HomeEntity.InfoBean.GourmetCityBean> gourmetCityBeen,
+                           List<HomeEntity.InfoBean.HistoricalCultureBean> historicalCultureBeen,
+                           View parent) {
         mLayoutInflater = LayoutInflater.from(context);
-        mData=infoBeen;
-        mContext=context;
-        mParent=parent;
+        this.waterBeen=waterBeen;
+        this.coastalCityBeen=coastalCityBeen;
+        this.gourmetCityBeen=gourmetCityBeen;
+        this.historicalCultureBeen=historicalCultureBeen;
+        this.mContext=context;
+        this.mParent=parent;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,15 +70,25 @@ public class CityNameAdapter extends RecyclerView.Adapter<CityNameAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(mContext)
-                .load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
-        holder.city_name_tv.setText(mData.get(position).getTitle());
+        if (historicalCultureBeen!=null) {
+            Glide.with(mContext).load(UrlUtils.getUrl(historicalCultureBeen.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
+            holder.city_name_tv.setText(historicalCultureBeen.get(position).getTitle());
+        }else if (waterBeen!=null){
+            Glide.with(mContext).load(UrlUtils.getUrl(waterBeen.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
+            holder.city_name_tv.setText(waterBeen.get(position).getTitle());
+        }else if (gourmetCityBeen!=null){
+            Glide.with(mContext).load(UrlUtils.getUrl(gourmetCityBeen.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
+            holder.city_name_tv.setText(gourmetCityBeen.get(position).getTitle());
+        }else if (coastalCityBeen!=null){
+            Glide.with(mContext).load(UrlUtils.getUrl(coastalCityBeen.get(position).getPhoto())).asBitmap().centerCrop().into(holder.city_name_img);
+            holder.city_name_tv.setText(coastalCityBeen.get(position).getTitle());
+        }
     }
 
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return coastalCityBeen!=null?coastalCityBeen.size():(waterBeen!=null?waterBeen.size():(gourmetCityBeen!=null?gourmetCityBeen.size():(historicalCultureBeen!=null?historicalCultureBeen.size():0)));
     }
 
     public interface OnUseClickListener {

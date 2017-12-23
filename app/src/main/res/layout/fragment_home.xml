@@ -375,7 +375,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -386,111 +385,20 @@
                 android:textColor="@color/home_location_word"
                 android:textSize="19sp" />
 
-            <LinearLayout
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/home_city_indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="22dp">
+            </net.lucode.hackware.magicindicator.MagicIndicator>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/home_city_icon_iv"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
-                        android:src="@drawable/home_theme_coastal_unselect" />
-
-                    <TextView
-                        android:id="@+id/home_city_content_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="沿海城市"
-                        android:textColor="@color/home_location_word" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
-                        android:src="@drawable/home_theme_history_selected" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="历史文化"
-                        android:textColor="@color/orange" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
-                        android:src="@drawable/home_theme_water_unselect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="江南水乡"
-                        android:textColor="@color/home_location_word" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
-                        android:src="@drawable/home_theme_food_unselect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="美食城市"
-                        android:textColor="@color/home_location_word" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/home_city_name"
+            <com.tryine.zzp.widget.NoScrollViewPager
+                android:id="@+id/home_city_name_vp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_height="160dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:scrollbars="none"></android.support.v7.widget.RecyclerView>
+                android:layout_marginRight="20dp"></com.tryine.zzp.widget.NoScrollViewPager>
 
         </LinearLayout>
 

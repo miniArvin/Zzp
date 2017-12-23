@@ -45,5 +45,6 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.1.0'
     compile 'com.youth.banner:banner:1.4.10'
+    compile 'com.zhy:base-adapter:3.0.3'
     testCompile 'junit:junit:4.12'
 }
