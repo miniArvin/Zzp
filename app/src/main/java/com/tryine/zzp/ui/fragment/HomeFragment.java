@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.tryine.zzp.adapter.HotelRecommendAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.entity.test.remote.HomeEntity;
 import com.tryine.zzp.entity.test.remote.HotelBean;
+import com.tryine.zzp.ui.activity.hotel.HotelDetailActivity;
 import com.tryine.zzp.ui.activity.hotel.HotelListActivity;
 import com.tryine.zzp.ui.activity.hotel.HotelSearchActivity;
 import com.tryine.zzp.ui.activity.hotel.SearchDateActivity;
@@ -161,7 +163,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         home_recommend_hotel.setNestedScrollingEnabled(false);
         hotelRecommendAdapter = new HotelRecommendAdapter(mContext, hotelInfo, mView);
         home_recommend_hotel.addItemDecoration(new SpaceItemDecoration(spacingInPixels,SpaceItemDecoration.HORIZONTAL_LIST));
-        home_recommend_hotel.setAdapter(hotelRecommendAdapter);
 
         HomeCoastalCityFragment homeCoastalCityFragment = new HomeCoastalCityFragment();
         HomeHistoricalCultureFragment homeHistoricalCultureFragment = new HomeHistoricalCultureFragment();
@@ -194,6 +195,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
         initMagicIndicator();
+
+        hotelRecommendAdapter.setOnItemClickListener(new HotelRecommendAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                bundle.putString("hotel_id", hotelInfo.get(position).getHotel_id());
+                bundle.putString("hotel_name", hotelInfo.get(position).getHotel_name());
+                startAct(HotelDetailActivity.class,bundle);
+            }
+        });
+        home_recommend_hotel.setAdapter(hotelRecommendAdapter);
     }
 
     public void loadMessage() {

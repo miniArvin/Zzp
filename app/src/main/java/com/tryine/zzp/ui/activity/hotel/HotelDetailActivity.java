@@ -324,6 +324,15 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotelDetailRecommendAdapter = new HotelDetailRecommendAdapter(mContext, hotelBeen);
                                 int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.home_city_item_div);
                                 hotel_detail_recommend_rv.addItemDecoration(new com.tryine.zzp.utils.SpaceItemDecoration(spacingInPixels, com.tryine.zzp.utils.SpaceItemDecoration.HORIZONTAL_LIST));
+                                hotelDetailRecommendAdapter.setOnItemClickListener(new HotelDetailRecommendAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View v, int position) {
+                                        bundle.putString("hotel_id", hotelBeen.get(position).getHotel_id());
+                                        bundle.putString("hotel_name", hotelBeen.get(position).getHotel_name());
+                                        startAct(HotelDetailActivity.class,bundle);
+                                    }
+                                });
+
                                 hotel_detail_recommend_rv.setAdapter(hotelDetailRecommendAdapter);
                             } else if (hotelDetailEntities.getStatus() == 362) {
                                 ToastUtils.showShort(hotelDetailEntities.getMsg());

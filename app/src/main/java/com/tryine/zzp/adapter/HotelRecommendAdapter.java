@@ -26,7 +26,7 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private List<HomeEntity.InfoBean.HotelBean> mData;
-    private OnUseClickListener onUseClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public HotelRecommendAdapter(Context context, List<HomeEntity.InfoBean.HotelBean> hotelBeen, View parent) {
         mLayoutInflater = LayoutInflater.from(context);
@@ -35,10 +35,12 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
         mParent=parent;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        public ViewHolder(View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        private OnItemClickListener onItemClickListener;
+        public ViewHolder(View itemView , OnItemClickListener onItemClickListener) {
             super(itemView);
+            this.onItemClickListener = onItemClickListener;
+            itemView.setOnClickListener(this);
         }
         ImageView hotel_recommend_img;
         TextView hotel_recommend_name;
@@ -46,13 +48,20 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
         TextView hotel_recommend_location;
         RatingBar hotel_recommend_level;
 
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(v,getPosition());
+            }
+
+        }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.hotel_recommend_item,
                 parent, false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        ViewHolder viewHolder=new ViewHolder(view,onItemClickListener);
 
         viewHolder.hotel_recommend_img = (ImageView) view
                 .findViewById(R.id.hotel_recommend_img);
@@ -68,12 +77,13 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Glide.with(mContext).load(UrlUtils.getUrl(mData.get(position).getPhoto())).asBitmap().centerCrop().into(holder.hotel_recommend_img);
         holder.hotel_recommend_name.setText(mData.get(position).getHotel_name());
         holder.hotel_recommend_price.setText(mData.get(position).getPrice());
         holder.hotel_recommend_location.setText(mData.get(position).getAddr());
         holder.hotel_recommend_level.setRating(Float.parseFloat(mData.get(position).getStar()));
+        holder.itemView.setTag(position);
     }
 
     @Override
@@ -81,12 +91,12 @@ public class HotelRecommendAdapter extends RecyclerView.Adapter<HotelRecommendAd
         return mData==null?0:mData.size();
     }
 
-    public interface OnUseClickListener {
-        void onClick(int position);
+    public interface OnItemClickListener {
+        void onItemClick(View view,int position);
     }
 
-    public void setOnUseClickListener(OnUseClickListener listener) {
-        this.onUseClickListener = listener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
 }

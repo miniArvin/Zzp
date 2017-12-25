@@ -8,11 +8,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.CityNameAdapter;
-import com.tryine.zzp.adapter.HotelRecommendAdapter;
 import com.tryine.zzp.base.BaseFragment;
 import com.tryine.zzp.entity.test.remote.HomeEntity;
 import com.tryine.zzp.utils.SpaceItemDecoration;
-import com.zhy.adapter.abslistview.CommonAdapter;
 
 import java.util.List;
 
