@@ -145,4 +145,9 @@ public class Api {
     //新闻资讯
     public static final String NEWSDETAIL = BASE_URL +"app/beauty/news_detail";
 
+    //普通发票
+    public static final String COMMONINVOICE = BASE_URL +"app/Invoice/ordinary";
+
+    //专用发票
+    public static final String SPECIALINVOICE = BASE_URL +"app/Invoice/special";
 }

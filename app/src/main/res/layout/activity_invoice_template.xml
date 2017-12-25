@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/order_hotel_ll"
+            android:id="@+id/mine_invoice_common_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/order_hotel_tv"
+                android:id="@+id/mine_invoice_common_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
@@ -34,9 +34,9 @@
                 android:textSize="15sp" />
 
             <View
-                android:id="@+id/order_hotel_v"
+                android:id="@+id/mine_invoice_common_v"
                 android:layout_width="30dp"
-                android:layout_height="4dp"
+                android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:background="@color/orange"
@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/order_independent_travel_ll"
+            android:id="@+id/mine_invoice_special_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/order_independent_travel_tv"
+                android:id="@+id/mine_invoice_special_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
@@ -62,10 +62,9 @@
                 android:textSize="15sp" />
 
             <View
-                android:id="@+id/order_independent_travel_v"
+                android:id="@+id/mine_invoice_special_v"
                 android:layout_width="30dp"
-                android:layout_height="4dp"
-                android:layout_below="@+id/order_independent_travel_tv"
+                android:layout_height="2dp"
                 android:layout_gravity="center"
                 android:background="@color/orange"
                 android:gravity="center"
@@ -77,27 +76,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:gravity="center"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
 
         <TextView
+            android:id="@+id/mine_invoice_title_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:elevation="3dp"
+            android:gravity="center_vertical"
             android:text="湖南创研科技股份有限公司"
             android:textColor="@color/home_location_word"
             android:textSize="17sp"
-            android:elevation="3dp"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"/>
+            android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/mine_invoice_add_title_ll"
             android:layout_width="250dp"
             android:layout_height="40dp"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:background="@drawable/invoice_add_template_bg_btn"
             android:gravity="center"
-            android:layout_centerInParent="true"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -109,17 +112,18 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:text="添加发票模板"
                 android:textColor="@color/orange"
-                android:textSize="24sp" />
+                android:textSize="17sp" />
         </LinearLayout>
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:src="@drawable/invoice_template_icon" />
 </LinearLayout>
