@@ -26,8 +26,8 @@ public class HotelListLevelFragment extends BaseFragment implements View.OnClick
     private NoScrollGirdView hotel_list_level_star_gv;
     private HotelListLevelDialogAdapter hotelListLevelPrice;
     private HotelListLevelDialogAdapter hotelListLevelStar;
-    private String starPos;
-    private String pricePos;
+    private String starPos="";
+    private String pricePos="";
     private TextView hotel_level_dialog_title_tv;
     public HotelListLevelFragment() {
 
@@ -98,7 +98,11 @@ public class HotelListLevelFragment extends BaseFragment implements View.OnClick
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 hotelListLevelPrice.setDefSelect(position);
-                pricePos = (position + 1) + "";
+                if (position==0){
+                    pricePos="";
+                }else {
+                    pricePos = (position + 1) + "";
+                }
             }
         });
         hotelListLevelStar.setDefSelect(0);

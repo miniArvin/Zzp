@@ -69,6 +69,8 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private TextView hotel_list_calendar_check_tv;
     private TextView hotel_list_calendar_out_tv;
     private boolean isLoad = false;
+    private String price="";
+    private String star="";
 
 
     @Override
@@ -78,8 +80,14 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
 
     @Override
     protected void afterOnCreate() {
+        price = getIntent().getStringExtra("price");
+        star = getIntent().getStringExtra("star");
         initView();
-        loadMessage("", "", "", "");
+        if (price == null && star == null){
+            loadMessage("", "", "", "");
+        }else {
+            loadMessage("price",price,"star",star);
+        }
         hotelListSelectContent();
     }
 
@@ -327,7 +335,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
             case R.id.hotel_list_pai_ll:
                 break;
             case R.id.hotel_list_level_result_tv:
-                loadMessage("", "" + "", "", "" + "");
+                loadMessage("", "" , "", "" );
                 break;
             case R.id.hotel_list_level_empty_tv:
                 break;

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,8 +18,13 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.othershe.nicedialog.BaseNiceDialog;
+import com.othershe.nicedialog.NiceDialog;
+import com.othershe.nicedialog.ViewConvertListener;
+import com.othershe.nicedialog.ViewHolder;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.CityNameAdapter;
+import com.tryine.zzp.adapter.HotelListLevelDialogAdapter;
 import com.tryine.zzp.adapter.HotelRecommendAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.entity.test.remote.HomeEntity;
@@ -37,6 +43,7 @@ import com.tryine.zzp.utils.SpaceItemDecoration;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.BottomDialog.BottomDialog;
 import com.tryine.zzp.base.BaseFragment;
+import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollViewPager;
 import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -96,6 +103,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private List<Integer> imgList = Arrays.asList(imgs);
     private List<Integer> unimgList = Arrays.asList(unImgs);
     private Bundle bundle ;
+    private List<String> levelPriceList;
+    private List<String> levelStarList;
+    private String starPos="";
+    private String pricePos="";
+    private HotelListLevelDialogAdapter hotelListLevelPrice;
+    private HotelListLevelDialogAdapter hotelListLevelStar;
+    private NoScrollGirdView hotel_list_level_price_gv;
+    private NoScrollGirdView hotel_list_level_star_gv;
 
 
     public HomeFragment() {
@@ -278,18 +293,92 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startAct(SearchDateActivity.class);
                 break;
             case R.id.home_hotel_level_tv:
-                BottomDialog.create(getFragmentManager())
-                        .setViewListener(new BottomDialog.ViewListener() {
+                NiceDialog.init()
+                        .setLayoutId(R.layout.hotel_level_dialog)
+                        .setConvertListener(new ViewConvertListener() {
                             @Override
-                            public void bindView(View v) {
+                            protected void convertView(ViewHolder viewHolder, BaseNiceDialog baseNiceDialog) {
+                                levelPriceList = new ArrayList<>();
+                                levelPriceList.add("不限");
+                                levelPriceList.add("￥100以下");
+                                levelPriceList.add("￥101-￥200");
+                                levelPriceList.add("￥201-￥300");
+                                levelPriceList.add("￥301-￥450");
+                                levelPriceList.add("￥451-￥600");
+                                levelPriceList.add("￥601-￥1000");
+                                levelPriceList.add("￥1001-￥2000");
+                                levelPriceList.add("￥2001-￥3000");
+                                levelPriceList.add("￥3000以上");
+                                levelStarList = new ArrayList<>();
+                                levelStarList.add("不限");
+                                levelStarList.add("一星级");
+                                levelStarList.add("二星级");
+                                levelStarList.add("三星级");
+                                levelStarList.add("四星级");
+                                levelStarList.add("五星级");
+                                View dialogView = viewHolder.getConvertView();
+                                hotel_list_level_price_gv = (NoScrollGirdView) dialogView.findViewById(R.id.hotel_list_level_price_gv);
+                                hotel_list_level_star_gv = (NoScrollGirdView) dialogView.findViewById(R.id.hotel_list_level_star_gv);
+                                hotelListLevelPrice = new HotelListLevelDialogAdapter(mContext, levelPriceList, 1);
+                                hotel_list_level_price_gv.setAdapter(hotelListLevelPrice);
+                                hotelListLevelStar = new HotelListLevelDialogAdapter(mContext, levelStarList, 2);
+                                hotel_list_level_star_gv.setAdapter(hotelListLevelStar);
+                                hotel_list_level_star_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        if (position==0){
+                                            starPos="";
+                                        }else if (position==1){
+                                            starPos="5";
+                                        }else if (position==2){
+                                            starPos="4";
+                                        }else if (position==3){
+                                            starPos="3";
+                                        }else if (position==4){
+                                            starPos="2";
+                                        }else if (position==5){
+                                            starPos="1";
+                                        }
+                                        hotelListLevelStar.setDefSelect(position);
+                                    }
+                                });
+                                hotel_list_level_price_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        hotelListLevelPrice.setDefSelect(position);
+                                        if (position==0){
+                                            pricePos="";
+                                        }else {
+                                            pricePos = (position + 1) + "";
+                                        }
+                                    }
+                                });
+                                hotelListLevelStar.setDefSelect(0);
+                                hotelListLevelPrice.setDefSelect(0);
 
+                                viewHolder.setOnClickListener(R.id.hotel_list_level_empty_tv, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        hotelListLevelStar.setDefSelect(0);
+                                        hotelListLevelPrice.setDefSelect(0);
+                                        starPos="";
+                                        pricePos="";
+                                    }
+                                });
+                                viewHolder.setOnClickListener(R.id.hotel_list_level_result_tv, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        bundle.putString("price",pricePos);
+                                        bundle.putString("star",starPos);
+                                        startAct(HotelListActivity.class,bundle);
+                                    }
+                                });
                             }
                         })
-                        .setGravity(1)
-                        .setCancelOutside(false)
-                        .setLayoutRes(R.layout.hotel_level_dialog)
-                        .setDimAmount(0.4f)
-                        .show();
+                        .setShowBottom(true)
+                        .setOutCancel(true)
+                        .setAnimStyle(R.style.EnterExitAnimation)
+                        .show(getChildFragmentManager());
                 break;
             case R.id.home_hotel_search_tv:
                 startAct(SearchKeyWordActivity.class);
