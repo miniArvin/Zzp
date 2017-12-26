@@ -29,6 +29,27 @@ public class InvoiceTemplateActivity extends BaseStatusMActivity implements View
     private TextView view_head_title;
     private String common="";
     private String special="";
+    private String tax="";
+    private String email="";
+    private String name="";
+    private String mobile="";
+    private String detail_address="";
+    private String province="";
+    private String city="";
+    private String district="";
+    private String credit="";
+    private String bank="";
+    private String card="";
+    private String tell="";
+    private String company_address="";
+    private String s_tax;
+    private String s_email;
+    private String s_name;
+    private String s_mobile;
+    private String s_detail_address;
+    private String s_province;
+    private String s_city;
+    private String s_district;
     private boolean isCommon=true;
     private LinearLayout mine_invoice_special_ll;
     private LinearLayout mine_invoice_common_ll;
@@ -102,15 +123,59 @@ public class InvoiceTemplateActivity extends BaseStatusMActivity implements View
                                     JSONObject info = new JSONObject(jsonObject.getString("info"));
                                     common = info.getString("invoice_name");
                                     mine_invoice_title_tv.setText(common);
+                                    bundle.putString("common",common);
                                     mine_invoice_title_tv.setVisibility(View.VISIBLE);
+                                    tax = info.getString("tax_code");
+                                    bundle.putString("tax_code",tax);
+                                    email = info.getString("email");
+                                    bundle.putString("email",email);
+                                    name = info.getString("name");
+                                    bundle.putString("name",name);
+                                    mobile = info.getString("mobile");
+                                    bundle.putString("mobile",mobile);
+                                    province = info.getString("province");
+                                    bundle.putString("province",province);
+                                    city = info.getString("city");
+                                    bundle.putString("city",city);
+                                    district = info.getString("district");
+                                    bundle.putString("district",district);
+                                    detail_address = info.getString("address");
+                                    bundle.putString("address",detail_address);
                                 }
                             }else {
                                 if (jsonObject.getInt("status")==339){
-                                    bundle.putInt("null",0);
+                                    bundle.putInt("nulls",0);
                                 }else if (jsonObject.getInt("status")==330){
-                                    bundle.putInt("null",1);
+                                    bundle.putInt("nulls",1);
                                     JSONObject info = new JSONObject(jsonObject.getString("info"));
                                     special = info.getString("invoice_name");
+                                    bundle.putString("special",special);
+                                    s_tax = info.getString("tax_code");
+                                    bundle.putString("tax_codes",s_tax);
+                                    s_email = info.getString("email");
+                                    bundle.putString("emails",s_email);
+                                    s_name = info.getString("name");
+                                    bundle.putString("names",s_name);
+                                    s_mobile = info.getString("mobile");
+                                    bundle.putString("mobiles",s_mobile);
+                                    s_province = info.getString("province");
+                                    bundle.putString("provinces",s_province);
+                                    s_city = info.getString("city");
+                                    bundle.putString("citys",s_city);
+                                    s_district = info.getString("district");
+                                    bundle.putString("districts",s_district);
+                                    s_detail_address = info.getString("address");
+                                    bundle.putString("addresss",s_detail_address);
+                                    credit = info.getString("credit_code");
+                                    bundle.putString("credits",credit);
+                                    bank = info.getString("bank");
+                                    bundle.putString("banks",bank);
+                                    card = info.getString("company_card");
+                                    bundle.putString("cards",card);
+                                    tell = info.getString("company_tell");
+                                    bundle.putString("tells",tell);
+                                    company_address = info.getString("company_address");
+                                    bundle.putString("company_addresss",company_address);
                                 }
                             }
 
@@ -198,15 +263,20 @@ public class InvoiceTemplateActivity extends BaseStatusMActivity implements View
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode==REQUEST_CODE&&resultCode==RESULT_CODE){
             setResult(RESULT_CODE);
-            Bundle resultBundle = new Bundle();
-            resultBundle = data.getExtras().getBundle("common");
-            if (resultBundle != null) {
-                common = resultBundle.getString("invoice_name");
+            Bundle commonResult = new Bundle();
+            Bundle specialResult = new Bundle();
+            commonResult = data.getExtras().getBundle("common");
+            specialResult = data.getExtras().getBundle("special");
+            if (commonResult != null) {
+                common = commonResult.getString("invoice_name");
                 mine_invoice_title_tv.setText(common);
 
-            }else {
-
             }
+            if (specialResult != null){
+                special = specialResult.getString("invoice_name");
+                mine_invoice_title_tv.setText(special);
+            }
+
         }
     }
 }
