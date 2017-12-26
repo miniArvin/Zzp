@@ -15,14 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.blankj.utilcode.util.LogUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.adapter.MagicIndicatorPagerAdapter;
+import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.ui.activity.mine.order.AllOrderActivity;
 import com.tryine.zzp.ui.fragment.order.OrderHotelFragment;
 import com.tryine.zzp.ui.fragment.order.OrderIndependentTravelFragment;
 import com.tryine.zzp.utils.FragmentUtil.OrderFragmentController;
 import com.tryine.zzp.base.BaseFragment;
 import com.tryine.zzp.widget.NoScrollViewPager;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -35,8 +39,14 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 
 public class OrderFragment extends BaseFragment implements View.OnClickListener{
@@ -61,10 +71,10 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     protected void afterCreated(Bundle savedInstanceState) {
-        init();
+        initView();
     }
 
-    public void init(){
+    public void initView(){
         titles=new ArrayList<>();
         titles.add("酒店");
         titles.add("自由行");

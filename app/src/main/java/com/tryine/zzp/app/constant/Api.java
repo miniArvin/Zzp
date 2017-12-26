@@ -150,4 +150,19 @@ public class Api {
 
     //专用发票
     public static final String SPECIALINVOICE = BASE_URL +"app/Invoice/special";
+
+    //售后列表
+    public static final String APPLYLIST = BASE_URL +"app/Service/apply_list";
+
+    //申请售后服务页面
+    public static final String APPLYSERVICE = BASE_URL +"app/Service/apply";
+
+    //申请售后服务
+    public static final String APPLYSPOSTERVICE = BASE_URL +"app/Service/apply_post";
+
+    //申请售后详情
+    public static final String APPLYSERVICEDETAIL = BASE_URL +"Service/apply_detail";
+
+    //订单
+    public static final String ORDER = BASE_URL +"app/index/order";
 }
