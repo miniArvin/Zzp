@@ -165,4 +165,10 @@ public class Api {
 
     //订单
     public static final String ORDER = BASE_URL +"app/index/order";
+
+    //订单中心-掌中拍订单
+    public static final String ZPPORDER = BASE_URL +"app/order/palm_shoot";
+
+    //订单评论
+    public static final String ORDERCOMMET = BASE_URL +"app/article/answer_list";
 }

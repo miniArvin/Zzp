@@ -17,7 +17,7 @@
             android:gravity="center"
             android:textColor="@color/home_location_btn"
             android:textSize="13sp"
-            android:text="我的文章(02)"
+            android:text="我的评论(02)"
             android:background="@drawable/mine_publish_title_bg"/>
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/hotel_list_search_word"
             android:textSize="13sp"
-            android:text="我的评论(02)"/>
+            android:text="我的文章(02)"/>
     </LinearLayout>
     <GridView
         android:id="@+id/mine_publish_comment_gv"
