@@ -2,6 +2,7 @@ package com.tryine.zzp.ui.activity.mine.afterSale;
 
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +43,12 @@ public class AfterSaleAllOrderActivity extends BaseStatusMActivity implements Vi
         mine_after_sale_all_lv= (ListView) findViewById(R.id.mine_after_sale_all_lv);
         mineAfterSaleAllOrderAdapter=new MineAfterSaleAllOrderAdapter(this);
         mine_after_sale_all_lv.setAdapter(mineAfterSaleAllOrderAdapter);
+        mine_after_sale_all_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startAct(AfterSaleStateActivity.class);
+            }
+        });
     }
 
     @Override

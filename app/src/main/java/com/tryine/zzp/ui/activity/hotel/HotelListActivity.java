@@ -54,6 +54,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private TextView hotel_list_score_tv;
     private TextView hotel_list_level_tv;
     private TextView hotel_list_pai_tv;
+    private TextView hotel_list_select_tv;
     private ImageView hotel_list_select_iv;
     private ImageView hotel_list_score_iv;
     private ImageView hotel_list_level_iv;
@@ -103,6 +104,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         hotel_list_score_tv = (TextView) findViewById(R.id.hotel_list_score_tv);
         hotel_list_level_tv = (TextView) findViewById(R.id.hotel_list_level_tv);
         hotel_list_pai_tv = (TextView) findViewById(R.id.hotel_list_pai_tv);
+        hotel_list_select_tv = (TextView) findViewById(R.id.hotel_list_select_tv);
         hotel_list_select_iv = (ImageView) findViewById(R.id.hotel_list_select_iv);
         hotel_list_score_iv = (ImageView) findViewById(R.id.hotel_list_score_iv);
         hotel_list_level_iv = (ImageView) findViewById(R.id.hotel_list_level_iv);
@@ -280,6 +282,9 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
             case R.id.hotel_list_select_result_tv:
                 break;
             case R.id.hotel_list_select_ll:
+                defaultState();
+                hotel_list_select_tv.setTextColor(getResources().getColor(R.color.orange));
+                hotel_list_select_iv.setImageResource(R.drawable.hotel_list_filtrate_selected_icon);
                 if (isLoad) {
                     if (isVisible) {
                         hotel_list_fl.setVisibility(View.GONE);
@@ -301,6 +306,9 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 transaction.show(hotelListSelectFragment);
                 break;
             case R.id.hotel_list_score_ll:
+                defaultState();
+                hotel_list_score_tv.setTextColor(getResources().getColor(R.color.orange));
+                hotel_list_score_iv.setImageResource(R.drawable.hotel_list_score_selected_icon);
                 if (isSort) {
                     score = "score_desc";
                     scoreSort(score);
@@ -312,6 +320,9 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 }
                 break;
             case R.id.hotel_list_level_ll:
+                defaultState();
+                hotel_list_level_tv.setTextColor(getResources().getColor(R.color.orange));
+                hotel_list_level_iv.setImageResource(R.drawable.hotel_list_price_selected_icon);
                 if (isLoad) {
                     if (isVisible) {
                         hotel_list_fl.setVisibility(View.GONE);
@@ -520,5 +531,14 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         if(hotelListSelectFragment != null){
             transaction.hide(hotelListSelectFragment);
         }
+    }
+
+    public void defaultState(){
+        hotel_list_select_tv.setTextColor(getResources().getColor(R.color.home_location_word));
+        hotel_list_score_tv.setTextColor(getResources().getColor(R.color.home_location_word));
+        hotel_list_level_tv.setTextColor(getResources().getColor(R.color.home_location_word));
+        hotel_list_select_iv.setImageResource(R.drawable.hotel_list_filtrate_unselected_icon);
+        hotel_list_level_iv.setImageResource(R.drawable.hotel_list_price_unselected_icon);
+        hotel_list_score_iv.setImageResource(R.drawable.hotel_list_score_unselected_icon);
     }
 }

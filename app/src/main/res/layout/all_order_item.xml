@@ -23,11 +23,12 @@
             android:id="@+id/all_order_comment_order_num_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/all_order_num_tv"
+            android:layout_toRightOf="@+id/all_order_num_tv"
             android:text="25647901052"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/all_order_comment_order_create_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -49,13 +50,14 @@
         android:layout_marginRight="10dp">
 
         <ImageView
+            android:id="@+id/all_order_comment_order_img_iv"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/order_comment_img"
-            android:id="@+id/imageView8" />
+            android:scaleType="fitXY"
+            android:src="@drawable/order_comment_img" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/all_order_comment_order_price_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -64,10 +66,11 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/all_order_comment_order_state_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView22"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/all_order_comment_order_price_tv"
             android:text="待付款"
             android:textColor="@color/all_order_obligation"
             android:textSize="12sp"></TextView>
@@ -75,15 +78,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageView8"
-            android:layout_toEndOf="@+id/imageView8"
             android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/all_order_comment_order_img_iv"
+            android:layout_toRightOf="@+id/all_order_comment_order_img_iv"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/all_order_comment_order_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全季国际大酒店(芙蓉中路店)"
@@ -91,6 +95,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/all_order_comment_order_location_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="芙蓉中路二段279号"
@@ -98,6 +103,7 @@
                 android:textSize="13sp" />
 
             <RatingBar
+                android:id="@+id/all_order_comment_order_level_rb"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,6 +112,7 @@
                 android:rating="5" />
 
             <TextView
+                android:id="@+id/all_order_comment_order_detail_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="08-31至09-01  精品大床房  1晚/1间(双早)"
@@ -127,6 +134,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/all_order_comment_order_cancel_tv"
             android:layout_width="80dp"
             android:layout_height="28dp"
             android:background="@drawable/login_bg_code"
@@ -135,13 +143,14 @@
             android:textColor="@color/orange" />
 
         <TextView
+            android:id="@+id/all_order_comment_order_do_tv"
             android:layout_width="80dp"
             android:layout_height="28dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/all_order_payment_bg_btn"
             android:gravity="center"
-            android:text="取消订单"
+            android:text="立即支付"
             android:textColor="@color/white" />
     </LinearLayout>
 

@@ -27,11 +27,13 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Common
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllOrderActivity extends BaseStatusMActivity {
+public class AllOrderActivity extends BaseStatusMActivity implements ZZPOrderFragment.OrderNumFragmentListener,View.OnClickListener {
     private List<String> titles;
     private List<Fragment> fragments;
     private MagicIndicator all_order_indicator;
     private NoScrollViewPager all_order_vp;
+    private TextView view_head_title;
+    private String orderNum="0";
 
     @Override
     protected int getLayoutId() {
@@ -40,23 +42,25 @@ public class AllOrderActivity extends BaseStatusMActivity {
 
     @Override
     protected void afterOnCreate() {
-        init();
+        initView();
     }
 
-    public void init() {
+    public void initView() {
         titles = new ArrayList<>();
-        titles.add("掌中拍订单(3)");
-        titles.add("自助定价(5)");
+        titles.add("掌中拍订单(0)");
+        titles.add("自助定价(0)");
         titles.add("旅游订单(0)");
         fragments = new ArrayList<>();
         fragments.add(new ZZPOrderFragment());
+        findViewById(R.id.view_head_back).setOnClickListener(this);
+        view_head_title = (TextView) findViewById(R.id.view_head_title);
+        view_head_title.setText("全部订单");
         all_order_vp = (NoScrollViewPager) findViewById(R.id.all_order_vp);
         all_order_indicator = (MagicIndicator) findViewById(R.id.all_order_indicator);
         initMagicIndicator();
     }
 
     private void initMagicIndicator() {
-
         all_order_vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -133,5 +137,20 @@ public class AllOrderActivity extends BaseStatusMActivity {
         });
         all_order_indicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(all_order_indicator, all_order_vp);
+    }
+
+
+    @Override
+    public void orderNum(String num) {
+        orderNum = num;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.view_head_back:
+                finish();
+                break;
+        }
     }
 }

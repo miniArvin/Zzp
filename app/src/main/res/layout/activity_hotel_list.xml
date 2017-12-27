@@ -117,7 +117,7 @@
             <ImageView
                 android:id="@+id/hotel_list_select_iv"
                 android:layout_width="13dp"
-                android:layout_height="wrap_content"
+                android:layout_height="13dp"
                 android:src="@drawable/hotel_list_filtrate_unselected_icon" />
         </LinearLayout>
 
@@ -146,7 +146,7 @@
             <ImageView
                 android:id="@+id/hotel_list_score_iv"
                 android:layout_width="13dp"
-                android:layout_height="wrap_content"
+                android:layout_height="13dp"
                 android:src="@drawable/hotel_list_score_unselected_icon" />
         </LinearLayout>
 
@@ -176,7 +176,7 @@
             <ImageView
                 android:id="@+id/hotel_list_level_iv"
                 android:layout_width="13dp"
-                android:layout_height="wrap_content"
+                android:layout_height="13dp"
                 android:src="@drawable/hotel_list_price_unselected_icon" />
         </LinearLayout>
 
