@@ -6,6 +6,8 @@ import android.widget.TextView;
 import com.tryine.zzp.R;
 import com.tryine.zzp.base.BaseStatusMActivity;
 
+import static com.tryine.zzp.app.constant.Code.RESULT_CODE;
+
 public class RegisterSuccessActivity extends BaseStatusMActivity implements View.OnClickListener {
     private TextView register_success_login;
     private TextView register_success_look;
@@ -31,8 +33,11 @@ public class RegisterSuccessActivity extends BaseStatusMActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_success_login:
+                startAct(LoginActivity.class);
+                finish();
                 break;
             case R.id.register_success_look:
+                finish();
                 break;
             default:
                 break;

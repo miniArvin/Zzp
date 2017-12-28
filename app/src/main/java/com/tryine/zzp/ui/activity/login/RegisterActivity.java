@@ -1,5 +1,6 @@
 package com.tryine.zzp.ui.activity.login;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,9 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
+import static com.tryine.zzp.app.constant.Code.REQUEST_CODE;
+import static com.tryine.zzp.app.constant.Code.RESULT_CODE;
+
 
 public class RegisterActivity extends BaseStatusMActivity implements View.OnClickListener {
     private TextView register_finish_num;
@@ -51,10 +55,10 @@ public class RegisterActivity extends BaseStatusMActivity implements View.OnClic
 
     @Override
     protected void afterOnCreate() {
-        loadData();
+        initVIew();
     }
 
-    public void loadData() {
+    public void initVIew() {
         register_finish_num = (TextView) findViewById(R.id.register_finish_num);
         register_finish_phone = (EditText) findViewById(R.id.register_finish_phone);
         register_finish_password = (EditText) findViewById(R.id.register_finish_password);
@@ -191,13 +195,18 @@ public class RegisterActivity extends BaseStatusMActivity implements View.OnClic
                             Log.e("one_jsonObject", jsonObject.getString("status"));
                             if (jsonObject.getInt("status") == 200) {
                                 Log.e("one_status", jsonObject.getInt("status") + "");
-                                startAct(RegisterSuccessActivity.class, true);
-                                ActivityCollector.saveActivity(MainActivity.class);
+                                loadData();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 });
+    }
+
+    public void loadData(){
+        startAct(RegisterSuccessActivity.class);
+        setResult(RESULT_CODE);
+        finish();
     }
 }

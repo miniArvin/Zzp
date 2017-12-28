@@ -16,6 +16,7 @@ import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.entity.test.remote.FoodDetailEntity;
 import com.tryine.zzp.utils.UrlUtils;
+import com.tryine.zzp.widget.NoScrollListView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -50,6 +51,7 @@ public class FoodViewDetailActivity extends BaseStatusMActivity implements View.
     private WebSettings webSettings;
     private int isZan=0;
     private FoodDetailEntity foodDetailEntity;
+    private NoScrollListView food_view_detail_comment_lv;
 
     @Override
     protected int getLayoutId() {
@@ -94,6 +96,7 @@ public class FoodViewDetailActivity extends BaseStatusMActivity implements View.
         food_view_detail_reply_tv.setOnClickListener(this);
         food_view_web = (WebView) findViewById(R.id.food_view_web);
         webSettings = food_view_web.getSettings();
+        food_view_detail_comment_lv = (NoScrollListView) findViewById(R.id.food_view_detail_comment_lv);
     }
 
     @Override
@@ -150,6 +153,7 @@ public class FoodViewDetailActivity extends BaseStatusMActivity implements View.
         }else {
             food_view_detail_zan_iv.setImageResource(R.drawable.found_zan_icon);
         }
+
     }
 
     public void loadMessage(){

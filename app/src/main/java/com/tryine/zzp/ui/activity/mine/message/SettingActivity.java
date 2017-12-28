@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.app.constant.Api;
@@ -19,6 +20,13 @@ import org.json.JSONObject;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Response;
+
+import static com.tryine.zzp.app.constant.Cons.SP_USER_ACCOUNT;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_EMAIL;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_FACE;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_ID;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_NAME;
+import static com.tryine.zzp.app.constant.Cons.SP_USER_TOKEN;
 
 public class SettingActivity extends BaseStatusMActivity implements View.OnClickListener {
     private TextView view_head_title;
@@ -145,10 +153,17 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
                             LogUtils.e(jsonObject);
-                            if (jsonObject.getInt("status")==330){
-                                ToastUtils.showShort("msg");
+                            if (jsonObject.getInt("status")==200){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                SPUtils.getInstance().put(SP_USER_ID,"");
+                                SPUtils.getInstance().put(SP_USER_TOKEN,"");
+                                LogUtils.e(SPUtils.getInstance("spConfig").getString(SP_USER_TOKEN));
+                                SPUtils.getInstance().put(SP_USER_EMAIL,"");
+                                SPUtils.getInstance().put(SP_USER_ACCOUNT,"");
+                                SPUtils.getInstance().put(SP_USER_NAME,"");
+                                SPUtils.getInstance().put(SP_USER_FACE,"");
                             }else {
-                                ToastUtils.showShort("msg");
+                                ToastUtils.showShort(jsonObject.getString("msg"));
                             }
                         }catch (Exception e){
 

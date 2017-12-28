@@ -44,7 +44,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ImageView mine_setting_iv;
     private ImageView mine_messages_iv;
     private String token;
-    private SPUtils spUtils;
     private CircleImageView mine_img_headimg;
 
 
@@ -60,11 +59,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void afterCreated(Bundle savedInstanceState) {
-        if (spUtils==null){
-            spUtils=SPUtils.getInstance("spConfig");
-        }
         token= SPUtils.getInstance("spConfig").getString(SP_USER_TOKEN);
-        if (token.isEmpty()){
+        if (token.equals("")||token.isEmpty()){
             startAct(LoginActivity.class);
         }
         init();
