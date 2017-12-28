@@ -171,4 +171,7 @@ public class Api {
 
     //订单评论
     public static final String ORDERCOMMET = BASE_URL +"app/article/answer_list";
+
+    //文章列表
+    public static final String ARTICLELIST = BASE_URL +"app/article/post_list";
 }

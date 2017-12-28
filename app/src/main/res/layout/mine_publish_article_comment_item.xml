@@ -69,6 +69,7 @@
         <ImageView
             android:layout_width="75dp"
             android:layout_height="match_parent"
+            android:scaleType="fitXY"
             android:src="@drawable/fenghuanggucheng"/>
         <TextView
             android:layout_width="match_parent"

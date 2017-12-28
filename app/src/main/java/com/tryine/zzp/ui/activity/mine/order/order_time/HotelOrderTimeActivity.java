@@ -25,6 +25,7 @@ import com.tryine.zzp.base.BaseStatusMActivity;
 import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.Callback;
 
 import org.json.JSONObject;
@@ -62,11 +63,11 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private TextView hotel_order_time_pay_tv;
     private ImageView hotel_order_room_count_iv;
     private HotelOrderLinkmanAdapter hotelOrderLinkmanAdapter;
-    private HotelOrderRoomCountAdapter hotelOrderRoomCountAdaptet;
+    private HotelOrderRoomCountAdapter hotelOrderRoomCountAdapter;
     private NoScrollGirdView hotel_order_room_count_gv;
     private List<String> linkmanName;
     private String roomPrice;
-    private int totalPrice;
+    private double totalPrice;
     private String phone;
     private String roomType;
     private int deposit = 1;
@@ -89,6 +90,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private String county = "";
     private String address = "";
     private String requirement = "";
+    private String note = "";
     private String room = "";
     private String quiet = "";
     private String high = "";
@@ -98,6 +100,8 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private boolean isCoupon = false;
     private String coupon = "";
     private String user_pay_fee = "";
+    private int roomNum = 1;
+    private String[] linkmanNames;
 
     @Override
     protected int getLayoutId() {
@@ -115,19 +119,19 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     }
 
     public void loadData() {
-        linkmanName.add("刘辰");
+        linkmanName.add("");
         hotelOrderLinkmanAdapter = new HotelOrderLinkmanAdapter(linkmanName, this);
         hotel_order_linkman_lv.setAdapter(hotelOrderLinkmanAdapter);
-        hotelOrderRoomCountAdaptet = new HotelOrderRoomCountAdapter(this, sku);
-        hotel_order_room_count_gv.setAdapter(hotelOrderRoomCountAdaptet);
+        hotelOrderRoomCountAdapter = new HotelOrderRoomCountAdapter(this, sku);
+        hotel_order_room_count_gv.setAdapter(hotelOrderRoomCountAdapter);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) hotel_order_room_count_gv.getLayoutParams();
-        params.height = 60;
+        params.height = 200;
         hotel_order_room_count_gv.setLayoutParams(params);
-        hotelOrderRoomCountAdaptet.setDefSelect(0);
+        hotelOrderRoomCountAdapter.setDefSelect(0);
         hotel_order_room_count_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                hotelOrderRoomCountAdaptet.setDefSelect(position);
+                hotelOrderRoomCountAdapter.setDefSelect(position);
                 hotel_order_room_count_tv.setText(position + 1 + "间");
                 int count = Math.abs(position + 1 - linkmanName.size());
                 if (linkmanName.size() < position + 1) {
@@ -139,6 +143,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                         delLinkman();
                     }
                 }
+                roomNum = position + 1;
                 hotel_order_room_count_gv.setVisibility(View.GONE);
             }
         });
@@ -204,17 +209,17 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                             if (jsonObject.getInt("status") == 330) {
                                 JSONObject info = new JSONObject(jsonObject.getString("info"));
                                 roomPrice = info.getString("price");
-                                totalPrice = Integer.valueOf(info.getString("price")) + Integer.valueOf(info.getString("money"));
+                                user_pay_fee = info.getString("money");
                                 roomType = info.getString("title");
                                 hotel_order_time_type_tv.setText(roomType);
                                 hotel_order_time_price_tv.setText("￥" + roomPrice);
                                 deposit = info.getInt("deposit");
                                 if (deposit != 0) {
-                                    user_pay_fee ="";
+                                    totalPrice = info.getDouble("price");
                                     hotel_order_time_pledge_ll.setVisibility(View.GONE);
-                                    hotel_order_time_total_prices_tv.setText("￥" + roomPrice);
+                                    hotel_order_time_total_prices_tv.setText("￥" + totalPrice);
                                 } else {
-                                    user_pay_fee="200";
+                                    totalPrice = info.getDouble("price") + info.getDouble("money");
                                     hotel_order_time_pledge_tv.setText("￥" + info.getString("money"));
                                     hotel_order_time_total_prices_tv.setText("(含押金):￥" + totalPrice);
                                 }
@@ -254,17 +259,20 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 break;
             case R.id.hotel_order_time_pay_tv:
                 getInputMessage();
-                if (!phone.isEmpty()) {
-                    if (isCoupon) {
-
-                    } else {
-
-                    }
-                    loadCommitOrderMessage();
-                } else {
-                    ToastUtils.showShort("请输入手机号码！");
+                if (linkmanNames.toString().equals("[]")) {
+                    ToastUtils.showShort("请填写入住人姓名！");
+                    return;
+                }
+                if (phone.isEmpty()) {
+                    ToastUtils.showShort("请填写手机号码！");
+                    return;
                 }
 
+                if (isCoupon) {
+
+                } else {
+                    loadCommitOrderMessage();
+                }
                 break;
             case R.id.hotel_order_room_count_rl:
                 if (hotel_order_room_count_gv.getVisibility() == View.GONE) {
@@ -523,17 +531,17 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     }
 
     public void loadCommitOrderMessage() {
-        OkHttpUtils
+        PostFormBuilder object = OkHttpUtils
                 .post()
                 .url(Api.HOTELSUBMITORDER)
                 .addParams("room_id", room_id)
-                .addParams("stime", checkDay)
-                .addParams("ltime", outDay)
-                .addParams("num", "2")
-                .addParams("realname", "[刘辰,刘辰1,li]")
+                .addParams("stime", "2017-12-28")
+                .addParams("ltime", "2017-12-30")
+                .addParams("num", roomNum + "")
                 .addParams("phone", phone)
                 .addParams("user_pay_fee", user_pay_fee)
                 .addParams("demand", requirement)
+                .addParams("note", note)
                 .addParams("coupon", coupon)
                 .addParams("invoice_type", invoiceType + "")
                 .addParams("bill_name", bill_name)
@@ -551,8 +559,11 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 .addParams("district", county)
                 .addParams("address", address)
                 .addParams("send_type", sendType)
-                .addParams("email", email)
-                .build()
+                .addParams("email", email);
+        for (int i = 0; i < linkmanNames.length; i++) {
+            object.addParams("realname[" + i + "]", linkmanNames[i]);
+        }
+        object.build()
                 .execute(new Callback() {
                     @Override
                     public Object parseNetworkResponse(Response response, int id) throws Exception {
@@ -575,14 +586,6 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                                 JSONObject info = new JSONObject(jsonObject.getString("info"));
                                 Bundle bundle = new Bundle();
                                 bundle.putString("order_id", info.getString("order_id"));
-                                bundle.putString("realname", "[刘辰,刘辰1,li]");
-                                bundle.putString("stime", checkDay);
-                                bundle.putString("ltime", outDay);
-                                bundle.putString("num", "2");
-                                bundle.putString("phone", phone);
-                                bundle.putString("room_price", roomPrice);
-                                bundle.putString("room_type", roomType);
-                                bundle.putString("hotel_name", hotel_name);
                                 startAct(OrderTimeSubmitActivity.class, bundle);
                             } else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
@@ -595,7 +598,14 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     }
 
     public void getInputMessage() {
+        linkmanNames = new String[hotel_order_linkman_lv.getChildCount()];
         phone = hotel_order_time_phone_et.getText().toString();
+        for (int i = 0; i < hotel_order_linkman_lv.getChildCount(); i++) {
+            LinearLayout layout = (LinearLayout) hotel_order_linkman_lv.getChildAt(i);
+            EditText editText = (EditText) layout.findViewById(R.id.hotel_order_linkman_et);
+            linkmanNames[i] = editText.getText().toString();
+        }
+
     }
 
     @Override

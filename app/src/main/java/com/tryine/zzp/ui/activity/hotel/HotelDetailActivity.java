@@ -417,6 +417,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                 if (roomBeen.get(position).getSku() != 0) {
                     room_id = roomBeen.get(position).getRoom_id();
                     bundle.putString("room_id",room_id);
+                    bundle.putString("hotel_name",hotel_name);
                     startAct(HotelOrderTimeActivity.class,bundle);
                 }
             }
