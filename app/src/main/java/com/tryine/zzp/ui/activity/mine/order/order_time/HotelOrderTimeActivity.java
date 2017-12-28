@@ -259,9 +259,11 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 break;
             case R.id.hotel_order_time_pay_tv:
                 getInputMessage();
-                if (linkmanNames.toString().equals("[]")) {
-                    ToastUtils.showShort("请填写入住人姓名！");
-                    return;
+                for (int i=0;i<linkmanNames.length;i++) {
+                    if (linkmanNames[i].equals("")) {
+                        ToastUtils.showShort("请填写入住人姓名！");
+                        return;
+                    }
                 }
                 if (phone.isEmpty()) {
                     ToastUtils.showShort("请填写手机号码！");
