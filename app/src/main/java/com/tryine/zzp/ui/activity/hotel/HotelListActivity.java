@@ -229,8 +229,14 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                     public void onResponse(Object response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e(jsonObject);
-                            hotelListAdapter.updateItem(hotel_list_lv, position);
+                            LogUtils.e("like",jsonObject);
+                            if (jsonObject.getInt("status")==330) {
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                hotelListInfo.get(position).setFav(1);
+                                hotelListAdapter.notifyDataSetChanged();
+                            }else if (jsonObject.getInt("status")==203){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -261,8 +267,15 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                     public void onResponse(Object response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e(jsonObject);
-                            hotelListAdapter.updateItem(hotel_list_lv, position);
+                            LogUtils.e("cancel",jsonObject);
+                            if (jsonObject.getInt("status")==330){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                hotelListInfo.get(position).setFav(0);
+                                hotelListAdapter.notifyDataSetChanged();
+                            }else if (jsonObject.getInt("status")==203){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -270,6 +270,10 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotel_detail_comment_chinese_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getComment_score_desc());
                                 hotel_detail_comment_count_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + "条评论");
                                 hotel_detail_rb.setRating((float) hotelDetailEntities.getInfo().getHotel_detail().getComment_score());
+                                fav = hotelDetailEntities.getInfo().getHotel_detail().getFav();
+                                if (fav != 0){
+                                    view_head_collect.setImageResource(R.drawable.hotel_list_collect_icon);
+                                }
                                 if (tagBeen != null && tagBeen.size() > 0) {
                                     hotel_detail_comment_tag1_tv.setText(tagBeen.get(0).getTag_name());
                                     hotel_detail_comment_tag1_tv.setVisibility(View.VISIBLE);
@@ -332,8 +336,9 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                         startAct(HotelDetailActivity.class,bundle);
                                     }
                                 });
-
                                 hotel_detail_recommend_rv.setAdapter(hotelDetailRecommendAdapter);
+
+                                //收藏
                             } else if (hotelDetailEntities.getStatus() == 362) {
                                 ToastUtils.showShort(hotelDetailEntities.getMsg());
                                 finish();
@@ -358,7 +363,12 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
             case R.id.view_head_share:
                 break;
             case R.id.view_head_collect:
-                hotelCollect();
+                if (fav==0){
+                    hotelCollect();
+                }else {
+                    hotelCancelCollect();
+                }
+
                 break;
             case R.id.hotel_detail_intro_more_iv:
             case R.id.hotel_detail_all_policy_tv:
@@ -395,11 +405,53 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     public void onResponse(Object response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e(jsonObject);
-                            ToastUtils.showShort(jsonObject.getString("msg"));
-                            if (jsonObject.getInt("status") == 330) {
-                                view_head_share.setImageResource(R.drawable.hotel_list_collect_icon);
+                            LogUtils.e("like",jsonObject);
+                            if (jsonObject.getInt("status")==330) {
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                fav=1;
+                                view_head_collect.setImageResource(R.drawable.hotel_list_collect_icon);
+                            }else if (jsonObject.getInt("status")==203){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    public void hotelCancelCollect() {
+        OkHttpUtils
+                .post()
+                .url(Api.HOTELCANCELCOLLECT)
+                .addParams("hotel_id", hotel_id)
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        String string = response.body().string();
+                        LogUtils.e(string);
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            LogUtils.e("cancel",jsonObject);
+                            if (jsonObject.getInt("status")==330){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                fav=0;
+                                view_head_collect.setImageResource(R.drawable.hotel_detail_collect_icon);
+                            }else if (jsonObject.getInt("status")==203){
+                                ToastUtils.showShort(jsonObject.getString("msg"));
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
