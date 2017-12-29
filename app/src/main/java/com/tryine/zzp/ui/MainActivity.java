@@ -33,8 +33,8 @@ public class MainActivity extends BaseBottomTabsActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mSelectPosition = getIntent().getIntExtra("position", 0);
-        if (mSelectPosition != 0) {
+        mSelectPosition = getIntent().getIntExtra("position", 5);
+        if (mSelectPosition != 5) {
             mainVP.setCurrentItem(mSelectPosition);
             setIntent(new Intent());
         }

@@ -17,6 +17,10 @@ public class Cons {
      */
     public static String SP_USER_TOKEN = "user_token";
     /**
+     * 用户token
+     */
+    public static String SP_USER_LOGIN = "user_login";
+    /**
      * 用户账号
      */
     public static String SP_USER_ACCOUNT="user_account";

@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
+import com.tryine.zzp.ui.MainActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -162,6 +163,10 @@ public class SettingActivity extends BaseStatusMActivity implements View.OnClick
                                 SPUtils.getInstance().put(SP_USER_ACCOUNT,"");
                                 SPUtils.getInstance().put(SP_USER_NAME,"");
                                 SPUtils.getInstance().put(SP_USER_FACE,"");
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("position",0);
+                                startAct(MainActivity.class,bundle);
+                                finish();
                             }else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }

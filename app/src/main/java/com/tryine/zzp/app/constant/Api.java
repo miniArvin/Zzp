@@ -8,7 +8,6 @@ public class Api {
     //测试服务器地址
     public static final String BASE_URL = "http://zzp.dreamhup.com/";
 
-
     //注册
 
     public static final String REGISTER = BASE_URL + "app/passport/register";

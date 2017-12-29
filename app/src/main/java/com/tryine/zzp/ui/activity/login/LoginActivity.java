@@ -1,21 +1,17 @@
 package com.tryine.zzp.ui.activity.login;
 
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.Utils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
-import com.tryine.zzp.app.ActivityCollector;
+
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.base.BaseStatusMActivity;
 
@@ -137,16 +133,19 @@ public class LoginActivity extends BaseStatusMActivity implements View.OnClickLi
                                 LogUtils.e("user,status", jsonObject.getInt("status") + "");
                                 JSONObject userInfo = jsonObject.getJSONObject("user_info");
                                 JSONObject userToken = jsonObject.getJSONObject("user_token");
-                                LogUtils.e("user,response", userInfo.getString("user_id"));
                                 SPUtils.getInstance().put(SP_USER_ID,userInfo.getString("user_id"));
                                 SPUtils.getInstance().put(SP_USER_TOKEN,userToken.getString("token"));
-                                LogUtils.e(SPUtils.getInstance("spConfig").getString(SP_USER_TOKEN));
                                 SPUtils.getInstance().put(SP_USER_PHONE,phone);
                                 SPUtils.getInstance().put(SP_USER_EMAIL,userInfo.getString("email"));
                                 SPUtils.getInstance().put(SP_USER_ACCOUNT,userInfo.getString("account"));
                                 SPUtils.getInstance().put(SP_USER_NAME,userInfo.getString("nickname"));
                                 SPUtils.getInstance().put(SP_USER_FACE,userInfo.getString("face"));
-                                startAct(MainActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("position",0);
+                                startAct(MainActivity.class,bundle);
+                                finish();
+                            }else {
+                                ToastUtils.showShort(jsonObject.getString("msg"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -45,7 +45,7 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -55,9 +55,9 @@
                 android:id="@+id/mine_img_headimg"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="15dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/mine_head_icon"
                 app:civ_border_color="@color/mine_head_border_color"
@@ -68,9 +68,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/mine_img_headimg">
 
                 <TextView
+                    android:id="@+id/mine_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:gravity="center"
@@ -80,16 +83,18 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/mine_member_iv"
                         android:layout_width="15dp"
                         android:layout_height="wrap_content"
                         android:src="@drawable/mine_member_icon" />
 
                     <TextView
+                        android:id="@+id/mine_member_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="4dp"
@@ -104,8 +109,9 @@
             <LinearLayout
                 android:layout_width="78dp"
                 android:layout_height="31dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
                 android:background="@drawable/mine_qian_dao_bg_white"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -124,7 +130,7 @@
                     android:textColor="@color/gray_font"
                     android:textSize="14sp" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -292,16 +298,18 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/mine_money_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥285.25"
+                android:text="￥0"
                 android:textColor="@color/mine_title_word"
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/mine_day_money_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="昨日佣金￥77.21"
+                android:text="昨日佣金￥0"
                 android:textColor="@color/mine_commission_word"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -335,10 +343,11 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/mine_coupon_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="5"
+                    android:text="0"
                     android:textColor="@color/black" />
 
                 <ImageView
