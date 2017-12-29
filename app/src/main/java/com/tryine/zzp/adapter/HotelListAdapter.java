@@ -66,6 +66,8 @@ public class HotelListAdapter extends BaseAdapter {
             viewHolder.hotel_list_comment_tv = (TextView) convertView.findViewById(R.id.hotel_list_comment_tv);
             viewHolder.hotel_list_pai_tv = (TextView) convertView.findViewById(R.id.hotel_list_pai_tv);
             viewHolder.hotel_list_level_rb = (RatingBar) convertView.findViewById(R.id.hotel_list_level_rb);
+            viewHolder.hotel_list_tag1_tv = (TextView) convertView.findViewById(R.id.hotel_list_tag1_tv);
+            viewHolder.hotel_list_tag2_tv = (TextView) convertView.findViewById(R.id.hotel_list_tag2_tv);
             viewHolder.is_collect_iv.setOnClickListener(mOnClickListener);
             convertView.setTag(viewHolder);
         } else {
@@ -85,7 +87,20 @@ public class HotelListAdapter extends BaseAdapter {
         } else {
             viewHolder.is_collect_iv.setImageResource(R.drawable.hotel_list_collect_icon);
         }
-
+        if (!mData.get(position).getIs_auction().equals("1")){
+            viewHolder.hotel_list_pai_tv.setVisibility(View.GONE);
+        }
+        if (mData.get(position).getTag().size()<1){
+            viewHolder.hotel_list_tag1_tv.setVisibility(View.GONE);
+            viewHolder.hotel_list_tag2_tv.setVisibility(View.GONE);
+        }else if (mData.get(position).getTag().size()==1){
+            viewHolder.hotel_list_tag1_tv.setText(mData.get(position).getTag().get(0).getTag_name());
+            viewHolder.hotel_list_tag2_tv.setVisibility(View.GONE);
+        }else if (mData.get(position).getTag().size()>1){
+            viewHolder.hotel_list_tag1_tv.setText(mData.get(position).getTag().get(0).getTag_name());
+            viewHolder.hotel_list_tag2_tv.setText(mData.get(position).getTag().get(1).getTag_name());
+        }
+        viewHolder.hotel_list_price_tv.setText("￥"+mData.get(position).getPrice());
         convertView(convertView, mData);
         return convertView;
     }
@@ -104,6 +119,8 @@ public class HotelListAdapter extends BaseAdapter {
         TextView hotel_list_comment_tv;
         TextView hotel_list_pai_tv;
         RatingBar hotel_list_level_rb;
+        TextView hotel_list_tag1_tv;
+        TextView hotel_list_tag2_tv;
     }
 
     public void setAddListener(OnAddListener listener) {

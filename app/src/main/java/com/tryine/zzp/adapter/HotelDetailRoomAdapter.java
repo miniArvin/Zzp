@@ -74,6 +74,8 @@ public class HotelDetailRoomAdapter extends BaseAdapter {
             viewHolder.hotel_detail_room_check_tv.setText("满房");
             viewHolder.hotel_detail_room_check_tv.setTextColor(mContext.getResources().getColor(R.color.hotel_detail_room_list_bg));
             viewHolder.hotel_detail_room_check_tv.setBackgroundResource(R.drawable.hotel_detail_item_man_fang_bg_btn);
+            viewHolder.hotel_detail_room_pai_tv.setText("已拍完");
+            viewHolder.hotel_detail_room_pai_tv.setBackgroundResource(R.drawable.account_binding_bg_gray);
         }else {
             viewHolder.hotel_detail_room_check_tv.setText("预定");
             viewHolder.hotel_detail_room_check_tv.setTextColor(Color.WHITE);

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -58,6 +59,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.tryine.zzp.app.constant.Code.REQUEST_CODE;
+
 public class HotelDetailActivity extends BaseStatusMActivity implements View.OnClickListener {
     private List<String> lists;
     private NoScrollGirdView hotel_detail_room_gv;
@@ -81,6 +84,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private List<HotelDetailEntity.InfoBean.ApplyBean.PhotoBean> photoBeen;
     private HotelDetailIntroAdapter hotelDetailIntroAdapter;
     private CircleImageView hotel_detail_head_cv;
+    private LinearLayout hotel_detail_all_comment_ll;
     private TextView hotel_detail_member_name_tv;
     private TextView hotel_detail_member_tv;
     private TextView hotel_detail_comment_publish_time_tv;
@@ -191,6 +195,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         findViewById(R.id.hotel_detail_all_comment_iv).setOnClickListener(this);
         findViewById(R.id.hotel_detail_comment_all_tv).setOnClickListener(this);
         findViewById(R.id.hotel_detail_comment_all_iv).setOnClickListener(this);
+        findViewById(R.id.hotel_detail_date_more_iv).setOnClickListener(this);
         hotel_detail_head_cv = (CircleImageView) findViewById(R.id.hotel_detail_head_cv);
         hotel_detail_member_name_tv = (TextView) findViewById(R.id.hotel_detail_member_name_tv);
         hotel_detail_member_tv = (TextView) findViewById(R.id.hotel_detail_member_tv);
@@ -202,6 +207,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         hotel_detail_policy_lv = (NoScrollListView) findViewById(R.id.hotel_detail_policy_lv);
         hotel_detail_recommend_rv = (RecyclerView) findViewById(R.id.hotel_detail_recommend_rv);
         hotel_detail_comment_all_count_tv = (TextView) findViewById(R.id.hotel_detail_comment_all_count_tv);
+        hotel_detail_all_comment_ll = (LinearLayout) findViewById(R.id.hotel_detail_all_comment_ll);
         loadData();
     }
 
@@ -283,6 +289,13 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 }
                                 hotelDetailIntroAdapter = new HotelDetailIntroAdapter(mContext, hotelIntroBeen);
                                 hotel_detail_hotel_intro_gv.setAdapter(hotelDetailIntroAdapter);
+                                hotel_detail_hotel_intro_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        bundle.putString("hotel_id", hotel_id);
+                                        startAct(HotelEquipmentDetailActivity.class,bundle);
+                                    }
+                                });
                                 //banner
                                 List<String> bannerUrls = new ArrayList<>();
                                 if (bannerBeen!= null) {
@@ -297,15 +310,21 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 checkRoom(roomBeen);
 
                                 //comment
-                                Glide.with(mContext).load(UrlUtils.getUrl(hotelDetailEntities.getInfo().getApply().getFace())).asBitmap().into(hotel_detail_head_cv);
-                                hotel_detail_member_name_tv.setText(hotelDetailEntities.getInfo().getApply().getNickname());
-                                hotel_detail_member_tv.setText(hotelDetailEntities.getInfo().getApply().getRank_name());
-                                hotel_detail_comment_publish_time_tv.setText(hotelDetailEntities.getInfo().getApply().getCreate_time());
-                                hotel_detail_comment_tv.setText(hotelDetailEntities.getInfo().getApply().getContent());
-                                hotel_detail_comment_rb.setRating(Float.parseFloat(hotelDetailEntities.getInfo().getApply().getScore()));
-                                hotel_detail_comment_all_count_tv.setText("(" + hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + ")");
-                                hotelDetailCommentImgAdapter = new HotelDetailCommentImgAdapter(mContext, photoBeen);
-                                hotel_detail_comment_gv.setAdapter(hotelDetailCommentImgAdapter);
+                                if (!(hotelDetailEntities.getInfo().getHotel_detail().getComment_count().isEmpty()||
+                                        hotelDetailEntities.getInfo().getHotel_detail().getComment_count().equals("")||
+                                        hotelDetailEntities.getInfo().getHotel_detail().getComment_count().equals("0"))) {
+                                    Glide.with(mContext).load(UrlUtils.getUrl(hotelDetailEntities.getInfo().getApply().getFace())).asBitmap().into(hotel_detail_head_cv);
+                                    hotel_detail_member_name_tv.setText(hotelDetailEntities.getInfo().getApply().getNickname());
+                                    hotel_detail_member_tv.setText(hotelDetailEntities.getInfo().getApply().getRank_name());
+                                    hotel_detail_comment_publish_time_tv.setText(hotelDetailEntities.getInfo().getApply().getCreate_time());
+                                    hotel_detail_comment_tv.setText(hotelDetailEntities.getInfo().getApply().getContent());
+                                    hotel_detail_comment_rb.setRating(Float.parseFloat(hotelDetailEntities.getInfo().getApply().getScore()));
+                                    hotel_detail_comment_all_count_tv.setText("(" + hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + ")");
+                                    hotelDetailCommentImgAdapter = new HotelDetailCommentImgAdapter(mContext, photoBeen);
+                                    hotel_detail_comment_gv.setAdapter(hotelDetailCommentImgAdapter);
+                                }else {
+                                    hotel_detail_all_comment_ll.setVisibility(View.GONE);
+                                }
 
                                 //政策
                                 hotelDetailPolicyAdapter = new HotelDetailPolicyAdapter(mContext, policyBeen);
@@ -368,7 +387,6 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                 }else {
                     hotelCancelCollect();
                 }
-
                 break;
             case R.id.hotel_detail_intro_more_iv:
             case R.id.hotel_detail_all_policy_tv:
@@ -378,6 +396,13 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
             case R.id.hotel_detail_comment_all_iv:
             case R.id.hotel_detail_all_comment_iv:
                 startAct(HotelDetailAllCommentActivity.class, bundle);
+                break;
+            case R.id.hotel_detail_date_more_iv:
+                startActForResult(SearchDateActivity.class,REQUEST_CODE);
+                break;
+            case R.id.hotel_detail_recommend_more_tv:
+            case R.id.hotel_detail_recommend_more_iv:
+                startAct(HotelListActivity.class);
                 break;
         }
     }

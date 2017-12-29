@@ -381,10 +381,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         .show(getChildFragmentManager());
                 break;
             case R.id.home_hotel_search_tv:
-                startAct(SearchKeyWordActivity.class);
+                startAct(HotelListActivity.class);
                 break;
             case R.id.home_hotel_search_word_tv:
-                startAct(HotelSearchActivity.class);
+                startAct(HotelListActivity.class);
                 break;
             case R.id.home_location_ll:
                 break;

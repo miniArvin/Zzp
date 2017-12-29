@@ -1,6 +1,7 @@
 package com.tryine.zzp.ui.activity.hotel;
 
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.tryine.zzp.app.constant.Code.REQUEST_CODE;
+import static com.tryine.zzp.app.constant.Code.RESULT_CODE;
+
 public class HotelListActivity extends BaseStatusMActivity implements View.OnClickListener,
         HotelListLevelFragment.LevelFragmentListener,
         HotelListSelectFragment.SelectFragmentListener,
@@ -72,6 +76,7 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
     private boolean isLoad = false;
     private String price="";
     private String star="";
+    private boolean isPai=false;
 
 
     @Override
@@ -290,10 +295,6 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         // 开启Fragment事务
         FragmentTransaction transaction = fm.beginTransaction();
         switch (v.getId()) {
-            case R.id.hotel_list_select_empty_tv:
-                break;
-            case R.id.hotel_list_select_result_tv:
-                break;
             case R.id.hotel_list_select_ll:
                 defaultState();
                 hotel_list_select_tv.setTextColor(getResources().getColor(R.color.orange));
@@ -357,6 +358,13 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                 transaction.show(hotelListLevelFragment);
                 break;
             case R.id.hotel_list_pai_ll:
+                if (isPai==false) {
+                    loadMessage("auction", "1", "", "");
+                    isPai=true;
+                }else {
+                    isPai=false;
+                    loadMessage("","","","");
+                }
                 break;
             case R.id.hotel_list_level_result_tv:
                 loadMessage("", "" , "", "" );
@@ -369,10 +377,10 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
             case R.id.hotel_list_calendar_out_tv:
             case R.id.hotel_list_calendar_check_tv:
             case R.id.hotel_list_calendar_ll:
-                startActForResult(SearchDateActivity.class, 101);
+                startActForResult(SearchDateActivity.class, REQUEST_CODE);
                 break;
             case R.id.hotel_list_search_ll:
-                startActForResult(SearchKeyWordActivity.class, 10);
+                startActForResult(SearchKeyWordActivity.class, REQUEST_CODE);
                 break;
             default:
                 break;
@@ -553,5 +561,12 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
         hotel_list_select_iv.setImageResource(R.drawable.hotel_list_filtrate_unselected_icon);
         hotel_list_level_iv.setImageResource(R.drawable.hotel_list_price_unselected_icon);
         hotel_list_score_iv.setImageResource(R.drawable.hotel_list_score_unselected_icon);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE&&resultCode==RESULT_CODE){
+
+        }
     }
 }
