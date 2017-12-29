@@ -50,8 +50,8 @@ public class HotelOrderRoomCountAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.hotel_list_level_item,null);
         viewHolder.hotel_list_level_item_tv = (TextView) convertView.findViewById(R.id.hotel_list_level_item_tv);
         LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) viewHolder.hotel_list_level_item_tv.getLayoutParams();
-        params.width=60;
-        params.height=40;
+        params.width=130;
+        params.height=65;
         viewHolder.hotel_list_level_item_tv.setLayoutParams(params);
         viewHolder.hotel_list_level_item_tv.setText(position+1+"间");
         if (defItem == position) {

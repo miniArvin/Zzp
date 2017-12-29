@@ -135,6 +135,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterPolicy;
     private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterFacilities;
     private Bundle bundle;
+    private boolean isDialog = false;
 
     @Override
     protected int getLayoutId() {
@@ -227,8 +228,8 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         outDate = formatter.format(dateOut);
         hotel_detail_check_day_tv.setText(checkDate);
         hotel_detail_out_day_tv.setText(outDate);
-        bundle.putString("check",checkDate);
-        bundle.putString("out",outDate);
+        bundle.putString("check", checkDate);
+        bundle.putString("out", outDate);
 
     }
 
@@ -277,7 +278,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 hotel_detail_comment_count_tv.setText(hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + "条评论");
                                 hotel_detail_rb.setRating((float) hotelDetailEntities.getInfo().getHotel_detail().getComment_score());
                                 fav = hotelDetailEntities.getInfo().getHotel_detail().getFav();
-                                if (fav != 0){
+                                if (fav != 0) {
                                     view_head_collect.setImageResource(R.drawable.hotel_list_collect_icon);
                                 }
                                 if (tagBeen != null && tagBeen.size() > 0) {
@@ -293,12 +294,12 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         bundle.putString("hotel_id", hotel_id);
-                                        startAct(HotelEquipmentDetailActivity.class,bundle);
+                                        startAct(HotelEquipmentDetailActivity.class, bundle);
                                     }
                                 });
                                 //banner
                                 List<String> bannerUrls = new ArrayList<>();
-                                if (bannerBeen!= null) {
+                                if (bannerBeen != null) {
                                     for (int i = 0; i < bannerBeen.size(); i++) {
                                         bannerUrls.add(UrlUtils.getUrl(bannerBeen.get(i).getPhoto()));
                                     }
@@ -310,8 +311,8 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 checkRoom(roomBeen);
 
                                 //comment
-                                if (!(hotelDetailEntities.getInfo().getHotel_detail().getComment_count().isEmpty()||
-                                        hotelDetailEntities.getInfo().getHotel_detail().getComment_count().equals("")||
+                                if (!(hotelDetailEntities.getInfo().getHotel_detail().getComment_count().isEmpty() ||
+                                        hotelDetailEntities.getInfo().getHotel_detail().getComment_count().equals("") ||
                                         hotelDetailEntities.getInfo().getHotel_detail().getComment_count().equals("0"))) {
                                     Glide.with(mContext).load(UrlUtils.getUrl(hotelDetailEntities.getInfo().getApply().getFace())).asBitmap().into(hotel_detail_head_cv);
                                     hotel_detail_member_name_tv.setText(hotelDetailEntities.getInfo().getApply().getNickname());
@@ -322,7 +323,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                     hotel_detail_comment_all_count_tv.setText("(" + hotelDetailEntities.getInfo().getHotel_detail().getComment_count() + ")");
                                     hotelDetailCommentImgAdapter = new HotelDetailCommentImgAdapter(mContext, photoBeen);
                                     hotel_detail_comment_gv.setAdapter(hotelDetailCommentImgAdapter);
-                                }else {
+                                } else {
                                     hotel_detail_all_comment_ll.setVisibility(View.GONE);
                                 }
 
@@ -352,7 +353,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                     public void onItemClick(View v, int position) {
                                         bundle.putString("hotel_id", hotelBeen.get(position).getHotel_id());
                                         bundle.putString("hotel_name", hotelBeen.get(position).getHotel_name());
-                                        startAct(HotelDetailActivity.class,bundle);
+                                        startAct(HotelDetailActivity.class, bundle);
                                     }
                                 });
                                 hotel_detail_recommend_rv.setAdapter(hotelDetailRecommendAdapter);
@@ -382,9 +383,9 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
             case R.id.view_head_share:
                 break;
             case R.id.view_head_collect:
-                if (fav==0){
+                if (fav == 0) {
                     hotelCollect();
-                }else {
+                } else {
                     hotelCancelCollect();
                 }
                 break;
@@ -398,7 +399,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                 startAct(HotelDetailAllCommentActivity.class, bundle);
                 break;
             case R.id.hotel_detail_date_more_iv:
-                startActForResult(SearchDateActivity.class,REQUEST_CODE);
+                startActForResult(SearchDateActivity.class, REQUEST_CODE);
                 break;
             case R.id.hotel_detail_recommend_more_tv:
             case R.id.hotel_detail_recommend_more_iv:
@@ -430,12 +431,12 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     public void onResponse(Object response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e("like",jsonObject);
-                            if (jsonObject.getInt("status")==330) {
+                            LogUtils.e("like", jsonObject);
+                            if (jsonObject.getInt("status") == 330) {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
-                                fav=1;
+                                fav = 1;
                                 view_head_collect.setImageResource(R.drawable.hotel_list_collect_icon);
-                            }else if (jsonObject.getInt("status")==203){
+                            } else if (jsonObject.getInt("status") == 203) {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }
                         } catch (Exception e) {
@@ -468,12 +469,12 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     public void onResponse(Object response, int id) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e("cancel",jsonObject);
-                            if (jsonObject.getInt("status")==330){
+                            LogUtils.e("cancel", jsonObject);
+                            if (jsonObject.getInt("status") == 330) {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
-                                fav=0;
+                                fav = 0;
                                 view_head_collect.setImageResource(R.drawable.hotel_detail_collect_icon);
-                            }else if (jsonObject.getInt("status")==203){
+                            } else if (jsonObject.getInt("status") == 203) {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }
 
@@ -493,31 +494,37 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
             public void onCheck(View v, int position) {
                 if (roomBeen.get(position).getSku() != 0) {
                     room_id = roomBeen.get(position).getRoom_id();
-                    bundle.putString("room_id",room_id);
-                    bundle.putString("hotel_name",hotel_name);
-                    startAct(HotelOrderTimeActivity.class,bundle);
+                    bundle.putString("room_id", room_id);
+                    bundle.putString("hotel_name", hotel_name);
+                    startAct(HotelOrderTimeActivity.class, bundle);
                 }
             }
 
             @Override
             public void onPai(View v, final int position) {
-                NiceDialog.init()
-                        .setLayoutId(R.layout.hotel_interest_pai_dialog)
-                        .setConvertListener(new ViewConvertListener() {
-                            @Override
-                            protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
-                                room_id = roomBeen.get(position).getRoom_id();
-                                viewHolder.setOnClickListener(R.id.hotel_detail_pai_close_iv, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        baseNiceDialog.dismiss();
-                                    }
-                                });
-                            }
-                        })
-                        .setOutCancel(false)
-                        .setAnimStyle(R.style.EnterExitAnimation)
-                        .show(getSupportFragmentManager());
+                if (isDialog == false) {
+                    isDialog = true;
+                    NiceDialog.init()
+                            .setLayoutId(R.layout.hotel_interest_pai_dialog)
+                            .setConvertListener(new ViewConvertListener() {
+                                @Override
+                                protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
+
+                                    room_id = roomBeen.get(position).getRoom_id();
+                                    viewHolder.setOnClickListener(R.id.hotel_detail_pai_close_iv, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            baseNiceDialog.dismiss();
+                                            isDialog = false;
+                                        }
+                                    });
+                                }
+                            })
+                            .setOutCancel(false)
+                            .setAnimStyle(R.style.EnterExitAnimation)
+                            .show(getSupportFragmentManager());
+
+                }
             }
         });
 
@@ -532,43 +539,46 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     }
 
     public void loadRoomMessage(String room_id, final int position) {
-        OkHttpUtils
-                .post()
-                .url(Api.HOTELDETAILROOM)
-                .addParams("room_id", room_id)
-                .build()
-                .execute(new Callback() {
-                    @Override
-                    public Object parseNetworkResponse(Response response, int id) throws Exception {
-                        String string = response.body().string();
-                        LogUtils.e(string);
-                        return string;
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        LogUtils.e(e);
-                    }
-
-                    @Override
-                    public void onResponse(Object response, int id) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response.toString());
-                            LogUtils.e(jsonObject);
-                            if (jsonObject.getInt("status") == 330) {
-                                Gson gson = new Gson();
-                                HotelDetailRoomEntity hotelDetailRoomEntities = gson.fromJson(response.toString(), HotelDetailRoomEntity.class);
-                                roomPolicyBeen = hotelDetailRoomEntities.getInfo().getPolicy();
-                                roomFacilitiesBeen = hotelDetailRoomEntities.getInfo().getFacilities();
-                                roomCheckDialog(position, roomPolicyBeen, roomFacilitiesBeen);
-                            } else {
-                                ToastUtils.showShort(jsonObject.getString("msg"));
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+        if (isDialog == false) {
+            isDialog = true;
+            OkHttpUtils
+                    .post()
+                    .url(Api.HOTELDETAILROOM)
+                    .addParams("room_id", room_id)
+                    .build()
+                    .execute(new Callback() {
+                        @Override
+                        public Object parseNetworkResponse(Response response, int id) throws Exception {
+                            String string = response.body().string();
+                            LogUtils.e(string);
+                            return string;
                         }
-                    }
-                });
+
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            LogUtils.e(e);
+                        }
+
+                        @Override
+                        public void onResponse(Object response, int id) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.toString());
+                                LogUtils.e(jsonObject);
+                                if (jsonObject.getInt("status") == 330) {
+                                    Gson gson = new Gson();
+                                    HotelDetailRoomEntity hotelDetailRoomEntities = gson.fromJson(response.toString(), HotelDetailRoomEntity.class);
+                                    roomPolicyBeen = hotelDetailRoomEntities.getInfo().getPolicy();
+                                    roomFacilitiesBeen = hotelDetailRoomEntities.getInfo().getFacilities();
+                                    roomCheckDialog(position, roomPolicyBeen, roomFacilitiesBeen);
+                                } else {
+                                    ToastUtils.showShort(jsonObject.getString("msg"));
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+        }
     }
 
     public void roomCheckDialog(final int position, final List<HotelDetailRoomEntity.InfoBean.PolicyBean> roomPolicyBeen, final List<HotelDetailRoomEntity.InfoBean.FacilitiesBean> roomFacilitiesBeen) {
@@ -578,19 +588,21 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     .setConvertListener(new ViewConvertListener() {
                         @Override
                         protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
+
                             viewHolder.setOnClickListener(R.id.hotel_detail_room_close_iv, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     baseNiceDialog.dismiss();
+                                    isDialog = false;
                                 }
                             });
                             viewHolder.setOnClickListener(R.id.hotel_detail_room_dialog_check_tv, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    room_id=roomBeen.get(position).getRoom_id();
-                                    bundle.putString("room_id",room_id);
-                                    bundle.putString("hotel_name",hotel_name);
-                                    startAct(HotelOrderTimeActivity.class,bundle);
+                                    room_id = roomBeen.get(position).getRoom_id();
+                                    bundle.putString("room_id", room_id);
+                                    bundle.putString("hotel_name", hotel_name);
+                                    startAct(HotelOrderTimeActivity.class, bundle);
                                 }
                             });
                             viewHolder.setOnClickListener(R.id.hotel_detail_room_dialog_pai_ll, new View.OnClickListener() {
@@ -604,7 +616,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
                             View dialogView = viewHolder.getConvertView();
                             List<String> bannerUrls = new ArrayList<>();
-                            if (bannerBeen!= null) {
+                            if (bannerBeen != null) {
                                 for (int i = 0; i < bannerBeen.size(); i++) {
                                     bannerUrls.add(UrlUtils.getUrl(bannerBeen.get(i).getPhoto()));
                                 }

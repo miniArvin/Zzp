@@ -22,6 +22,35 @@
             android:textSize="21sp" />
 
         <RelativeLayout
+            android:id="@+id/order_time_unrequirement_dialog_rl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="无需求"
+                android:textColor="@color/home_location_word"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/order_time_unrequirement_dialog_iv"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/order_time_requirement_dialog_selected_icon" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/mine_div" />
+
+
+        <RelativeLayout
             android:id="@+id/order_time_requirement_dialog_rl"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -41,35 +70,6 @@
                 android:layout_height="18dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/order_time_requirement_dialog_selected_icon" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/mine_div" />
-
-
-        <RelativeLayout
-            android:id="@+id/order_time_unrequirement_dialog_rl"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="不需求"
-                android:textColor="@color/home_location_word"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:id="@+id/order_time_unrequirement_dialog_iv"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:src="@drawable/order_time_requirement_dialog_unselected_icon" />
         </RelativeLayout>
 
@@ -77,7 +77,8 @@
             android:id="@+id/order_time_requirement_dialog_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/order_time_requirement_dialog_et"

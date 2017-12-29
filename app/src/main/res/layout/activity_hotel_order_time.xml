@@ -299,6 +299,7 @@
                 android:numColumns="6"
                 android:visibility="gone"></com.tryine.zzp.widget.NoScrollGirdView>
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -384,6 +385,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/hotel_order_time_equipment_iv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
@@ -405,12 +407,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="26dp"
                     android:gravity="center"
-                    android:text="高层"
+                    android:text="无需求"
                     android:textColor="@color/home_location_word"
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/hotel_order_time_equipment_iv"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
@@ -424,6 +425,7 @@
                 android:background="@color/found_search_bg" />
 
             <RelativeLayout
+                android:id="@+id/hotel_order_time_coupon_iv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
@@ -444,12 +446,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="26dp"
                     android:gravity="center"
-                    android:text="-20元"
                     android:textColor="@color/home_location_word"
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/hotel_order_time_coupon_iv"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"
@@ -458,6 +458,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/hotel_order_invoice_iv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
@@ -478,12 +479,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="26dp"
                     android:gravity="center"
-                    android:text="纸质发票"
                     android:textColor="@color/home_location_word"
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/hotel_order_invoice_iv"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignParentRight="true"

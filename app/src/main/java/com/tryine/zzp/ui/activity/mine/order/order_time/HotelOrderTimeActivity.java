@@ -95,7 +95,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private String quiet = "";
     private String high = "";
     private String voice = "";
-    private boolean isNeed = true;
+    private boolean isNeed = false;
     private String needStr = "";
     private boolean isCoupon = false;
     private String coupon = "";
@@ -124,9 +124,6 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         hotel_order_linkman_lv.setAdapter(hotelOrderLinkmanAdapter);
         hotelOrderRoomCountAdapter = new HotelOrderRoomCountAdapter(this, sku);
         hotel_order_room_count_gv.setAdapter(hotelOrderRoomCountAdapter);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) hotel_order_room_count_gv.getLayoutParams();
-        params.height = 200;
-        hotel_order_room_count_gv.setLayoutParams(params);
         hotelOrderRoomCountAdapter.setDefSelect(0);
         hotel_order_room_count_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
