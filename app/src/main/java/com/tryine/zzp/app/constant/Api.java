@@ -173,4 +173,13 @@ public class Api {
 
     //文章列表
     public static final String ARTICLELIST = BASE_URL +"app/article/post_list";
+
+    //我的钱包
+    public static final String WALLET = BASE_URL +"app/Coupon/wallet";
+
+    //领券中心
+    public static final String VOUCHERCENTER = BASE_URL +"app/Coupon/voucher_center";
+
+    //我的优惠券
+    public static final String COUPON = BASE_URL +"app/Coupon/lists";
 }
