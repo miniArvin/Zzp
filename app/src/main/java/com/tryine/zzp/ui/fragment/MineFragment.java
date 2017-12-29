@@ -187,7 +187,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                                 mine_name_tv.setText(info.getString("nickname"));
                                 mine_member_tv.setText(info.getString("rank_name"));
                             }else if (jsonObject.getInt("status")==203){
-                                startAct(LoginActivity.class);
+
                             }else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }

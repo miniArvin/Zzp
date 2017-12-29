@@ -140,9 +140,6 @@ public class LoginActivity extends BaseStatusMActivity implements View.OnClickLi
                                 SPUtils.getInstance().put(SP_USER_ACCOUNT,userInfo.getString("account"));
                                 SPUtils.getInstance().put(SP_USER_NAME,userInfo.getString("nickname"));
                                 SPUtils.getInstance().put(SP_USER_FACE,userInfo.getString("face"));
-                                Bundle bundle = new Bundle();
-                                bundle.putInt("position",0);
-                                startAct(MainActivity.class,bundle);
                                 finish();
                             }else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));

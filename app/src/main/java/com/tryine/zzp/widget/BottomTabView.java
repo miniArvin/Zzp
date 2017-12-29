@@ -12,9 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.tryine.zzp.R;
+import com.tryine.zzp.ui.activity.login.LoginActivity;
 
 import java.util.List;
+
+import static com.tryine.zzp.app.constant.Cons.SP_USER_ID;
 
 /**
  * Name: BottomTabView
@@ -157,15 +161,18 @@ public class BottomTabView extends LinearLayout {
      * 恢复上一个 Tab Item 的状态
      */
     public void updatePosition(int position) {
-        if (lastPosition != position) {
-            if (tabItemViews != null && tabItemViews.size() != 0) {
-                tabItemViews.get(position).setStatus(TabItemView.PRESS);
-                if (lastPosition != -1) {
-                    tabItemViews.get(lastPosition).setStatus(TabItemView.DEFAULT);
+        if (!(SPUtils.getInstance().getString(SP_USER_ID).equals("")&&(position==2||position==3))){
+
+            if (lastPosition != position) {
+                if (tabItemViews != null && tabItemViews.size() != 0) {
+                    tabItemViews.get(position).setStatus(TabItemView.PRESS);
+                    if (lastPosition != -1) {
+                        tabItemViews.get(lastPosition).setStatus(TabItemView.DEFAULT);
+                    }
+                    lastPosition = position;
+                } else {
+                    throw new RuntimeException("please setTabItemViews !");
                 }
-                lastPosition = position;
-            } else {
-                throw new RuntimeException("please setTabItemViews !");
             }
         }
     }

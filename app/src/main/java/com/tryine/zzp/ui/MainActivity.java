@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.gyf.barlibrary.ImmersionBar;
 import com.tryine.zzp.R;
 import com.tryine.zzp.base.BaseBottomTabsActivity;
+import com.tryine.zzp.ui.activity.login.LoginActivity;
 import com.tryine.zzp.ui.fragment.FoundFragment;
 import com.tryine.zzp.ui.fragment.HomeFragment;
 import com.tryine.zzp.ui.fragment.IndependentTravelFragment;
@@ -24,6 +25,7 @@ import com.tryine.zzp.widget.BottomTabView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tryine.zzp.app.constant.Cons.SP_USER_ID;
 import static com.tryine.zzp.app.constant.Cons.SP_USER_TOKEN;
 
 public class MainActivity extends BaseBottomTabsActivity {
@@ -79,7 +81,12 @@ public class MainActivity extends BaseBottomTabsActivity {
         mainBottomTab.setOnTabItemSelectListener(new BottomTabView.OnTabItemSelectListener() {
             @Override
             public void onTabItemSelect(int position) {
-                mainVP.setCurrentItem(position, true);
+                if (SPUtils.getInstance().getString(SP_USER_ID).equals("")&&(position==2||position==3)){
+                    startAct(LoginActivity.class);
+                }else {
+                    mainVP.setCurrentItem(position, true);
+                }
+
             }
         });
         //切换ViewPager时，同时切换BottomTabView
