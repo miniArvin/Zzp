@@ -73,22 +73,37 @@ public class AllOrderAdapter extends BaseAdapter {
             viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }else if (state.equals("待点评")){
             viewHolder.all_order_comment_order_state_tv.setTextColor(mContext.getResources().getColor(R.color.orange));
-            viewHolder.all_order_comment_order_cancel_tv.setText("删除");
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
             viewHolder.all_order_comment_order_do_tv.setText("立即点评");
             viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.all_order_comment_bg_btn));
             viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }else if (state.equals("待入住")){
             viewHolder.all_order_comment_order_state_tv.setTextColor(mContext.getResources().getColor(R.color.all_order_not_check_word_bg));
-            viewHolder.all_order_comment_order_cancel_tv.setText("删除");
-            viewHolder.all_order_comment_order_do_tv.setText("取消订单");
-            viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.login_bg_code));
-            viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.orange));
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
+            viewHolder.all_order_comment_order_do_tv.setText("申请退款");
+            viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.order_bg_gray));
+            viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }else if (state.equals("已完成")) {
             viewHolder.all_order_comment_order_state_tv.setTextColor(mContext.getResources().getColor(R.color.all_order_default_word));
-            viewHolder.all_order_comment_order_cancel_tv.setText("删除");
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
             viewHolder.all_order_comment_order_do_tv.setText("再次预定");
             viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.login_bg_look));
             viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.orange));
+        }else if (state.equals("待确认")){
+            viewHolder.all_order_comment_order_do_tv.setText("申请退款");
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
+            viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.order_bg_gray));
+            viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
+        }else if (state.equals("已取消")){
+            viewHolder.all_order_comment_order_do_tv.setText("删除订单");
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
+            viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.order_bg_red));
+            viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
+        }else if (state.equals("审核通过")){
+            viewHolder.all_order_comment_order_do_tv.setText("退款详情");
+            viewHolder.all_order_comment_order_cancel_tv.setVisibility(View.GONE);
+            viewHolder.all_order_comment_order_do_tv.setBackground(mContext.getResources().getDrawable(R.drawable.order_bg_red));
+            viewHolder.all_order_comment_order_do_tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }
         viewHolder.all_order_comment_order_num_tv.setText(listBeen.get(position).getOrder_sn());
         viewHolder.all_order_comment_order_create_tv.setText(listBeen.get(position).getCreate_time());
