@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.othershe.nicedialog.BaseNiceDialog;
 import com.othershe.nicedialog.NiceDialog;
@@ -70,7 +71,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
     private double totalPrice;
     private String phone;
     private String roomType;
-    private int deposit = 1;
+    private int deposit = 0;
     private String bill_name = "";
     private String invoice_name = "";
     private String tax_code = "";
@@ -114,7 +115,11 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         hotel_name = getIntent().getStringExtra("hotel_name");
         checkDay = getIntent().getStringExtra("check");
         outDay = getIntent().getStringExtra("out");
-        loadMessage();
+        roomPrice = getIntent().getStringExtra("roomPrice");
+        user_pay_fee = getIntent().getStringExtra("user_pay_fee");
+        roomType = getIntent().getStringExtra("roomType");
+        deposit = getIntent().getIntExtra("deposit",0);
+        sku = getIntent().getIntExtra("sku",0);
         initView();
     }
 
@@ -144,6 +149,17 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                 hotel_order_room_count_gv.setVisibility(View.GONE);
             }
         });
+
+        hotel_order_time_type_tv.setText(roomType);
+        hotel_order_time_price_tv.setText("￥" + roomPrice);
+        if (deposit != 0) {
+            hotel_order_time_pledge_ll.setVisibility(View.GONE);
+            hotel_order_time_total_prices_tv.setText("￥" + totalPrice);
+        } else {
+            hotel_order_time_pledge_tv.setText(user_pay_fee);
+            totalPrice = Double.parseDouble(roomPrice)+Double.parseDouble(user_pay_fee);
+            hotel_order_time_total_prices_tv.setText("(含押金):￥" + totalPrice);
+        }
     }
 
     public void initView() {
@@ -177,6 +193,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
         hotel_order_room_count_gv = (NoScrollGirdView) findViewById(R.id.hotel_order_room_count_gv);
         findViewById(R.id.hotel_order_room_count_rl).setOnClickListener(this);
         hotel_order_room_count_iv = (ImageView) findViewById(R.id.hotel_order_room_count_iv);
+        loadData();
     }
 
     public void loadMessage() {
@@ -262,8 +279,8 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                         return;
                     }
                 }
-                if (phone.isEmpty()) {
-                    ToastUtils.showShort("请填写手机号码！");
+                if (!RegexUtils.isMobileExact(phone)) {
+                    ToastUtils.showShort("请填写正确的手机号码！");
                     return;
                 }
 
@@ -586,6 +603,7 @@ public class HotelOrderTimeActivity extends BaseStatusMActivity implements View.
                                 Bundle bundle = new Bundle();
                                 bundle.putString("order_id", info.getString("order_id"));
                                 startAct(OrderTimeSubmitActivity.class, bundle);
+                                finish();
                             } else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }

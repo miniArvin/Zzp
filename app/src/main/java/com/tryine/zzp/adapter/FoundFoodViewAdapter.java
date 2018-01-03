@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tryine.zzp.R;
-import com.tryine.zzp.entity.test.TestEntity;
 import com.tryine.zzp.entity.test.remote.FoundEntity;
 import com.tryine.zzp.utils.UrlUtils;
 
@@ -25,6 +24,7 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private List<FoundEntity.InfoBean.PostBean> postBeen;
+    private OnItemClickListener onItemClickListener;
 
     public FoundFoodViewAdapter(View mParent, Context mContext ,List<FoundEntity.InfoBean.PostBean> data) {
         mLayoutInflater=LayoutInflater.from(mContext);
@@ -33,10 +33,13 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
         this.postBeen = data;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private OnItemClickListener onItemClickListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView , OnItemClickListener onItemClickListener) {
             super(itemView);
+            this.onItemClickListener = onItemClickListener;
+            itemView.setOnClickListener(this);
         }
         ImageView food_view_img;
         TextView food_view_place_tv;
@@ -44,13 +47,20 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
         ImageView found_food_view_img_headimg;
         TextView food_view_zan_tv;
         TextView food_view_comment_tv;
+
+        @Override
+        public void onClick(View v) {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(v,getPosition());
+            }
+        }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.found_food_view_item,
                 parent, false);
-        FoundFoodViewAdapter.ViewHolder viewHolder = new FoundFoodViewAdapter.ViewHolder(view);
+        FoundFoodViewAdapter.ViewHolder viewHolder = new FoundFoodViewAdapter.ViewHolder(view,onItemClickListener);
 
         viewHolder.food_view_img = (ImageView) view
                 .findViewById(R.id.food_view_img);
@@ -81,5 +91,13 @@ public class FoundFoodViewAdapter extends RecyclerView.Adapter<FoundFoodViewAdap
     @Override
     public int getItemCount() {
         return postBeen==null?0:postBeen.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view,int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 }

@@ -47,7 +47,6 @@ public class MainActivity extends BaseBottomTabsActivity {
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
         super.onCreate(savedInstanceState);
 
-//        com.tryine.swm.utils.StatusBarUtils.setTransparentStatusBar(this);
         String[] permissions = {
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,

@@ -39,6 +39,7 @@ import com.tryine.zzp.utils.GlideImageLoader;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.FlowLayout.FlowLayoutManager;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
+import com.tryine.zzp.widget.IsloginDialog;
 import com.tryine.zzp.widget.NoScrollGirdView;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.youth.banner.Banner;
@@ -85,6 +86,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private HotelDetailIntroAdapter hotelDetailIntroAdapter;
     private CircleImageView hotel_detail_head_cv;
     private LinearLayout hotel_detail_all_comment_ll;
+    private LinearLayout hotel_detail_room_ll;
     private TextView hotel_detail_member_name_tv;
     private TextView hotel_detail_member_tv;
     private TextView hotel_detail_comment_publish_time_tv;
@@ -136,6 +138,11 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
     private HotelDetailDialogRoomAdapter hotelDetailDialogRoomAdapterFacilities;
     private Bundle bundle;
     private boolean isDialog = false;
+    private String roomPrice;
+    private double totalPrice;
+    private String roomType;
+    private int sku;
+    private String user_pay_fee ;
 
     @Override
     protected int getLayoutId() {
@@ -209,6 +216,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
         hotel_detail_recommend_rv = (RecyclerView) findViewById(R.id.hotel_detail_recommend_rv);
         hotel_detail_comment_all_count_tv = (TextView) findViewById(R.id.hotel_detail_comment_all_count_tv);
         hotel_detail_all_comment_ll = (LinearLayout) findViewById(R.id.hotel_detail_all_comment_ll);
+        hotel_detail_room_ll = (LinearLayout) findViewById(R.id.hotel_detail_room_ll);
         loadData();
     }
 
@@ -309,6 +317,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                         .start();
                                 //room
                                 checkRoom(roomBeen);
+
 
                                 //comment
                                 if (!(hotelDetailEntities.getInfo().getHotel_detail().getComment_count().isEmpty() ||
@@ -437,7 +446,10 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                 fav = 1;
                                 view_head_collect.setImageResource(R.drawable.hotel_list_collect_icon);
                             } else if (jsonObject.getInt("status") == 203) {
-                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                IsloginDialog.newInstance("1")
+                                        .setMargin(60)
+                                        .setOutCancel(false)
+                                        .show(getSupportFragmentManager());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -496,34 +508,36 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     room_id = roomBeen.get(position).getRoom_id();
                     bundle.putString("room_id", room_id);
                     bundle.putString("hotel_name", hotel_name);
-                    startAct(HotelOrderTimeActivity.class, bundle);
+                    loadOrderTimeMessage();
                 }
             }
 
             @Override
             public void onPai(View v, final int position) {
-                if (isDialog == false) {
-                    isDialog = true;
-                    NiceDialog.init()
-                            .setLayoutId(R.layout.hotel_interest_pai_dialog)
-                            .setConvertListener(new ViewConvertListener() {
-                                @Override
-                                protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
+                if (roomBeen.get(position).getSku() != 0) {
+                    if (isDialog == false) {
+                        isDialog = true;
+                        NiceDialog.init()
+                                .setLayoutId(R.layout.hotel_interest_pai_dialog)
+                                .setConvertListener(new ViewConvertListener() {
+                                    @Override
+                                    protected void convertView(ViewHolder viewHolder, final BaseNiceDialog baseNiceDialog) {
 
-                                    room_id = roomBeen.get(position).getRoom_id();
-                                    viewHolder.setOnClickListener(R.id.hotel_detail_pai_close_iv, new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            baseNiceDialog.dismiss();
-                                            isDialog = false;
-                                        }
-                                    });
-                                }
-                            })
-                            .setOutCancel(false)
-                            .setAnimStyle(R.style.EnterExitAnimation)
-                            .show(getSupportFragmentManager());
+                                        room_id = roomBeen.get(position).getRoom_id();
+                                        viewHolder.setOnClickListener(R.id.hotel_detail_pai_close_iv, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                baseNiceDialog.dismiss();
+                                                isDialog = false;
+                                            }
+                                        });
+                                    }
+                                })
+                                .setOutCancel(false)
+                                .setAnimStyle(R.style.EnterExitAnimation)
+                                .show(getSupportFragmentManager());
 
+                    }
                 }
             }
         });
@@ -540,7 +554,6 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
     public void loadRoomMessage(String room_id, final int position) {
         if (isDialog == false) {
-            isDialog = true;
             OkHttpUtils
                     .post()
                     .url(Api.HOTELDETAILROOM)
@@ -549,6 +562,7 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                     .execute(new Callback() {
                         @Override
                         public Object parseNetworkResponse(Response response, int id) throws Exception {
+                            isDialog = true;
                             String string = response.body().string();
                             LogUtils.e(string);
                             return string;
@@ -570,8 +584,6 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                     roomPolicyBeen = hotelDetailRoomEntities.getInfo().getPolicy();
                                     roomFacilitiesBeen = hotelDetailRoomEntities.getInfo().getFacilities();
                                     roomCheckDialog(position, roomPolicyBeen, roomFacilitiesBeen);
-                                } else {
-                                    ToastUtils.showShort(jsonObject.getString("msg"));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -602,7 +614,8 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
                                     room_id = roomBeen.get(position).getRoom_id();
                                     bundle.putString("room_id", room_id);
                                     bundle.putString("hotel_name", hotel_name);
-                                    startAct(HotelOrderTimeActivity.class, bundle);
+                                    loadOrderTimeMessage();
+                                    baseNiceDialog.dismiss();
                                 }
                             });
                             viewHolder.setOnClickListener(R.id.hotel_detail_room_dialog_pai_ll, new View.OnClickListener() {
@@ -639,4 +652,54 @@ public class HotelDetailActivity extends BaseStatusMActivity implements View.OnC
 
     }
 
+    public void loadOrderTimeMessage() {
+        OkHttpUtils
+                .post()
+                .url(Api.HOTELORDERS)
+                .addParams("room_id", room_id)
+                .build()
+                .execute(new Callback() {
+                    @Override
+                    public Object parseNetworkResponse(Response response, int id) throws Exception {
+                        String string = response.body().string();
+                        LogUtils.e(string);
+                        return string;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(Object response, int id) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.toString());
+                            LogUtils.e(jsonObject);
+                            if (jsonObject.getInt("status") == 330) {
+                                JSONObject info = new JSONObject(jsonObject.getString("info"));
+                                roomType = info.getString("title");
+                                roomPrice = info.getString("price");
+                                user_pay_fee = info.getString("money");
+                                deposit = info.getInt("deposit");
+                                sku = info.getInt("sku");
+                                bundle.putString("roomPrice",roomPrice);
+                                bundle.putString("user_pay_fee",user_pay_fee);
+                                bundle.putString("roomType",roomType);
+                                bundle.putInt("deposit",deposit);
+                                bundle.putInt("sku",sku);
+                                startAct(HotelOrderTimeActivity.class,bundle);
+                                finish();
+                            } else {
+                                IsloginDialog.newInstance("1")
+                                        .setMargin(60)
+                                        .setOutCancel(false)
+                                        .show(getSupportFragmentManager());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
 }

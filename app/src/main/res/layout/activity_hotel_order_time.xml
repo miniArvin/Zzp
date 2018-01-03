@@ -40,7 +40,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
-                        android:text="精选大床房"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
@@ -62,7 +61,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
-                            android:text="8月31日"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -79,7 +77,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
-                            android:text="9月01日"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -88,7 +85,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
-                            android:text="1晚"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -99,7 +95,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="￥399.00"
                     android:textColor="@color/white"
                     android:textSize="21sp" />
             </LinearLayout>
@@ -193,7 +188,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="￥389"
                     android:textColor="@color/home_location_btn"
                     android:textSize="18sp" />
 
@@ -522,7 +516,6 @@
                         android:id="@+id/hotel_order_time_total_prices_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(含押金)￥389"
                         android:textColor="@color/orange"
                         android:textSize="18sp" />
 

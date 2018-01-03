@@ -27,6 +27,7 @@ import com.tryine.zzp.ui.fragment.hotel.HotelListSelectFragment;
 import com.tryine.zzp.ui.fragment.hotel.SelectBrandFragment;
 import com.tryine.zzp.ui.fragment.hotel.SelectRoomFragment;
 import com.tryine.zzp.ui.fragment.hotel.SelectServiceFragment;
+import com.tryine.zzp.widget.IsloginDialog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -199,8 +200,6 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                                     hotelListInfo.clear();
                                     hotelListAdapter.notifyDataSetChanged();
                                 }
-
-
                             } else {
                                 ToastUtils.showShort(hotelListEntities.getMsg());
                             }
@@ -240,7 +239,10 @@ public class HotelListActivity extends BaseStatusMActivity implements View.OnCli
                                 hotelListInfo.get(position).setFav(1);
                                 hotelListAdapter.notifyDataSetChanged();
                             }else if (jsonObject.getInt("status")==203){
-                                ToastUtils.showShort(jsonObject.getString("msg"));
+                                IsloginDialog.newInstance("1")
+                                        .setMargin(60)
+                                        .setOutCancel(false)
+                                        .show(getSupportFragmentManager());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

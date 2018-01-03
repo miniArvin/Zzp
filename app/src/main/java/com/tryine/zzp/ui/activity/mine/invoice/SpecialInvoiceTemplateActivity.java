@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.app.constant.Api;
@@ -174,14 +175,14 @@ public class SpecialInvoiceTemplateActivity extends BaseStatusMActivity implemen
         } else {
             bundle.putString("credit", credit);
         }
-        if (email.isEmpty()) {
-            ToastUtils.showShort("请填写接收邮箱！");
+        if (RegexUtils.isEmail(email)) {
+            ToastUtils.showShort("请填写正确的接收邮箱！");
             return;
         } else {
             bundle.putString("email", email);
         }
-        if (tell.isEmpty()) {
-            ToastUtils.showShort("请填写公司电话！");
+        if (RegexUtils.isTel(tell)) {
+            ToastUtils.showShort("请填写正确的公司电话！");
             return;
         } else {
             bundle.putString("tell", tell);
@@ -198,8 +199,8 @@ public class SpecialInvoiceTemplateActivity extends BaseStatusMActivity implemen
         } else {
             bundle.putString("name", name);
         }
-        if (mobile.isEmpty()) {
-            ToastUtils.showShort("请填写手机号码！");
+        if (RegexUtils.isMobileExact(mobile)) {
+            ToastUtils.showShort("请填写正确的手机号码！");
             return;
         } else {
             bundle.putString("mobile", mobile);

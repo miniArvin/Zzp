@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.app.constant.Api;
@@ -144,8 +145,8 @@ public class CommonInvoiceTemplateActivity extends BaseStatusMActivity implement
         }else {
             bundle.putString("name",name);
         }
-        if (mobile.isEmpty()) {
-            ToastUtils.showShort("请填写手机号码！");
+        if (RegexUtils.isMobileExact(mobile)) {
+            ToastUtils.showShort("请填写正确的手机号码！");
             return;
         }else {
             bundle.putString("mobile",mobile);

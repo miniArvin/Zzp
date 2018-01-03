@@ -6,9 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.tryine.zzp.R;
@@ -19,11 +21,15 @@ import com.tryine.zzp.adapter.FoundNewsAdapter;
 import com.tryine.zzp.adapter.FoundQuestionsAdapter;
 import com.tryine.zzp.app.constant.Api;
 import com.tryine.zzp.entity.test.remote.FoundEntity;
+import com.tryine.zzp.ui.activity.found.FoodViewDetailActivity;
 import com.tryine.zzp.ui.activity.found.FoundDetailActivity;
+import com.tryine.zzp.ui.activity.found.FoundNewsDetailActivity;
+import com.tryine.zzp.ui.activity.found.FoundQuestionsDetailActivity;
 import com.tryine.zzp.ui.activity.hotel.HotelListActivity;
 import com.tryine.zzp.utils.GlideImageLoader;
 import com.tryine.zzp.utils.UrlUtils;
 import com.tryine.zzp.widget.FlowLayout.SpaceItemDecoration;
+import com.tryine.zzp.widget.IsloginDialog;
 import com.tryine.zzp.widget.NoScrollListView;
 import com.tryine.zzp.base.BaseFragment;
 import com.youth.banner.Banner;
@@ -37,6 +43,8 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
+
+import static com.tryine.zzp.app.constant.Cons.SP_USER_ID;
 
 public class FoundFragment extends BaseFragment implements View.OnClickListener {
 
@@ -104,7 +112,81 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
     }
 
     public void loadData(){
+        //轮播图
+        List<String> bannerUrls = new ArrayList<>();
+        if (imgBeen!= null) {
+            for (int i = 0; i < imgBeen.size(); i++) {
+                bannerUrls.add(UrlUtils.getUrl(imgBeen.get(i).getPhoto()));
+            }
+        }
+        found_banner.setImages(bannerUrls)
+                .setImageLoader(new GlideImageLoader())
+                .start();
 
+        //目的地
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        found_location_name_rv.setLayoutManager(linearLayoutManager);
+        found_location_name_rv.setNestedScrollingEnabled(false);
+        foundLocationNameAdapter=new FoundLocationNameAdapter(mView,mContext,cityBeen);
+        found_location_name_rv.setAdapter(foundLocationNameAdapter);
+
+        //美食美景
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(mView.getContext());
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        found_food_view_rv.setLayoutManager(linearLayoutManager1);
+        found_food_view_rv.setNestedScrollingEnabled(false);
+        found_food_view_rv.addItemDecoration(new SpaceItemDecoration(dp2px(1)));
+        foundFoodViewAdapter=new FoundFoodViewAdapter(mView,mContext,postBeen);
+        foundFoodViewAdapter.setOnItemClickListener(new FoundFoodViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (!(SPUtils.getInstance().getString(SP_USER_ID).equals(""))) {
+                    bundle.putString("post_id",postBeen.get(position).getPost_id());
+                    startAct(FoodViewDetailActivity.class,bundle);
+                }else {
+                    IsloginDialog.newInstance("1")
+                            .setMargin(60)
+                            .setOutCancel(false)
+                            .show(getChildFragmentManager());
+                }
+            }
+        });
+        found_food_view_rv.setAdapter(foundFoodViewAdapter);
+
+        //新闻资讯
+        foundNewsAdapter =new FoundNewsAdapter(mView,mContext,articleBeen);
+        found_news_lv.setAdapter(foundNewsAdapter);
+
+        found_news_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    bundle.putString("article_id",articleBeen.get(position).getArticle_id());
+                    startAct(FoundNewsDetailActivity.class,bundle);
+
+            }
+        });
+
+        //趣味问答
+        foundQuestionsAdapter=new FoundQuestionsAdapter(mView,mContext,answerBeen);
+        found_question_lv.setAdapter(foundQuestionsAdapter);
+        found_question_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                bundle.putString("post_id",answerBeen.get(position).getPost_id());
+                startAct(FoundQuestionsDetailActivity.class,bundle);
+            }
+        });
+
+        //推荐酒店
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.home_city_item_div);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mView.getContext());
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        found_recommend_hotel_rv.setLayoutManager(linearLayoutManager2);
+        found_recommend_hotel_rv.setNestedScrollingEnabled(false);
+        foundHotelRecommendAdapter = new FoundHotelRecommendAdapter(mContext, hotelBeen, mView);
+        found_recommend_hotel_rv.addItemDecoration(new com.tryine.zzp.utils.SpaceItemDecoration(spacingInPixels, com.tryine.zzp.utils.SpaceItemDecoration.HORIZONTAL_LIST));
+        found_recommend_hotel_rv.setAdapter(foundHotelRecommendAdapter);
     }
 
     public void loadMessage(){
@@ -139,52 +221,7 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
                                 hotelBeen=foundEntity.getInfo().getHotel();
                                 imgBeen=foundEntity.getInfo().getImg();
                                 postBeen=foundEntity.getInfo().getPost();
-
-                                //轮播图
-                                List<String> bannerUrls = new ArrayList<>();
-                                if (imgBeen!= null) {
-                                    for (int i = 0; i < imgBeen.size(); i++) {
-                                        bannerUrls.add(UrlUtils.getUrl(imgBeen.get(i).getPhoto()));
-                                    }
-                                }
-                                found_banner.setImages(bannerUrls)
-                                        .setImageLoader(new GlideImageLoader())
-                                        .start();
-
-                                //目的地
-                                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mView.getContext());
-                                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                                found_location_name_rv.setLayoutManager(linearLayoutManager);
-                                found_location_name_rv.setNestedScrollingEnabled(false);
-                                foundLocationNameAdapter=new FoundLocationNameAdapter(mView,mContext,cityBeen);
-                                found_location_name_rv.setAdapter(foundLocationNameAdapter);
-
-                                //美食美景
-                                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(mView.getContext());
-                                linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
-                                found_food_view_rv.setLayoutManager(linearLayoutManager1);
-                                found_food_view_rv.setNestedScrollingEnabled(false);
-                                found_food_view_rv.addItemDecoration(new SpaceItemDecoration(dp2px(5)));
-                                foundFoodViewAdapter=new FoundFoodViewAdapter(mView,mContext,postBeen);
-                                found_food_view_rv.setAdapter(foundFoodViewAdapter);
-
-                                //新闻资讯
-                                foundNewsAdapter =new FoundNewsAdapter(mView,mContext,articleBeen);
-                                found_news_lv.setAdapter(foundNewsAdapter);
-
-                                //趣味问答
-                                foundQuestionsAdapter=new FoundQuestionsAdapter(mView,mContext,answerBeen);
-                                found_question_lv.setAdapter(foundQuestionsAdapter);
-
-                                //推荐酒店
-                                int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.home_city_item_div);
-                                LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mView.getContext());
-                                linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
-                                found_recommend_hotel_rv.setLayoutManager(linearLayoutManager2);
-                                found_recommend_hotel_rv.setNestedScrollingEnabled(false);
-                                foundHotelRecommendAdapter = new FoundHotelRecommendAdapter(mContext, hotelBeen, mView);
-                                found_recommend_hotel_rv.addItemDecoration(new com.tryine.zzp.utils.SpaceItemDecoration(spacingInPixels, com.tryine.zzp.utils.SpaceItemDecoration.HORIZONTAL_LIST));
-                                found_recommend_hotel_rv.setAdapter(foundHotelRecommendAdapter);
+                                loadData();
                             }else {
                                 ToastUtils.showShort(jsonObject.getString("msg"));
                             }
@@ -198,16 +235,37 @@ public class FoundFragment extends BaseFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.found_food_view_more_ll:
-                bundle.putInt("found",0);
-                startAct(FoundDetailActivity.class,bundle);
+                if (!(SPUtils.getInstance().getString(SP_USER_ID).equals(""))) {
+                    bundle.putInt("found", 0);
+                    startAct(FoundDetailActivity.class, bundle);
+                }else {
+                    IsloginDialog.newInstance("1")
+                            .setMargin(60)
+                            .setOutCancel(false)
+                            .show(getChildFragmentManager());
+                }
                 break;
             case R.id.found_news_more_ll:
-                bundle.putInt("found",2);
-                startAct(FoundDetailActivity.class,bundle);
+                if (!(SPUtils.getInstance().getString(SP_USER_ID).equals(""))) {
+                    bundle.putInt("found", 2);
+                    startAct(FoundDetailActivity.class, bundle);
+                }else {
+                    IsloginDialog.newInstance("1")
+                            .setMargin(60)
+                            .setOutCancel(false)
+                            .show(getChildFragmentManager());
+                }
                 break;
             case R.id.found_question_more_ll:
-                bundle.putInt("found",1);
-                startAct(FoundDetailActivity.class,bundle);
+                if (!(SPUtils.getInstance().getString(SP_USER_ID).equals(""))) {
+                    bundle.putInt("found", 1);
+                    startAct(FoundDetailActivity.class, bundle);
+                }else {
+                    IsloginDialog.newInstance("1")
+                            .setMargin(60)
+                            .setOutCancel(false)
+                            .show(getChildFragmentManager());
+                }
                 break;
             case R.id.found_hotel_more_ll:
                 startAct(HotelListActivity.class);

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
@@ -96,12 +97,16 @@ public class LoginActivity extends BaseStatusMActivity implements View.OnClickLi
 
     public void userLogin() {
         getUserMessage();
-        if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+        if (!RegexUtils.isMobileExact(phone)) {
+            Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (password.length()<6){
+            Toast.makeText(this, "请输入六位数以上密码", Toast.LENGTH_SHORT).show();
             return;
         }
         OkHttpUtils

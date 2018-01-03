@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.tryine.zzp.R;
 import com.tryine.zzp.base.BaseStatusMActivity;
@@ -187,8 +188,8 @@ public class OrderTimeInvoiceActivity extends BaseStatusMActivity implements Vie
                         } else {
                             bundle.putString("company_card", invoiceOA);
                         }
-                        if (invoice_tell.isEmpty()) {
-                            ToastUtils.showShort("请填写公司电话！");
+                        if (RegexUtils.isTel(invoice_tell)) {
+                            ToastUtils.showShort("请填写正确的公司电话！");
                             return;
                         } else {
                             bundle.putString("company_tell", invoice_tell);
@@ -204,8 +205,8 @@ public class OrderTimeInvoiceActivity extends BaseStatusMActivity implements Vie
                     }
                     if (isMail) {
                         bundle.putBoolean("send_type",true);
-                        if (invoice_mail.isEmpty()) {
-                            ToastUtils.showShort("请填写电子邮箱！");
+                        if (RegexUtils.isEmail(invoice_mail)) {
+                            ToastUtils.showShort("请填写正确的电子邮箱！");
                             return;
                         } else {
                             bundle.putString("email", invoice_mail);
@@ -218,8 +219,8 @@ public class OrderTimeInvoiceActivity extends BaseStatusMActivity implements Vie
                         } else {
                             bundle.putString("name", invoice_recipients);
                         }
-                        if (invoice_phone.isEmpty()) {
-                            ToastUtils.showShort("请填写手机号码！");
+                        if (RegexUtils.isMobileExact(invoice_phone)) {
+                            ToastUtils.showShort("请填写正确的手机号码！");
                             return;
                         } else {
                             bundle.putString("mobile", invoice_phone);
